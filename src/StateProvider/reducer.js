@@ -1,4 +1,4 @@
-import { TEST_ACTION } from './actions_constant'
+import { TEST_ACTION, LOGIN, LOGOUT } from './actions_constant'
 import { initialState } from './StateProvider'
 
 const reducer = (state = initialState, action) => {
@@ -7,6 +7,16 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 text: action.payload
+            }
+        case LOGIN:
+            return {
+                ...state,
+                isLogin: true
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                isLogin: false
             }
         //add action from usage
         default:
