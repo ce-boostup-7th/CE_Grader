@@ -1,22 +1,33 @@
 import React from "react";
 
-import styled from "styled-components";
-
-const Div = styled.div`
-  background-color: teal;
-`;
-
-const ExtraDiv = styled(Div)`
-  background-color: red;
-  font-size: 30px;
-`;
-
+import { ThemeProvider } from "styled-components";
+import { themes } from "react95";
+import {
+  Div,
+  ResetStyles,
+  WindowHeaderStyled,
+  WindowStyled,
+  ButtonStyled,
+  spanStyled
+} from "./LoginStyle";
 export default () => {
   return (
-    <div>
-      This is div
-      <Div>This is Div with styled</Div>
-      <ExtraDiv>This is Extra Div styled</ExtraDiv>
-    </div>
+    <Div className="App">
+      <ResetStyles />
+      <ThemeProvider theme={themes.default}>
+        <WindowStyled>
+          <WindowHeaderStyled>
+            <span>react95.exe</span>
+            <ButtonStyled size={"sm"} square>
+              <spanStyled
+                style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
+              >
+                x
+              </spanStyled>
+            </ButtonStyled>
+          </WindowHeaderStyled>
+        </WindowStyled>
+      </ThemeProvider>
+    </Div>
   );
 };
