@@ -10,6 +10,8 @@ import {
   ButtonStyled,
   Spanstyled
 } from "./LoginStyle";
+import { StateContext } from "../../StateProvider/StateProvider";
+import { LOGIN } from "../../StateProvider/actions_constant";
 
 const WindowContentStyled = styled(WindowContent)`
   display: flex;
@@ -25,9 +27,15 @@ const Form = styled.form`
 
 export default () => {
   const [onclose, setOnClose] = React.useState(false);
+  const {state,dispatch } = React.useContext(StateContext)
   const handleClose = () => {
     setOnClose(true);
   };
+  const handleLoggin = () =>{
+    dispatch({
+      type:LOGIN
+    })
+  }
 
   React.useEffect(() => {}, [onclose]);
   return (
@@ -56,7 +64,7 @@ export default () => {
               <input type="text" placeholder="USER_PASSWORD" />
             </Form>
             <Form>
-              <ButtonStyled type="submit" style={{ marginBottom: "8px" }}>
+              <ButtonStyled onClick={()=>handleLoggin()} style={{ marginBottom: "8px" }}>
                 <Spanstyled>submit</Spanstyled>
               </ButtonStyled>
               <ButtonStyled>
