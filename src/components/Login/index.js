@@ -1,22 +1,71 @@
 import React from "react";
 
-import styled from "styled-components";
+import styled, { ThemeProvider } from "styled-components";
+import { themes, WindowContent } from "react95";
+import {
+  Div,
+  ResetStyles,
+  WindowHeaderStyled,
+  WindowStyled,
+  ButtonStyled,
+  Spanstyled
+} from "./LoginStyle";
 
-const Div = styled.div`
-  background-color: teal;
+const WindowContentStyled = styled(WindowContent)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;
 
-const ExtraDiv = styled(Div)`
-  background-color: red;
-  font-size: 30px;
+const Form = styled.form`
+  display: inline-flex;
+  flex-direction: column;
 `;
 
 export default () => {
+  const [onclose, setOnClose] = React.useState(false);
+  const handleClose = () => {
+    setOnClose(true);
+  };
+
+  React.useEffect(() => {}, [onclose]);
   return (
-    <div>
-      This is div
-      <Div>This is Div with styled</Div>
-      <ExtraDiv>This is Extra Div styled</ExtraDiv>
-    </div>
+    <Div className="App">
+      <ResetStyles />
+      <ThemeProvider theme={themes.default}>
+        <WindowStyled>
+          <WindowHeaderStyled>
+            <span>react95.exe</span>
+            <ButtonStyled onClick={handleClose} size={"sm"} square>
+              <Spanstyled>x</Spanstyled>
+            </ButtonStyled>
+          </WindowHeaderStyled>
+          <WindowContentStyled>
+            <div>ICOn</div>
+            <Form>
+              <Spanstyled style={{ marginBottom: "3px" }}>
+                Login name{" "}
+              </Spanstyled>
+              <input
+                type="text"
+                placeholder="USER_NAME"
+                style={{ marginBottom: "8px" }}
+              />
+              <Spanstyled style={{ marginBottom: "3px" }}>Password</Spanstyled>
+              <input type="text" placeholder="USER_PASSWORD" />
+            </Form>
+            <Form>
+              <ButtonStyled type="submit" style={{ marginBottom: "8px" }}>
+                <Spanstyled>submit</Spanstyled>
+              </ButtonStyled>
+              <ButtonStyled>
+                <Spanstyled>cancle</Spanstyled>
+              </ButtonStyled>
+            </Form>
+          </WindowContentStyled>
+        </WindowStyled>
+      </ThemeProvider>
+    </Div>
   );
 };
