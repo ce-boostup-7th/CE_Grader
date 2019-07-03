@@ -1,16 +1,39 @@
 import React from "react";
 
-import { ThemeProvider } from "styled-components";
-import { themes } from "react95";
+import styled, { ThemeProvider } from "styled-components";
+import { themes, WindowContent } from "react95";
 import {
   Div,
   ResetStyles,
   WindowHeaderStyled,
   WindowStyled,
   ButtonStyled,
-  spanStyled
+  Spanstyled
 } from "./LoginStyle";
+
+const WindowContentStyled = styled(WindowContent)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Form = styled.form`
+  display: inline-flex;
+  flex-direction: column;
+`;
+
 export default () => {
+  const [onclose, setOnClose] = React.useState(false);
+  const handleClose = () => {
+    setOnClose(true);
+  };
+
+  React.useEffect(() => {
+    if (onclose) {
+      console.log(onclose);
+    }
+  }, [onclose]);
   return (
     <Div className="App">
       <ResetStyles />
@@ -18,14 +41,33 @@ export default () => {
         <WindowStyled>
           <WindowHeaderStyled>
             <span>react95.exe</span>
-            <ButtonStyled size={"sm"} square>
-              <spanStyled
-                style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
-              >
-                x
-              </spanStyled>
+            <ButtonStyled onClick={handleClose} size={"sm"} square>
+              <Spanstyled>x</Spanstyled>
             </ButtonStyled>
           </WindowHeaderStyled>
+          <WindowContentStyled>
+            <div>ICOn</div>
+            <Form>
+              <Spanstyled style={{ marginBottom: "3px" }}>
+                Login name{" "}
+              </Spanstyled>
+              <input
+                type="text"
+                placeholder="USER_NAME"
+                style={{ marginBottom: "8px" }}
+              />
+              <Spanstyled style={{ marginBottom: "3px" }}>Password</Spanstyled>
+              <input type="text" placeholder="USER_PASSWORD" />
+            </Form>
+            <Form>
+              <ButtonStyled type="submit" style={{ marginBottom: "8px" }}>
+                <Spanstyled>submit</Spanstyled>
+              </ButtonStyled>
+              <ButtonStyled>
+                <Spanstyled>cancle</Spanstyled>
+              </ButtonStyled>
+            </Form>
+          </WindowContentStyled>
         </WindowStyled>
       </ThemeProvider>
     </Div>

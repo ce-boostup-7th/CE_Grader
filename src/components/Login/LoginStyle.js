@@ -19,7 +19,7 @@ const ButtonStyled = styled(Button)`
   margin-top: 1px;
 `;
 
-const spanStyled = styled.span`
+const Spanstyled = styled.span`
   font-weight: bold;
   transform: translateY(-1px);
 `;
@@ -37,5 +37,5 @@ export {
   ButtonStyled,
   WindowHeaderStyled,
   ResetStyles,
-  spanStyled
+  Spanstyled
 };
