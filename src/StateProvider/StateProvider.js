@@ -3,6 +3,7 @@ import React from 'react'
 import reducer from './reducer'
 
 export const initialState = {
+    isLoggin:false,
     text:''
 }
 export const StateContext = React.createContext(initialState)
