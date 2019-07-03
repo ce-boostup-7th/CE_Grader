@@ -2,8 +2,8 @@
   "name": "ce_grader",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/61010707/CE_Grader.git",
-  "author": "DrZin <61010707@kmitl.ac.th>",
+  "repository": "https://github.com/DrZIn-dev/CE_Grader.git",
+  "author": "DrZin-dev <pasawee.dev@gmail.com>",
   "license": "MIT",
   "scripts": {
     "startWSL": "echo 'Server on WSL running at :'&& echo 'http://'$(hostname -I)'':1234 | tr -d ' ' && yarn start",
