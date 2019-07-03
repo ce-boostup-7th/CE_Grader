@@ -29,11 +29,7 @@ export default () => {
     setOnClose(true);
   };
 
-  React.useEffect(() => {
-    if (onclose) {
-      console.log(onclose);
-    }
-  }, [onclose]);
+  React.useEffect(() => {}, [onclose]);
   return (
     <Div className="App">
       <ResetStyles />
