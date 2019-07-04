@@ -1,7 +1,6 @@
 import React from "react";
 
 import { StateContext } from "../StateProvider/StateProvider";
-import { LOGOUT } from "../StateProvider/actions_constant";
 
 import Login from "../components/Login";
 import SideNav from "../components/SideNav";

@@ -27,15 +27,15 @@ const Form = styled.form`
 
 export default () => {
   const [onclose, setOnClose] = React.useState(false);
-  const {state,dispatch } = React.useContext(StateContext)
+  const { state, dispatch } = React.useContext(StateContext);
   const handleClose = () => {
     setOnClose(true);
   };
-  const handleLoggin = () =>{
+  const handleLoggin = () => {
     dispatch({
-      type:LOGIN
-    })
-  }
+      type: LOGIN
+    });
+  };
 
   React.useEffect(() => {}, [onclose]);
   return (
@@ -64,7 +64,10 @@ export default () => {
               <input type="text" placeholder="USER_PASSWORD" />
             </Form>
             <Form>
-              <ButtonStyled onClick={()=>handleLoggin()} style={{ marginBottom: "8px" }}>
+              <ButtonStyled
+                onClick={() => handleLoggin()}
+                style={{ marginBottom: "8px" }}
+              >
                 <Spanstyled>submit</Spanstyled>
               </ButtonStyled>
               <ButtonStyled>
