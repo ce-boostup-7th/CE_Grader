@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react'
 
-import reducer from "./reducer";
+import reducer from './reducer'
 
 export const initialState = {
-  isLoggin: false,
-  text: ""
-};
-export const StateContext = React.createContext(initialState);
+	isLoggin: false,
+	text: ''
+}
+export const StateContext = React.createContext(initialState)
 
 export default props => {
-  let [state, dispatch] = React.useReducer(reducer, initialState);
-  return (
-    <StateContext.Provider value={{ state, dispatch }}>
-      {props.children}
-    </StateContext.Provider>
-  );
-};
+	let [state, dispatch] = React.useReducer(reducer, initialState)
+	return (
+		<StateContext.Provider value={{state, dispatch}}>
+			{props.children}
+		</StateContext.Provider>
+	)
+}

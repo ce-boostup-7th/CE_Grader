@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react'
 
-import StateProvider from "./StateProvider/StateProvider";
-import MainWindows from "./page/MainWindows";
+import StateProvider from './StateProvider/StateProvider'
+import MainWindows from './page/MainWindows'
 
 const App = () => {
-  return (
-    <StateProvider>
-      <MainWindows />
-    </StateProvider>
-  );
-};
+	return (
+		<StateProvider>
+			<MainWindows />
+		</StateProvider>
+	)
+}
 
-export default App;
+export default App
