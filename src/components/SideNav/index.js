@@ -6,10 +6,8 @@ import {
 	WindowContent,
 	Window,
 	WindowHeader,
-	Tab,
-	Tabs,
-	TabBody,
-	reset
+	reset,
+	Divider
 } from 'react95'
 
 import {StateContext} from '../../StateProvider/StateProvider'
@@ -31,21 +29,11 @@ export default () => {
 			<ResetStyles />
 			<button onClick={handalLogOut}>Log Out</button>
 			<ThemeProvider theme={themes.default}>
-				<Window style={{width: 350}}>
-					<WindowHeader>👗 store.exe</WindowHeader>
-					<WindowContent>
-						<Tabs
-							value={tabs}
-							onChange={value => {
-								setTabs(value)
-							}}>
-							<Tab value={0}>Shoes</Tab>
-							<Tab value={1}>Accesories</Tab>
-						</Tabs>
-						<div style={{height: '100vh'}}>
-							{tabs === 0 && <TabBody>This is nav Tab</TabBody>}
-						</div>
-					</WindowContent>
+				<Window style={{width: 350, height: '100vh'}}>
+					<WindowHeader>👗 Side_Nav.exe</WindowHeader>
+					<WindowContent>This is profile</WindowContent>
+					<Divider />
+					<WindowContent>This is Tree bar</WindowContent>
 				</Window>
 			</ThemeProvider>
 		</div>
