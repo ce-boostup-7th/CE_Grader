@@ -127,7 +127,7 @@ export default () => {
 						</div>
 					</WindowContent>
 					<Divider />
-					<WindowContent>This is Tree bar</WindowContent>
+					<WindowContent>This is Tree bar coding here</WindowContent>
 				</Window>
 			</ThemeProvider>
 		</div>
