@@ -1,22 +1,22 @@
-import React from "react";
-import { shallow, mount, render } from "enzyme";
+import React from 'react'
+import {shallow, mount, render} from 'enzyme'
 
-import SideNav from "./index";
+import SideNav from './index'
 
-describe("SideNav", () => {
-  it("should render ", () => {
-    const component = shallow(<SideNav />);
-    expect(component.exists()).toBeTruthy();
-  });
+describe('SideNav', () => {
+	it('should render ', () => {
+		const component = shallow(<SideNav />)
+		expect(component.exists()).toBeTruthy()
+	})
 
-  it("should mount", () => {
-    const component = mount(<SideNav />);
-    const wrapper = component.find('ButtonStyled.Spanstyled[children="x"]');
-    expect(wrapper.exists());
-  });
+	it('should mount', () => {
+		const component = mount(<SideNav />)
+		const wrapper = component.find('ButtonStyled.Spanstyled[children="x"]')
+		expect(wrapper.exists())
+	})
 
-  it("should render", () => {
-    const component = render(<SideNav />);
-    expect(component);
-  });
-});
+	it('should render', () => {
+		const component = render(<SideNav />)
+		expect(component)
+	})
+})
