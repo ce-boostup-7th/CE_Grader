@@ -10,6 +10,8 @@ import {
 	ButtonStyled,
 	Spanstyled
 } from './LoginStyle'
+import Keys from '../../resource/icons/keys.png'
+
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LOGIN} from '../../StateProvider/actions_constant'
 
@@ -44,13 +46,15 @@ export default () => {
 			<ThemeProvider theme={themes.default}>
 				<WindowStyled>
 					<WindowHeaderStyled>
-						<span>react95.exe</span>
+						<span>CE Boost Up by Veronica.exe</span>
 						<ButtonStyled onClick={handleClose} size={'sm'} square>
 							<Spanstyled>x</Spanstyled>
 						</ButtonStyled>
 					</WindowHeaderStyled>
 					<WindowContentStyled>
-						<div>ICOn</div>
+						<div>
+							<img src={Keys} alt="key- icons" />
+						</div>
 						<Form>
 							<Spanstyled style={{marginBottom: '3px'}}>Login name </Spanstyled>
 							<input
