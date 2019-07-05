@@ -11,9 +11,9 @@ const ResetStyles = createGlobalStyle`
   ${reset}
 `
 const Circle = styled.span`
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
+	width: 14px;
+	height: 14px;
+	border-radius: 7px;
 	background: green;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
