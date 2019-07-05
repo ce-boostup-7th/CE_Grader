@@ -10,6 +10,16 @@ import {LOGOUT} from '../../StateProvider/actions_constant'
 const ResetStyles = createGlobalStyle`
   ${reset}
 `
+const Circle = styled.span`
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	background: green;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-box-shadow: 1.5px 1.5px 0px 0px #000000;
+	box-shadow: 1.5px 1.5px 0px 0px #000000;
+`
 
 export default () => {
 	let {state, dispatch} = useContext(StateContext)
@@ -18,6 +28,7 @@ export default () => {
 	const [rank, setRank] = useState(0)
 	const [pass, setPass] = useState(0)
 	const [quiz, setQuiz] = useState(0)
+	const [users, setUsers] = useState(1)
 
 	const handalLogOut = e => {
 		dispatch({type: LOGOUT})
@@ -45,7 +56,9 @@ export default () => {
 								height: '100px',
 								position: 'relative',
 								overflow: 'hidden',
-								borderRadius: '50%'
+								borderRadius: '50%',
+								WebkitBoxShadow: '1.5px 1.5px 0px 0px #000000',
+								boxShadow: '1.5px 1.5px 0px 0px #000000'
 							}}>
 							<img
 								src={testImg}
@@ -104,7 +117,13 @@ export default () => {
 									<span>quiz</span>
 								</div>
 							</div>
-							<Button>user online </Button>
+							<Button
+								style={{display: 'flex', justifyContent: 'space-between'}}>
+								<Circle />
+								<span style={{paddingLeft: '5px'}}>
+									{users} user{users > 1 ? 's' : null} online
+								</span>
+							</Button>
 						</div>
 					</WindowContent>
 					<Divider />
