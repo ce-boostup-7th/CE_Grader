@@ -1,33 +1,35 @@
 {
-  "name": "ce_grader",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/DrZIn-dev/CE_Grader.git",
-  "author": "DrZin-dev <pasawee.dev@gmail.com>",
-  "license": "MIT",
-  "scripts": {
-    "startWSL": "echo 'Server on WSL running at :'&& echo 'http://'$(hostname -I)'':1234 | tr -d ' ' && yarn start",
-    "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html",
-    "test": "CI=true jest -u",
-    "test:watch": "jest --watchAll",
-    "test:coverage": "jest -u --coverage --colors"
-  },
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-react": "^7.0.0",
-    "babel-jest": "^24.8.0",
-    "babel-loader": "^8.0.6",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.14.0",
-    "jest": "^24.8.0",
-    "parcel-bundler": "^1.12.3",
-    "react95": "^2.0.0",
-    "styled-components": "^4.3.2"
-  }
+	"name": "ce_grader",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/DrZIn-dev/CE_Grader.git",
+	"author": "DrZin-dev <pasawee.dev@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"startWSL": "echo 'Server on WSL running at :'&& echo 'http://'$(hostname -I)'':1234 | tr -d ' ' && yarn start",
+		"start": "parcel ./src/index.html",
+		"build": "parcel build ./src/index.html",
+		"test": "CI=true jest -u",
+		"test:watch": "jest --watchAll",
+		"test:coverage": "jest -u --coverage --colors"
+	},
+	"dependencies": {
+		"@react95/core": "^2.0.0",
+		"global": "^4.4.0",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/preset-env": "^7.4.5",
+		"@babel/preset-react": "^7.0.0",
+		"babel-jest": "^24.8.0",
+		"babel-loader": "^8.0.6",
+		"enzyme": "^3.10.0",
+		"enzyme-adapter-react-16": "^1.14.0",
+		"jest": "^24.8.0",
+		"parcel-bundler": "^1.12.3",
+		"react95": "^2.0.0",
+		"styled-components": "^4.3.2"
+	}
 }
