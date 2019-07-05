@@ -46,7 +46,9 @@ export default () => {
 			<ThemeProvider theme={themes.default}>
 				<WindowStyled>
 					<WindowHeaderStyled>
-						<span>CE Boost Up by Veronica.exe</span>
+						<span style={{fontFamily: 'Press Start 2P, serif'}}>
+							CE Boost Up by Veronica.exe
+						</span>
 						<ButtonStyled onClick={handleClose} size={'sm'} square>
 							<Spanstyled>x</Spanstyled>
 						</ButtonStyled>
@@ -72,7 +74,7 @@ export default () => {
 								<Spanstyled>submit</Spanstyled>
 							</ButtonStyled>
 							<ButtonStyled>
-								<Spanstyled>cancle</Spanstyled>
+								<Spanstyled>cancel</Spanstyled>
 							</ButtonStyled>
 						</Form>
 					</WindowContentStyled>
