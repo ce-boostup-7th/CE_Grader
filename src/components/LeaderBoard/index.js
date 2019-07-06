@@ -54,6 +54,9 @@ export default () => {
 						}}>
 						<Tab value={0}>Page 1</Tab>
 						<Tab value={1}>Page 2</Tab>
+						<Tab value={2}>Page 3</Tab>
+						<Tab value={3}>Page 4</Tab>
+						<Tab value={4}>Page 5</Tab>
 					</Tabs>
 					<div style={{height: '87vh'}}>
 						{tabs === 0 && (
@@ -70,18 +73,22 @@ export default () => {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										<TableRow>
-											<TableDataCell style={{textAlign: 'center'}}>
-												{users[0].rank}
-											</TableDataCell>
-											<TableDataCell>{users[0].name}</TableDataCell>
-											<TableDataCell style={{textAlign: 'center'}}>
-												{users[0].score}
-											</TableDataCell>
-											<TableDataCell style={{textAlign: 'center'}}>
-												{users[0].time} {' hrs '}
-											</TableDataCell>
-										</TableRow>
+										{users.map(data => {
+											return data.id < 23 ? (
+												<TableRow key={data.id}>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.rank}
+													</TableDataCell>
+													<TableDataCell>{data.name}</TableDataCell>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.score}
+													</TableDataCell>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.time} {' hrs '}
+													</TableDataCell>
+												</TableRow>
+											) : null
+										})}
 									</TableBody>
 								</Table>
 							</TabBody>
@@ -100,14 +107,56 @@ export default () => {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										<TableRow>
-											<TableDataCell style={{textAlign: 'center'}}>
-												🌿
-											</TableDataCell>
-											<TableDataCell>Bulbasaur</TableDataCell>
-											<TableDataCell>64</TableDataCell>
-											<TableDataCell>45 hrs</TableDataCell>
+										{users.map(data => {
+											return data.id > 22 && data.id < 45 ? (
+												<TableRow key={data.id}>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.rank}
+													</TableDataCell>
+													<TableDataCell>{data.name}</TableDataCell>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.score}
+													</TableDataCell>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.time} {' hrs '}
+													</TableDataCell>
+												</TableRow>
+											) : null
+										})}
+									</TableBody>
+								</Table>
+							</TabBody>
+						)}
+						{tabs === 2 && (
+							<TabBody>
+								<Table>
+									<TableHead>
+										<TableRow head>
+											<TableHeadCell>Rank</TableHeadCell>
+											<TableHeadCell style={{width: '30vw'}}>
+												Name
+											</TableHeadCell>
+											<TableHeadCell>Score</TableHeadCell>
+											<TableHeadCell>Time</TableHeadCell>
 										</TableRow>
+									</TableHead>
+									<TableBody>
+										{users.map(data => {
+											return data.id > 44 && data.id < 67 ? (
+												<TableRow key={data.id}>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.rank}
+													</TableDataCell>
+													<TableDataCell>{data.name}</TableDataCell>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.score}
+													</TableDataCell>
+													<TableDataCell style={{textAlign: 'center'}}>
+														{data.time} {' hrs '}
+													</TableDataCell>
+												</TableRow>
+											) : null
+										})}
 									</TableBody>
 								</Table>
 							</TabBody>
