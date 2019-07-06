@@ -4,7 +4,8 @@ import reducer from './reducer'
 
 export const initialState = {
 	isLoggin: false,
-	text: ''
+	text: '',
+	pages: ''
 }
 export const StateContext = React.createContext(initialState)
 
