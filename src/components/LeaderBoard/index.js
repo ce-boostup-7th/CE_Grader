@@ -17,12 +17,13 @@ import {
 	TableHeadCell
 } from 'react95'
 import {ThemeProvider} from 'styled-components'
-
+import {userRank} from './userDatas.js'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 // Start  Code Here
 export default () => {
 	let {state, dispatch} = React.useContext(StateContext)
+	const [users, setUsers] = useState(userRank)
 	const [tabs, settabs] = useState(0)
 	return (
 		<ThemeProvider theme={themes.default}>
@@ -71,11 +72,15 @@ export default () => {
 									<TableBody>
 										<TableRow>
 											<TableDataCell style={{textAlign: 'center'}}>
-												🌿
+												{users[0].rank}
 											</TableDataCell>
-											<TableDataCell>Bulbasaur</TableDataCell>
-											<TableDataCell>64</TableDataCell>
-											<TableDataCell>45 hrs</TableDataCell>
+											<TableDataCell>{users[0].name}</TableDataCell>
+											<TableDataCell style={{textAlign: 'center'}}>
+												{users[0].score}
+											</TableDataCell>
+											<TableDataCell style={{textAlign: 'center'}}>
+												{users[0].time} {' hrs '}
+											</TableDataCell>
 										</TableRow>
 									</TableBody>
 								</Table>
