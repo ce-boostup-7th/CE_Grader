@@ -3,7 +3,7 @@ import React, {useState, useContext} from 'react'
 import styled, {ThemeProvider, createGlobalStyle} from 'styled-components'
 import {themes, WindowContent, Window, reset, Divider, Button} from 'react95'
 import testImg from '../../resource/img/IMG_6413.jpg'
-
+import logOut from '../../resource/icons/logOut.png'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LOGOUT} from '../../StateProvider/actions_constant'
 import TreeFiles from '../TreeFiles'
@@ -37,11 +37,37 @@ export default () => {
 	return (
 		<div style={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
 			<ResetStyles />
-			<button onClick={handalLogOut}>Log Out</button>
+			
 			<ThemeProvider theme={themes.default}>
 				<Window style={{width: '350px', height: '100vh'}}>
-					<WindowContent style={{display: 'flex', justifyContent: 'center'}}>
-						{name}
+					<WindowContent
+						style={{
+							display: 'flex',
+							justifyContent: 'center',
+							alignContent: 'center',
+							alignItems: 'center'
+						}}>
+						<div style={{marginLeft: '45%'}}>{name} </div>
+						<Button style={{marginLeft: '25%'}} onClick={handalLogOut}>
+							<div
+								style={{
+									width: '28px',
+									height: '25px',
+									overflow: 'hidden',
+									position: 'relative'
+								}}>
+								<img
+									src={logOut}
+									style={{
+										display: 'inline',
+										margin: '0 auto',
+										marginLeft: '-10%',
+										height: '100%',
+										width: 'auto'
+									}}
+								/>
+							</div>
+						</Button>
 					</WindowContent>
 					<Divider />
 					<WindowContent
