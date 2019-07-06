@@ -17,13 +17,13 @@ import {
 	TableHeadCell
 } from 'react95'
 import {ThemeProvider} from 'styled-components'
-import {userRank} from './userDatas.js'
+import {usersNew} from './userDatas.js'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 // Start  Code Here
 export default () => {
 	let {state, dispatch} = React.useContext(StateContext)
-	const [users, setUsers] = useState(userRank)
+	const [users, setUsers] = useState(usersNew)
 	const [tabs, settabs] = useState(0)
 	return (
 		<ThemeProvider theme={themes.default}>
@@ -73,79 +73,11 @@ export default () => {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										{users.map(data => {
-											return data.id < 23 ? (
-												<TableRow key={data.id}>
+										{usersNew.map((data, index) => {
+											return index < 22 ? (
+												<TableRow key={index}>
 													<TableDataCell style={{textAlign: 'center'}}>
-														{data.rank}
-													</TableDataCell>
-													<TableDataCell>{data.name}</TableDataCell>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.score}
-													</TableDataCell>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.time} {' hrs '}
-													</TableDataCell>
-												</TableRow>
-											) : null
-										})}
-									</TableBody>
-								</Table>
-							</TabBody>
-						)}
-						{tabs === 1 && (
-							<TabBody>
-								<Table>
-									<TableHead>
-										<TableRow head>
-											<TableHeadCell>Rank</TableHeadCell>
-											<TableHeadCell style={{width: '30vw'}}>
-												Name
-											</TableHeadCell>
-											<TableHeadCell>Score</TableHeadCell>
-											<TableHeadCell>Time</TableHeadCell>
-										</TableRow>
-									</TableHead>
-									<TableBody>
-										{users.map(data => {
-											return data.id > 22 && data.id < 45 ? (
-												<TableRow key={data.id}>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.rank}
-													</TableDataCell>
-													<TableDataCell>{data.name}</TableDataCell>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.score}
-													</TableDataCell>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.time} {' hrs '}
-													</TableDataCell>
-												</TableRow>
-											) : null
-										})}
-									</TableBody>
-								</Table>
-							</TabBody>
-						)}
-						{tabs === 2 && (
-							<TabBody>
-								<Table>
-									<TableHead>
-										<TableRow head>
-											<TableHeadCell>Rank</TableHeadCell>
-											<TableHeadCell style={{width: '30vw'}}>
-												Name
-											</TableHeadCell>
-											<TableHeadCell>Score</TableHeadCell>
-											<TableHeadCell>Time</TableHeadCell>
-										</TableRow>
-									</TableHead>
-									<TableBody>
-										{users.map(data => {
-											return data.id > 44 && data.id < 67 ? (
-												<TableRow key={data.id}>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.rank}
+														{index + 1 === 1 ? '1st' : index + 1}
 													</TableDataCell>
 													<TableDataCell>{data.name}</TableDataCell>
 													<TableDataCell style={{textAlign: 'center'}}>
