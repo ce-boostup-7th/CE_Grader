@@ -7,6 +7,7 @@ import logOut from '../../resource/icons/logOut.png'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LOGOUT} from '../../StateProvider/actions_constant'
 import TreeFiles from '../TreeFiles'
+import Icon from '@react95/core/Icon'
 const ResetStyles = createGlobalStyle`
   ${reset}
 `
@@ -37,7 +38,7 @@ export default () => {
 	return (
 		<div style={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
 			<ResetStyles />
-			
+
 			<ThemeProvider theme={themes.default}>
 				<Window style={{width: '350px', height: '100vh'}}>
 					<WindowContent
@@ -48,8 +49,8 @@ export default () => {
 							alignItems: 'center'
 						}}>
 						<div style={{marginLeft: '45%'}}>{name} </div>
-						<Button style={{marginLeft: '25%'}} onClick={handalLogOut}>
-							<div
+						<Button style={{marginLeft: '25%'}} onClick={handalLogOut} square>
+							{/* <div
 								style={{
 									width: '28px',
 									height: '25px',
@@ -66,7 +67,8 @@ export default () => {
 										width: 'auto'
 									}}
 								/>
-							</div>
+							</div> */}
+							<Icon name={'reader_eject'} />
 						</Button>
 					</WindowContent>
 					<Divider />

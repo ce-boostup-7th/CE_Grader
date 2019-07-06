@@ -6,7 +6,8 @@ import Login from '../components/Login'
 import SideNav from '../components/SideNav'
 import LeaderBoard from '../components/LeaderBoard'
 const MainWindows = props => {
-	let {state, dispatch} = React.useContext(StateContext)
+	let { state, dispatch } = React.useContext(StateContext)
+	state.isLogin=true
 	return (
 		<div>
 			{state.isLogin ? (
@@ -17,7 +18,7 @@ const MainWindows = props => {
 					}}>
 					{' '}
 					<SideNav />
-					<LeaderBoard>โ</LeaderBoard>
+					<LeaderBoard></LeaderBoard>
 				</div>
 			) : (
 				<Login />
