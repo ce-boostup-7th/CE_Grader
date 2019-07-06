@@ -5,7 +5,7 @@ import reducer from './reducer'
 export const initialState = {
 	isLoggin: false,
 	text: '',
-	pages: 'LEADER_BOARD'
+	pages: ''
 }
 export const StateContext = React.createContext(initialState)
 
