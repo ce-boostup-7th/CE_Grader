@@ -6,7 +6,7 @@ import testImg from '../../resource/img/IMG_6413.jpg'
 
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LOGOUT} from '../../StateProvider/actions_constant'
-
+import TreeFiles from '../TreeFiles'
 const ResetStyles = createGlobalStyle`
   ${reset}
 `
@@ -127,7 +127,9 @@ export default () => {
 						</div>
 					</WindowContent>
 					<Divider />
-					<WindowContent>This is Tree bar coding here</WindowContent>
+					<WindowContent>
+						<TreeFiles />
+					</WindowContent>
 				</Window>
 			</ThemeProvider>
 		</div>
