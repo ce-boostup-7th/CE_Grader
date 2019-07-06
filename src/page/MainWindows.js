@@ -15,6 +15,7 @@ const MainWindows = props => {
 					style={{
 						display: 'flex',
 						flexDirection: 'row'
+						
 					}}>
 					{' '}
 					<SideNav />

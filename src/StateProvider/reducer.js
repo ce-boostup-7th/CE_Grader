@@ -3,7 +3,8 @@ import {
 	LOGIN,
 	LOGOUT,
 	DASH_BOARD,
-	LEADER_BOARD
+	LEADER_BOARD,
+	CLOSE_WIN
 } from './actions_constant'
 import {initialState} from './StateProvider'
 import LeaderBoard from '../components/LeaderBoard'
@@ -36,6 +37,12 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				pages: LEADER_BOARD
+			}
+		}
+		case CLOSE_WIN: { 
+			return {
+				...state,
+				pages:''
 			}
 		}
 		default:
