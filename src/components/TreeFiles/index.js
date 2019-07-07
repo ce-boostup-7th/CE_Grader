@@ -3,8 +3,7 @@ import React from 'react'
 import Tree from '@react95/core/Tree'
 
 import {StateContext} from '../../StateProvider/StateProvider'
-import { LEADER_BOARD, DASH_BOARD } from '../../StateProvider/actions_constant'
-
+import {LEADER_BOARD, DASH_BOARD} from '../../StateProvider/actions_constant'
 
 export default () => {
 	let {state, dispatch} = React.useContext(StateContext)
