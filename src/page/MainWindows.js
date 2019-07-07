@@ -7,7 +7,8 @@ import SideNav from '../components/SideNav'
 import LeaderBoard from '../components/LeaderBoard'
 const MainWindows = props => {
 	let {state, dispatch} = React.useContext(StateContext)
-	
+	state.isLogin = true
+	state.pages = LEADER_BOARD
 	return (
 		<div>
 			{state.isLogin ? (
@@ -15,14 +16,13 @@ const MainWindows = props => {
 					style={{
 						display: 'flex',
 						flexDirection: 'row'
-						
 					}}>
 					{' '}
 					<SideNav />
 					{(() => {
 						switch (state.pages) {
 							case LEADER_BOARD:
-								return <LeaderBoard></LeaderBoard>
+								return <LeaderBoard />
 
 							//wait for dashboard
 							default:

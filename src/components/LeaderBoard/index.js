@@ -58,9 +58,9 @@ export default () => {
 						<Tab value={3}>Page 4</Tab>
 						<Tab value={4}>Page 5</Tab>
 					</Tabs>
-					<div style={{height: '87vh'}}>
+					<div style={{height: '85vh'}}>
 						{tabs === 0 && (
-							<TabBody>
+							<TabBody style={{overflowY: 'auto'}}>
 								<Table>
 									<TableHead>
 										<TableRow head>
@@ -75,7 +75,7 @@ export default () => {
 									<TableBody>
 										{usersNew.map((data, index) => {
 											return index < 22 ? (
-												<TableRow key={index}>
+												<TableRow>
 													<TableDataCell style={{textAlign: 'center'}}>
 														{index + 1 === 1 ? '1st' : index + 1}
 													</TableDataCell>
