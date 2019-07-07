@@ -24,7 +24,7 @@ import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 export default () => {
 	let {state, dispatch} = React.useContext(StateContext)
 	const [users, setUsers] = useState(usersNew)
-	const [tabs, settabs] = useState(0)
+	const [tabs, settabs] = useState(1)
 	return (
 		<ThemeProvider theme={themes.default}>
 			<Window style={{display: 'inline', width: '100vw', height: '100vh'}}>
@@ -52,47 +52,74 @@ export default () => {
 						onChange={value => {
 							settabs(value)
 						}}>
-						<Tab value={0}>Page 1</Tab>
-						<Tab value={1}>Page 2</Tab>
-						<Tab value={2}>Page 3</Tab>
-						<Tab value={3}>Page 4</Tab>
-						<Tab value={4}>Page 5</Tab>
+						<Tab value={1}>Today Ranking 🏆</Tab>
 					</Tabs>
 					<div style={{height: '85vh'}}>
-						{tabs === 0 && (
-							<TabBody style={{overflowY: 'auto'}}>
-								<Table>
-									<TableHead>
-										<TableRow head>
-											<TableHeadCell>Rank</TableHeadCell>
-											<TableHeadCell style={{width: '30vw'}}>
-												Name
-											</TableHeadCell>
-											<TableHeadCell>Score</TableHeadCell>
-											<TableHeadCell>Time</TableHeadCell>
-										</TableRow>
-									</TableHead>
-									<TableBody>
-										{usersNew.map((data, index) => {
-											return index < 22 ? (
-												<TableRow>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{index + 1 === 1 ? '1st' : index + 1}
+						<TabBody>
+							<Table style={{display: 'block'}}>
+								<TableHead style={{display: 'block'}}>
+									<TableRow head style={{display: 'block'}}>
+										<TableHeadCell style={{width: '8vw'}}>Rank</TableHeadCell>
+										<TableHeadCell style={{width: '35vw'}}>Name</TableHeadCell>
+										<TableHeadCell style={{width: '12vw'}}>Score</TableHeadCell>
+										<TableHeadCell style={{width: '12vw'}}>Time</TableHeadCell>
+									</TableRow>
+								</TableHead>
+								<TableBody
+									style={{display: 'block', height: '75vh', overflow: 'auto'}}>
+									{tabs === 1 &&
+										users.map((user, index) => {
+											return (
+												<TableRow key={index}>
+													<TableDataCell
+														style={{width: '8vw', textAlign: 'center'}}>
+														{(() => {
+															switch (index + 1) {
+																case 1:
+																	return '1st'
+																case 2:
+																	return '2nd'
+																case 3:
+																	return '3rd'
+																default:
+																	return index + 1
+															}
+														})()}
 													</TableDataCell>
-													<TableDataCell>{data.name}</TableDataCell>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.score}
+													<TableDataCell style={{width: '33vw'}}>
+														{(() => {
+															switch (index + 1) {
+																case 1:
+																	return user.name+`🥇`
+																case 2:
+																	return user.name+'🥈'
+																case 3:
+																	return user.name+'🥉'
+																default:
+																	return user.name
+															}
+														})()}
 													</TableDataCell>
-													<TableDataCell style={{textAlign: 'center'}}>
-														{data.time} {' hrs '}
+													<TableDataCell
+														style={{
+															textAlign: 'center',
+															width: '11vw'
+														}}>
+														{user.score}
+													</TableDataCell>
+													<TableDataCell
+														style={{
+															textAlign: 'center',
+															width: '10vw'
+														}}>
+														{user.time} {' hrs '}
 													</TableDataCell>
 												</TableRow>
-											) : null
+											)
 										})}
-									</TableBody>
-								</Table>
-							</TabBody>
-						)}
+								</TableBody>
+							</Table>
+						</TabBody>
 					</div>
 				</WindowContent>
 			</Window>
