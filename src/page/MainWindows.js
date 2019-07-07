@@ -16,14 +16,14 @@ const MainWindows = props => {
 					style={{
 						display: 'flex',
 						flexDirection: 'row'
+						
 					}}>
 					{' '}
 					<SideNav />
 					{(() => {
 						switch (state.pages) {
 							case LEADER_BOARD:
-								return <LeaderBoard />
-
+								return <LeaderBoard/>
 							//wait for dashboard
 							default:
 								return null
