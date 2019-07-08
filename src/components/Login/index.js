@@ -27,19 +27,19 @@ const Form = styled.form`
 	flex-direction: column;
 `
 
-export default () => {
-	const [onclose, setOnClose] = React.useState(false)
+export default (props) => {
 	const {state, dispatch} = React.useContext(StateContext)
-	const handleClose = () => {
-		setOnClose(true)
-	}
 	const handleLoggin = () => {
 		dispatch({
 			type: LOGIN
 		})
+		//some action
 	}
-
-	React.useEffect(() => {}, [onclose])
+	React.useEffect(()=>{
+		if(state.isLogin){
+		//some action
+		}
+	},[state.isLogin])
 	return (
 		<Div className="App">
 			<ResetStyles />
@@ -49,7 +49,7 @@ export default () => {
 						<span style={{fontFamily: 'Press Start 2P, serif'}}>
 							CE Boost Up by Veronica.exe
 						</span>
-						<ButtonStyled onClick={handleClose} size={'sm'} square>
+						<ButtonStyled size={'sm'} square>
 							<Spanstyled>x</Spanstyled>
 						</ButtonStyled>
 					</WindowHeaderStyled>

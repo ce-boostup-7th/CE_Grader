@@ -17,11 +17,13 @@ const reducer = (state = initialState, action) => {
 				text: action.payload
 			}
 		case LOGIN:
+			localStorage.setItem('Login', "true")
 			return {
 				...state,
 				isLogin: true
 			}
 		case LOGOUT:
+			localStorage.setItem('Login', "false")
 			return {
 				...state,
 				isLogin: false

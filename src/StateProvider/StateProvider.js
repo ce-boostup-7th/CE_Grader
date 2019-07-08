@@ -3,9 +3,18 @@ import React from 'react'
 import reducer from './reducer'
 
 export const initialState = {
-	isLoggin: false,
+	isLogin: false,
 	text: '',
-	pages: ''
+	data:[
+		{
+			name:'ex.1',
+			order:'0001',
+			status:'PASS',
+			level:1,
+			topic:'ex1',
+			pass:'123'
+		}
+	]
 }
 export const StateContext = React.createContext(initialState)
 
