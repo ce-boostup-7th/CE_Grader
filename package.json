@@ -11,20 +11,28 @@
 		"build": "parcel build ./src/index.html",
 		"test": "CI=true jest -u",
 		"test:watch": "jest --watchAll",
-		"test:coverage": "jest -u --coverage --colors"
+		"test:coverage": "jest -u --coverage --colors",
+		"story": "start-storybook"
 	},
 	"dependencies": {
 		"@react95/core": "^2.0.0",
 		"global": "^4.4.0",
 		"react": "^16.8.6",
-		"react-dom": "^16.8.6"
+		"react-ace": "^7.0.2",
+		"react-dom": "^16.8.6",
+		"react-router-dom": "^5.0.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.5",
 		"@babel/preset-env": "^7.4.5",
 		"@babel/preset-react": "^7.0.0",
+		"@storybook/addon-knobs": "^5.1.9",
+		"@storybook/react": "^5.1.9",
+		"@types/storybook__addon-knobs": "^5.0.2",
+		"@types/storybook__react": "^4.0.2",
 		"babel-jest": "^24.8.0",
 		"babel-loader": "^8.0.6",
+		"brace": "^0.11.1",
 		"enzyme": "^3.10.0",
 		"enzyme-adapter-react-16": "^1.14.0",
 		"jest": "^24.8.0",
