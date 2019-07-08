@@ -1,5 +1,13 @@
-import { TEST_ACTION, LOGIN, LOGOUT } from './actions_constant'
-import { initialState } from './StateProvider'
+import {
+	TEST_ACTION,
+	LOGIN,
+	LOGOUT,
+	DASH_BOARD,
+	LEADER_BOARD,
+	CLOSE_WIN
+} from './actions_constant'
+import {initialState} from './StateProvider'
+import LeaderBoard from '../components/LeaderBoard'
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -21,6 +29,24 @@ const reducer = (state = initialState, action) => {
 				isLogin: false
 			}
 		//add action from usage
+		case DASH_BOARD: {
+			return {
+				...state,
+				pages: DASH_BOARD
+			}
+		}
+		case LEADER_BOARD: {
+			return {
+				...state,
+				pages: LEADER_BOARD
+			}
+		}
+		case CLOSE_WIN: { 
+			return {
+				...state,
+				pages:''
+			}
+		}
 		default:
 			console.warn('invalid action')
 			return state
