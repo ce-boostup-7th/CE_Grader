@@ -15,7 +15,6 @@ export const initialState = {
 			pass:'123'
 		}
 	]
-}
 export const StateContext = React.createContext(initialState)
 
 export default props => {

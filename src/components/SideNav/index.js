@@ -4,16 +4,18 @@ import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { themes, WindowContent, Window, reset, Divider, Button } from 'react95'
 import testImg from '../../resource/img/IMG_6413.jpg'
 
-import { StateContext } from '../../StateProvider/StateProvider'
-import { LOGOUT } from '../../StateProvider/actions_constant'
+import {StateContext} from '../../StateProvider/StateProvider'
+import {LOGOUT} from '../../StateProvider/actions_constant'
+import TreeFiles from '../TreeFiles'
+import Icon from '@react95/core/Icon'
 
 const ResetStyles = createGlobalStyle`
   ${reset}
 `
 const Circle = styled.span`
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
+	width: 14px;
+	height: 14px;
+	border-radius: 7px;
 	background: green;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
