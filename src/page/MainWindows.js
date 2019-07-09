@@ -4,7 +4,7 @@ import {StateContext} from '../StateProvider/StateProvider'
 import {Switch, Redirect, Route} from 'react-router-dom'
 
 import Login from '../components/Login'
-import SideNav from '../components/SideNav'
+import Leaderboard from './LeaderPage'
 import Problem from '../page/ProblemPage'
 import {LOGIN, LOGOUT} from '../StateProvider/actions_constant'
 
@@ -37,7 +37,7 @@ const MainWindows = props => {
 				<Route exact path="/" />
 				<Route path="/login" component={Login} />
 				<Route path="/dashboard" />
-				<Route path="/leaderboard" />
+				<Route path="/leaderboard" component={Leaderboard}/>
 				<Route path="/problem" component={Problem} />
 				<Route path="/quize>" />
 				<Route component={NoRoute} />

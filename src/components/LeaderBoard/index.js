@@ -30,7 +30,8 @@ export default () => {
 		<div
 			style={{
 				display: 'flex',
-				marginLeft: '8%',
+				justifyContent: 'center',
+				marginLeft: '2%',
 				marginTop: '0.5%'
 			}}>
 			<ThemeProvider theme={themes.default}>
