@@ -6,6 +6,7 @@ import {Switch, Redirect, Route} from 'react-router-dom'
 import Login from '../components/Login'
 import Leaderboard from './LeaderPage'
 import Problem from '../page/ProblemPage'
+import Dashboard from './DashboardPage'
 import {LOGIN, LOGOUT} from '../StateProvider/actions_constant'
 
 const NoRoute = () => {
@@ -36,8 +37,8 @@ const MainWindows = props => {
 			<Switch>
 				<Route exact path="/" />
 				<Route path="/login" component={Login} />
-				<Route path="/dashboard" />
-				<Route path="/leaderboard" component={Leaderboard}/>
+				<Route path="/dashboard" component={Dashboard} />
+				<Route path="/leaderboard" component={Leaderboard} />
 				<Route path="/problem" component={Problem} />
 				<Route path="/quize>" />
 				<Route component={NoRoute} />
