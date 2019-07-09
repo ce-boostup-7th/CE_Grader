@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { Tooltip } from 'react95'
+
 const renderArray = (number, serialize) => {
 	let temp = []
 	for (let i = 0; i < number; i++) {
@@ -27,7 +29,7 @@ const Container = styled.div`
 	flex-direction: column;
 	max-height: 90vh;
 	min-height: 90vh;
-	border: solid 5px #e2e2e2;
+	border: solid 10px #e2e2e2;
 	background-color: #e2e2e2;
 `
 const Box = styled.div`
@@ -45,42 +47,73 @@ const Item = styled.div`
 	min-height: 50px;
 	height: 50px;
 	line-height: 50px;
+    border-style: solid;
+    border-width: 2px;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #050608;
+    border-bottom-color: #050608;
+    box-shadow: inset 1px 1px 0px 1px #dfe0e3, inset -1px -1px 0 1px #888c8f;
+    padding: 0 0.5rem;
+    background: #ced0cf;
+	
+	${props => props.sorting && `:active{
+	border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-top-color: #050608;
+	border-left-color: #050608;
+	}
+	:hover{
+		cursor:pointer;
+	}`};
 `
 
 const DataBox = styled.div`
 	display: flex;
 	flex-direction: row;
 	min-height: 50px;
-	background-color: #e2e2e2;
+	background-color: white;
 	align-items: center;
 	justify-content: center;
 	font-family: sans-serif;
-	padding: 5px;
+	padding: 2px;
+	margin:2px;
+	:hover{
+		color:white;
+		background-color:#000080;
+	}
 `
 const DataItem = styled.div`
 	text-align: ${props => props.align};
 	width: ${props => props.width}%;
 `
 const Data = styled.div`
-	width: 100%;
+	height: 100vh;
 	overflow-y: auto;
+	border-style: solid;
+    border-width: 2px;
+    border-left-color: #ffffff;
+    border-top-color: #ffffff;
+    border-right-color: #050608;
+    border-bottom-color: #050608;
+	box-sizing:border-box;
+	box-shadow:1px 1px 0px 1px #dfe0e3,-1px -1px 0 1px #888c8f;
+	background-color:white;
+`
+const StyledTooltip = styled(Tooltip)`
+background:white;
+;
 `
 
-const Sortable = styled.div`
-	:hover {
-		cursor: pointer;
-	}
-`
-
-export default ({data, sort}) => {
+export default ({ data, sort }) => {
 	return (
 		<Container>
 			<Box>
 				<Item width={12.5}>Status</Item>
 				<Item width={12.5}>Order</Item>
 				<Item width={37.5}>Name</Item>
-				<Item width={12.5}>
-					<Sortable onClick={e => sort('Level')}>Level</Sortable>
+				<Item width={12.5} sorting onClick={e => sort('Level')}>
+					<StyledTooltip delay={300} text="Click to sort by level ⌛">Level</StyledTooltip>
 				</Item>
 				<Item width={12.5}>Topic</Item>
 				<Item width={12.5}>Pass</Item>

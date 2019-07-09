@@ -12,7 +12,7 @@ export const initialState = {
 			status: 'PASS',
 			level: 1,
 			topic: 'ex1',
-			pass: '123'
+			pass: 'TESTING'
 		}
 	]
 }
