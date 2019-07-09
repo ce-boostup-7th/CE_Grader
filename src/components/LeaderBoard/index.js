@@ -132,7 +132,6 @@ export default () => {
 															}}>
 															{user.time} {' hrs '}
 														</TableDataCell>
-													
 													</TableRow>
 												)
 											})}

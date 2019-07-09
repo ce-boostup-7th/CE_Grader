@@ -27,7 +27,7 @@ const Form = styled.form`
 	flex-direction: column;
 `
 
-export default (props) => {
+export default props => {
 	const {state, dispatch} = React.useContext(StateContext)
 	const handleLoggin = () => {
 		dispatch({
@@ -35,11 +35,11 @@ export default (props) => {
 		})
 		//some action
 	}
-	React.useEffect(()=>{
-		if(state.isLogin){
-		//some action
+	React.useEffect(() => {
+		if (state.isLogin) {
+			//some action
 		}
-	},[state.isLogin])
+	}, [state.isLogin])
 	return (
 		<Div className="App">
 			<ResetStyles />

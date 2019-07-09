@@ -5,14 +5,14 @@ import reducer from './reducer'
 export const initialState = {
 	isLogin: false,
 	text: '',
-	data:[
+	data: [
 		{
-			name:'ex.1',
-			order:'0001',
-			status:'PASS',
-			level:1,
-			topic:'ex1',
-			pass:'123'
+			name: 'ex.1',
+			order: '0001',
+			status: 'PASS',
+			level: 1,
+			topic: 'ex1',
+			pass: '123'
 		}
 	]
 }
