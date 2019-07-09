@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react'
+import React, {useState, useContext} from 'react'
 
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { themes, WindowContent, Window, reset, Divider, Button } from 'react95'
+import styled, {ThemeProvider, createGlobalStyle} from 'styled-components'
+import {themes, WindowContent, Window, reset, Divider, Button} from 'react95'
 import testImg from '../../resource/img/IMG_6413.jpg'
 
 import {StateContext} from '../../StateProvider/StateProvider'
@@ -23,8 +23,8 @@ const Circle = styled.span`
 	box-shadow: 1.5px 1.5px 0px 0px #000000;
 `
 
-export default (props) => {
-	let { state, dispatch } = useContext(StateContext)
+export default props => {
+	let {state, dispatch} = useContext(StateContext)
 	let [name, setName] = useState('Unknown')
 	let [tabs, setTabs] = useState(0)
 	const [rank, setRank] = useState(0)
@@ -33,17 +33,23 @@ export default (props) => {
 	const [users, setUsers] = useState(1)
 
 	const handleLogOut = (e, routerpush) => {
-		dispatch({ type: LOGOUT })
+		dispatch({type: LOGOUT})
 		routerpush('/login')
 	}
 
 	return (
 		<div>
-			<div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '350px' }}>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					height: '100vh',
+					width: '350px'
+				}}>
 				<ResetStyles />
 				<ThemeProvider theme={themes.default}>
-					<Window style={{ width: '100%', height: '100vh' }}>
-						<WindowContent style={{ display: 'flex', justifyContent: 'center' }}>
+					<Window style={{width: '100%', height: '100vh'}}>
+						<WindowContent style={{display: 'flex', justifyContent: 'center'}}>
 							{name}
 						</WindowContent>
 						<Divider />
@@ -121,11 +127,11 @@ export default (props) => {
 									</div>
 								</div>
 								<Button
-									style={{ display: 'flex', justifyContent: 'space-between' }}>
+									style={{display: 'flex', justifyContent: 'space-between'}}>
 									<Circle />
-									<span style={{ paddingLeft: '5px' }}>
+									<span style={{paddingLeft: '5px'}}>
 										{users} user{users > 1 ? 's' : null} online
-								</span>
+									</span>
 								</Button>
 							</div>
 						</WindowContent>

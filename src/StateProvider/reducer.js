@@ -17,13 +17,13 @@ const reducer = (state = initialState, action) => {
 				text: action.payload
 			}
 		case LOGIN:
-			localStorage.setItem('Login', "true")
+			localStorage.setItem('Login', 'true')
 			return {
 				...state,
 				isLogin: true
 			}
 		case LOGOUT:
-			localStorage.setItem('Login', "false")
+			localStorage.setItem('Login', 'false')
 			return {
 				...state,
 				isLogin: false
@@ -41,10 +41,10 @@ const reducer = (state = initialState, action) => {
 				pages: LEADER_BOARD
 			}
 		}
-		case CLOSE_WIN: { 
+		case CLOSE_WIN: {
 			return {
 				...state,
-				pages:''
+				pages: ''
 			}
 		}
 		default:
