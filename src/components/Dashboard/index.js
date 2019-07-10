@@ -1,8 +1,16 @@
 import React from 'react'
 import styled, {ThemeProvider} from 'styled-components'
 
-import {Window, WindowHeader, WindowContent, themes, Button} from 'react95'
+import {
+	Window,
+	WindowHeader,
+	WindowContent,
+	themes,
+	Button,
+	Cutout
+} from 'react95'
 import HeatMap from './HeatMap'
+import StackBar from './StackBar'
 const Container = styled.div`
 	background-color: #ccc;
 	display: flex;
@@ -14,6 +22,7 @@ const Container = styled.div`
 
 const WinBox = styled(Window)`
 	width: 100%;
+	margin: 0 auto;
 `
 const BoxHeader = styled(WindowHeader)`
 	display: flex;
@@ -30,11 +39,38 @@ const Exit = styled.span`
 `
 const BoxContent = styled(WindowContent)`
 	display: grid;
-	grid-template-columns: [first] 50% [line2] 50% [end];
-	grid-template-rows: [row1] 50% [row2] 50% [last-line];
-	height: 100%;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas:
+		'heatMap circle'
+		'stack attemp';
 	gap: 10px;
+	height: 90%;
 `
+
+const DashBox = styled.div`
+	grid-area: ${props => {
+		return props.area
+	}};
+`
+const FieldBox = styled.div`
+	display: flex;
+	grid-area: ${props => {
+		return props.area
+	}};
+	overflow: auto;
+	position: relative;
+	width: 100%;
+	height: 100%;
+`
+
+const CutoutBox = styled(Cutout)`
+	align-items: stretch;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+`
+
 export default () => {
 	return (
 		<Container>
@@ -47,7 +83,16 @@ export default () => {
 						</ExitButton>
 					</BoxHeader>
 					<BoxContent>
-						<HeatMap />
+						<FieldBox area="stack">
+							<StackBar />
+						</FieldBox>
+						<FieldBox label="HeatMap" area="heatMap">
+							<HeatMap />
+						</FieldBox>
+						<FieldBox label="last doing" area="attemp">
+							{' attemp'}
+						</FieldBox>
+						<DashBox area="circle">{' circle'}</DashBox>
 					</BoxContent>
 				</WinBox>
 			</ThemeProvider>
