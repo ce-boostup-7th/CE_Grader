@@ -21,7 +21,8 @@
 		"react": "^16.8.6",
 		"react-ace": "^7.0.2",
 		"react-dom": "^16.8.6",
-		"react-router-dom": "^5.0.1"
+		"react-router-dom": "^5.0.1",
+		"sty": "^0.6.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.5",
@@ -37,7 +38,10 @@
 		"enzyme": "^3.10.0",
 		"enzyme-adapter-react-16": "^1.14.0",
 		"jest": "^24.8.0",
+		"jest-canvas-mock": "^2.1.0",
 		"parcel-bundler": "^1.12.3",
+		"plotly.js": "^1.48.3",
+		"react-plotly.js": "^2.3.0",
 		"react95": "^2.0.0",
 		"styled-components": "^4.3.2"
 	}
