@@ -4298,6 +4298,16 @@ config-chain@^1.1.12:
     ini "^1.3.4"
     proto-list "~1.2.1"
 
+connect@>=1.4.1:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/connect/-/connect-3.7.0.tgz#5d49348910caa5e07a01800b030d0c35f20484f8"
+  integrity sha512-ZqRXc+tZukToSNmh5C2iWMSoV3X1YUcPbqEM4DkEG5tNQXrQUZCNVGGv3IuicnkMtPfGf3Xtp8WCXs295iQ1pQ==
+  dependencies:
+    debug "2.6.9"
+    finalhandler "1.1.2"
+    parseurl "~1.3.3"
+    utils-merge "1.0.1"
+
 console-browserify@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
@@ -6062,7 +6072,7 @@ filtered-vector@^1.2.1:
     binary-search-bounds "^1.0.0"
     cubic-hermite "^1.0.0"
 
-finalhandler@~1.1.2:
+finalhandler@1.1.2, finalhandler@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/finalhandler/-/finalhandler-1.1.2.tgz#b7e7d000ffd11938d0fdb053506f6ebabe9f587d"
   integrity sha512-aAWcW57uxVNrQZqFXjITpW3sIUQmHGG3qSb9mUah9MgMC4NeWhNOlNjXEYq3HjRAvL6arUviZGGJsBg6z0zsWA==
@@ -11371,6 +11381,13 @@ re@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/re/-/re-0.1.4.tgz#d821067ee10b52011491ba1ad9342150f9ce7031"
   integrity sha1-2CEGfuELUgEUkboa2TQhUPnOcDE=
+
+rea@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/rea/-/rea-0.0.1.tgz#10efa614cc9073521bda674b6fc950b0315bd7a4"
+  integrity sha1-EO+mFMyQc1Ib2mdLb8lQsDFb16Q=
+  dependencies:
+    connect ">=1.4.1"
 
 react-ace@^7.0.2:
   version "7.0.2"
