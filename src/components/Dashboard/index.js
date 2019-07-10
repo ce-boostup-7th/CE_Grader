@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, {ThemeProvider} from 'styled-components'
 
-
 import {
 	Window,
 	WindowHeader,
@@ -12,7 +11,7 @@ import {
 } from 'react95'
 import HeatMap from './HeatMap'
 import StackBar from './StackBar'
-
+import Attemp from './Attemp'
 const Container = styled.div`
 	background-color: #ccc;
 	display: flex;
@@ -25,7 +24,6 @@ const Container = styled.div`
 const WinBox = styled(Window)`
 	width: 100%;
 	margin: 0 auto;
-
 `
 const BoxHeader = styled(WindowHeader)`
 	display: flex;
@@ -48,7 +46,7 @@ const BoxContent = styled(WindowContent)`
 	grid-template-areas:
 		'heatMap circle'
 		'stack attemp';
-	gap: 10px;
+	gap: 30px;
 	height: 90%;
 `
 
@@ -62,10 +60,11 @@ const FieldBox = styled.div`
 	grid-area: ${props => {
 		return props.area
 	}};
-	overflow: auto;
+	overflow: hidden;
 	position: relative;
 	width: 100%;
 	height: 100%;
+	justify-content: space-around;
 `
 
 const CutoutBox = styled(Cutout)`
@@ -87,7 +86,6 @@ export default () => {
 						</ExitButton>
 					</BoxHeader>
 					<BoxContent>
-
 						<FieldBox area="stack">
 							<StackBar />
 						</FieldBox>
@@ -95,10 +93,9 @@ export default () => {
 							<HeatMap />
 						</FieldBox>
 						<FieldBox label="last doing" area="attemp">
-							{' attemp'}
+							<Attemp />
 						</FieldBox>
 						<DashBox area="circle">{' circle'}</DashBox>
-
 					</BoxContent>
 				</WinBox>
 			</ThemeProvider>
