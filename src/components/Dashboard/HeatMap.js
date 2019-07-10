@@ -7,15 +7,40 @@ const Stackbar = styled(Plot)`
 	width: 100%;
 	height: 100%;
 `
-const HeatMap = () => {
+const HeatMap = props => {
 	return (
 		<Stackbar
 			var
 			data={[
 				{
-					z: [[1, 20, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
-					x: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-					y: ['Morning', 'Afternoon', 'Evening'],
+					z: props.data,
+					x: [
+						'1AM',
+						'2AM',
+						'3AM',
+						'4AM',
+						'5AM',
+						'6AM',
+						'7AM',
+						'8AM',
+						'9AM',
+						'10AM',
+						'11AM',
+						'12AM',
+						'1PM',
+						'2PM',
+						'3PM',
+						'4PM',
+						'5PM',
+						'6PM',
+						'7PM',
+						'8PM',
+						'9PM',
+						'10PM',
+						'11PM',
+						'12PM'
+					],
+					y: ['1st Day', '2nd Day', '3rd Day', '4th Day'],
 					type: 'heatmap'
 				}
 			]}

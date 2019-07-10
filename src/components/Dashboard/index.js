@@ -91,7 +91,7 @@ export default () => {
 							<StackBar />
 						</FieldBox>
 						<FieldBox area="heatMap">
-							<HeatMap />
+							<HeatMap data={dummyData.heatmaps} />
 						</FieldBox>
 						<FieldBox area="attemp">
 							<Attemp data={dummyData.attemps} />
