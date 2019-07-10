@@ -17,6 +17,7 @@
 	"dependencies": {
 		"@react95/core": "^2.0.0",
 		"global": "^4.4.0",
+		"history": "^4.9.0",
 		"re": "^0.1.4",
 		"rea": "^0.0.1",
 		"react": "^16.8.6",

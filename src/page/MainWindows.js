@@ -1,13 +1,16 @@
 import React from 'react'
 
-import {StateContext} from '../StateProvider/StateProvider'
-import {Switch, Redirect, Route} from 'react-router-dom'
+import { StateContext } from '../StateProvider/StateProvider'
+import { Switch, Redirect, Route, withRouter } from 'react-router-dom'
 
 import Login from '../components/Login'
-import Leaderboard from './LeaderPage'
-import Problem from '../page/ProblemPage'
-import Dashboard from './DashboardPage'
-import {LOGIN, LOGOUT} from '../StateProvider/actions_constant'
+import { LOGIN, LOGOUT } from '../StateProvider/actions_constant'
+import SideNav from '../components/SideNav';
+import QuizPage from './QuizPage';
+import Dashboard from '../components/Dashboard';
+import LeaderBoard from '../components/LeaderBoard';
+import ProblemPage from './ProblemPage';
+import WorkingPage from './WorkingPage';
 
 const NoRoute = () => {
 	let [time, setTime] = React.useState(0)
@@ -21,8 +24,10 @@ const NoRoute = () => {
 	return <div>Page Not Found Redirect in {3 - time} sec</div>
 }
 
+const routes = ['/leaderboard', '/dashboard', '/problem', '/quiz']
+
 const MainWindows = props => {
-	let {state, dispatch} = React.useContext(StateContext)
+	let { state, dispatch } = React.useContext(StateContext)
 	React.useEffect(() => {
 		dispatch({
 			type: JSON.parse(localStorage.getItem('Login')) ? LOGIN : LOGOUT
@@ -31,16 +36,24 @@ const MainWindows = props => {
 	}, [state.isLogin])
 	return (
 		<div
-			stlyed={{
-				height: '100vh'
-			}}>
+			style={{
+				height:'100vh',
+				display:'flex',
+				flexDirection:'row'
+			}}
+		>
+
+			{
+				routes.includes(location.pathname) && <SideNav />
+			}
 			<Switch>
-				<Route exact path="/" />
+				<Route exact path="/" component={() => <Redirect to="/dashboard" />} />
 				<Route path="/login" component={Login} />
 				<Route path="/dashboard" component={Dashboard} />
-				<Route path="/leaderboard" component={Leaderboard} />
-				<Route path="/problem" component={Problem} />
-				<Route path="/quize>" />
+				<Route path="/leaderboard" component={LeaderBoard} />
+				<Route path="/problem" component={ProblemPage} />
+				<Route path="/quiz" component={QuizPage} />
+				<Route path="/workbench" component={WorkingPage}/>
 				<Route component={NoRoute} />
 			</Switch>
 		</div>
