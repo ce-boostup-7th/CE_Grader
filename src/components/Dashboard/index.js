@@ -90,10 +90,10 @@ export default () => {
 						<FieldBox area="stack">
 							<StackBar />
 						</FieldBox>
-						<FieldBox label="HeatMap" area="heatMap">
+						<FieldBox area="heatMap">
 							<HeatMap />
 						</FieldBox>
-						<FieldBox label="last doing" area="attemp">
+						<FieldBox area="attemp">
 							<Attemp data={dummyData.attemps} />
 						</FieldBox>
 						<DashBox area="circle">{' circle'}</DashBox>
