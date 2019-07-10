@@ -21,7 +21,7 @@ const Circle = styled.span`
 	box-shadow: 1.5px 1.5px 0px 0px #000000;
 `
 
-export default () => {
+export default (props) => {
 	let {state, dispatch} = useContext(StateContext)
 	let [name, setName] = useState('Unknown')
 	let [tabs, setTabs] = useState(0)

@@ -8,11 +8,12 @@ import logout from '../../resource/icons/logout.png'
 
 const StyledUl = styled.ul`
 	display: inline-block;
-	border: solid 2px black;
-	width: 100%;
+	width: inherit;
 	padding: 4px;
 	list-style: none;
 	background-color: white;
+	box-sizing: border-box;
+	box-shadow: inset 1px 1px 0px 1px #dfe0e3, inset -1px -1px 0 1px #888c8f;
 `
 const StyledLi = styled.li`
 	display: inline;
@@ -27,8 +28,8 @@ const Icon = styled.i`
 	position: relative;
 	top: 5px;
 	padding-right: 10px;
-	height: 18px;
-	width: 18px;
+	height: 16px;
+	width: 24px;
 	content: url(${props => props.icon});
 `
 const LeftIcon = styled(Icon)`
@@ -36,23 +37,30 @@ const LeftIcon = styled(Icon)`
 `
 const RightIcon = styled(Icon)`
 	float: right;
+	padding:0px;
 `
-export default ({location, destination}) => {
+const Container = styled.div`
+width:${({ size }) => size}%;
+`
+
+export default ({ size, location, destination }) => {
 	return (
-		<StyledUl>
-			<LeftIcon icon={up_arrow} />
-			<StyledLi>
-				<Icon icon={folder_open} />
-				<a href="#">{location}</a>
-			</StyledLi>
-			<StyledLi>
-				<Icon icon={file_set} />
-				<a href="#">{location}.exe</a>
-			</StyledLi>
-			<StyledLi>
-				<a href="#">{destination}</a>
-			</StyledLi>
-			<RightIcon icon={logout} />
-		</StyledUl>
+		<Container size={size}>
+			<StyledUl>
+				<LeftIcon icon={up_arrow} />
+				<StyledLi>
+					<Icon icon={folder_open} />
+					<a href="#">{location}</a>
+				</StyledLi>
+				<StyledLi>
+					<Icon icon={file_set} />
+					<a href="#">{location}.exe</a>
+				</StyledLi>
+				<StyledLi>
+					<a href="#">{destination}</a>
+				</StyledLi>
+				<RightIcon icon={logout} />
+			</StyledUl>
+		</Container>
 	)
 }
