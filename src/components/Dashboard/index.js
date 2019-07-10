@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, {ThemeProvider} from 'styled-components'
 
+
 import {
 	Window,
 	WindowHeader,
@@ -11,6 +12,7 @@ import {
 } from 'react95'
 import HeatMap from './HeatMap'
 import StackBar from './StackBar'
+
 const Container = styled.div`
 	background-color: #ccc;
 	display: flex;
@@ -23,6 +25,7 @@ const Container = styled.div`
 const WinBox = styled(Window)`
 	width: 100%;
 	margin: 0 auto;
+
 `
 const BoxHeader = styled(WindowHeader)`
 	display: flex;
@@ -39,6 +42,7 @@ const Exit = styled.span`
 `
 const BoxContent = styled(WindowContent)`
 	display: grid;
+
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 1fr;
 	grid-template-areas:
@@ -83,6 +87,7 @@ export default () => {
 						</ExitButton>
 					</BoxHeader>
 					<BoxContent>
+
 						<FieldBox area="stack">
 							<StackBar />
 						</FieldBox>
@@ -93,6 +98,7 @@ export default () => {
 							{' attemp'}
 						</FieldBox>
 						<DashBox area="circle">{' circle'}</DashBox>
+
 					</BoxContent>
 				</WinBox>
 			</ThemeProvider>
