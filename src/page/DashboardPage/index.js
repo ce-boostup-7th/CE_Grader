@@ -20,9 +20,8 @@ export default () => {
 		<Container>
 			<SideNav />
 			<Div>
-					<Dashboard />
+				<Dashboard />
 			</Div>
-		
 		</Container>
 	)
 }

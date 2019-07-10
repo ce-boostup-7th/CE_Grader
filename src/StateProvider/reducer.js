@@ -48,7 +48,6 @@ const reducer = (state = initialState, action) => {
 			}
 		}
 		default:
-			console.warn('invalid action')
 			return state
 	}
 }
