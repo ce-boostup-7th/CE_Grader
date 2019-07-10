@@ -127,5 +127,26 @@ export const dummyData = {
 			5,
 			2
 		]
+	],
+	stackBar: [
+		{
+			x: ['basic', 'if-else', 'loop', 'function', 'array'],
+			y: [20, 14, 23, 34, 24],
+			name: 'Sent',
+			type: 'bar'
+		},
+
+		{
+			x: ['basic', 'if-else', 'loop', 'function', 'array'],
+			y: [12, 10, 20, 30, 20],
+			name: 'Correct',
+			type: 'bar'
+		},
+		{
+			x: ['basic', 'if-else', 'loop', 'function', 'array'],
+			y: [8, 4, 3, 4, 4],
+			name: 'inCorrect',
+			type: 'bar'
+		}
 	]
 }

@@ -7,23 +7,30 @@ const Stackbar = styled(Plot)`
 	width: 100%;
 	height: 100%;
 `
-const StackBar = () => {
-	const data1 = {
-		x: ['giraffes', 'orangutans', 'monkeys'],
-		y: [20, 14, 23],
-		name: 'SF Zoo',
+const StackBar = (props) => {
+	const sent = {
+		x: ['basic', 'if-else', 'loop', 'function', 'array'],
+		y: [20, 14, 23, 34, 24],
+		name: 'Sent',
 		type: 'bar'
 	}
 
-	const data2 = {
-		x: ['giraffes', 'orangutans', 'monkeys'],
-		y: [12, 18, 29],
-		name: 'LA Zoo',
+	const correct = {
+		x: ['basic', 'if-else', 'loop', 'function', 'array'],
+		y: [12, 10, 20, 30, 20],
+		name: 'Correct',
 		type: 'bar'
 	}
+	const inCorrect = {
+		x: ['basic', 'if-else', 'loop', 'function', 'array'],
+		y: [8, 4, 3, 4, 4],
+		name: 'inCorrect',
+		type: 'bar'
+	}
+
 	return (
 		<Stackbar
-			data={[data1, data2]}
+			data={props.data}
 			layout={{barmode: 'group'}}
 			config={{scrollZoom: true, responsive: true, autosizable: true}}
 		/>
