@@ -1,16 +1,17 @@
 import React from 'react'
-
 import StateProvider from './StateProvider/StateProvider'
 import MainWindows from './page/MainWindows'
-import {BrowserRouter} from 'react-router-dom'
+import {Router} from 'react-router-dom'
+
+import history from './history'
 
 const App = () => {
 	return (
-		<BrowserRouter>
+		<Router history={history} >
 			<StateProvider>
 				<MainWindows />
 			</StateProvider>
-		</BrowserRouter>
+		</Router>
 	)
 }
 
