@@ -4,8 +4,9 @@ import Tree from '@react95/core/Tree'
 
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LEADER_BOARD, DASH_BOARD} from '../../StateProvider/actions_constant'
+import history from '../../history'
 
-export default () => {
+export default (props) => {
 	let {state, dispatch} = React.useContext(StateContext)
 	const {icons} = Tree
 	let [dataN, setDataN] = React.useState([
@@ -21,7 +22,7 @@ export default () => {
 					label: 'LeaderBoard.exe',
 					iconName: icons.FILE_EXECUTABLE,
 					onClick: () => {
-						dispatch({type: LEADER_BOARD})
+						history.push('/leaderboard')
 					}
 				}
 			]
@@ -38,7 +39,7 @@ export default () => {
 					label: 'DashBoard.exe',
 					iconName: icons.FILE_EXECUTABLE,
 					onClick: () => {
-						dispatch({type: DASH_BOARD})
+						history.push('/dashboard')
 					}
 				}
 			]
@@ -55,7 +56,7 @@ export default () => {
 					label: 'Problems.exe',
 					iconName: icons.FILE_EXECUTABLE,
 					onClick: () => {
-						console.log('nice')
+						history.push('/problem')
 					}
 				}
 			]
@@ -72,7 +73,7 @@ export default () => {
 					label: 'Quizs.exe',
 					iconName: icons.FILE_EXECUTABLE,
 					onClick: () => {
-						console.log('nice')
+						history.push('/quiz')
 					}
 				}
 			]

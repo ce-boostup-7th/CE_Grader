@@ -15,14 +15,12 @@ const Div = styled.div`
 	margin: 20px;
 `
 
-export default () => {
+export default (props) => {
 	return (
 		<Container>
-			<SideNav />
 			<Div>
-					<Dashboard />
+				<Dashboard />
 			</Div>
-		
 		</Container>
 	)
 }

@@ -8,10 +8,9 @@ const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 `
-export default () => {
+export default (props) => {
 	return (
 		<Container>
-			<SideNav />
 			<LeaderBoard />
 		</Container>
 	)

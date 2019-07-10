@@ -2,15 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 import DataTable from '../../components/DataTable'
-import SideNav from '../../components/SideNav'
 import {StateContext} from '../../StateProvider/StateProvider'
-import {set} from 'store2'
 
 const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	align-content: flex-start;
+	width:100%;
 `
 const Div = styled.div`
 	flex-grow: 3;
@@ -33,13 +32,12 @@ let processingData = (state, mode) => {
 	}
 }
 
-export default () => {
+export default (props) => {
 	let {state, dispatch} = React.useContext(StateContext)
 	let [mode, setMode] = React.useState(0)
 
 	return (
 		<Container>
-			<SideNav />
 			<Div>
 				<DataTable
 					data={processingData(state, mode)}
