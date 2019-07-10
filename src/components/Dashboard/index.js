@@ -12,6 +12,7 @@ import {
 import HeatMap from './HeatMap'
 import StackBar from './StackBar'
 import Attemp from './Attemp'
+import {dummyData} from './DummyData'
 const Container = styled.div`
 	background-color: #ccc;
 	display: flex;
@@ -93,7 +94,7 @@ export default () => {
 							<HeatMap />
 						</FieldBox>
 						<FieldBox label="last doing" area="attemp">
-							<Attemp />
+							<Attemp data={dummyData.attemps} />
 						</FieldBox>
 						<DashBox area="circle">{' circle'}</DashBox>
 					</BoxContent>
