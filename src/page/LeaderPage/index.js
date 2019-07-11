@@ -3,15 +3,15 @@ import styled from 'styled-components'
 
 import SideNav from '../../components/SideNav'
 import LeaderBoard from '../../components/LeaderBoard'
-
+import {userRank} from '../../DummyData'
 const Container = styled.div`
 	display: flex;
 	flex-direction: row;
 `
-export default (props) => {
+export default props => {
 	return (
 		<Container>
-			<LeaderBoard />
+			<LeaderBoard data={userRank} />
 		</Container>
 	)
 }

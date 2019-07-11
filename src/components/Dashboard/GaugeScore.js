@@ -49,7 +49,7 @@ const GaugeScore = props => {
 						'While Loop',
 						'Score'
 					],
-					values: [65, 14, 9, 3, 2, 12, 7, 2, 3, 6, 3, 2, 1, 20, 11, 5, 4, 13],
+					values: props.data,
 					leaf: {opacity: 0.5},
 					marker: {line: {width: 2}},
 					branchvalues: 'total'

@@ -21,14 +21,8 @@ const Circle = styled.span`
 	box-shadow: 1.5px 1.5px 0px 0px #000000;
 `
 
-export default (props) => {
+export default props => {
 	let {state, dispatch} = useContext(StateContext)
-	let [name, setName] = useState('Unknown')
-	let [tabs, setTabs] = useState(0)
-	const [rank, setRank] = useState(0)
-	const [pass, setPass] = useState(0)
-	const [quiz, setQuiz] = useState(0)
-	const [users, setUsers] = useState(1)
 
 	const handalLogOut = e => {
 		dispatch({type: LOGOUT})
@@ -51,7 +45,7 @@ export default (props) => {
 							alignContent: 'center',
 							alignItems: 'center'
 						}}>
-						<div style={{marginLeft: '45%'}}>{name} </div>
+						<div style={{marginLeft: '45%'}}>{props.data.userName} </div>
 						<Button style={{marginLeft: '25%'}} onClick={handalLogOut} square>
 							<Icon name={'reader_eject'} />
 						</Button>
@@ -74,7 +68,7 @@ export default (props) => {
 								boxShadow: '1.5px 1.5px 0px 0px #000000'
 							}}>
 							<img
-								src={testImg}
+								src={props.img}
 								alt="test img "
 								style={{
 									display: 'inline',
@@ -106,7 +100,7 @@ export default (props) => {
 										alignItems: 'center',
 										marginRight: '40px'
 									}}>
-									<span>{rank}</span>
+									<span>{props.data.rank}</span>
 									<span>rank</span>
 								</div>
 								<div
@@ -116,7 +110,7 @@ export default (props) => {
 										alignItems: 'center',
 										marginRight: '40px'
 									}}>
-									<span>{pass}</span>
+									<span>{props.data.passCount}</span>
 									<span>Pass</span>
 								</div>
 								<div
@@ -126,7 +120,7 @@ export default (props) => {
 										alignItems: 'center',
 										marginRight: '10px'
 									}}>
-									<span>{quiz}</span>
+									<span>{props.data.quizCount}</span>
 									<span>quiz</span>
 								</div>
 							</div>
@@ -134,7 +128,8 @@ export default (props) => {
 								style={{display: 'flex', justifyContent: 'space-between'}}>
 								<Circle />
 								<span style={{paddingLeft: '5px'}}>
-									{users} user{users > 1 ? 's' : null} online
+									{props.userOnline} user{props.userOnline > 1 ? 's' : null}{' '}
+									online
 								</span>
 							</Button>
 						</div>
