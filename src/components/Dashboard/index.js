@@ -12,7 +12,7 @@ import {
 import HeatMap from './HeatMap'
 import StackBar from './StackBar'
 import Attemp from './Attemp'
-import {GaugeComplete} from './Gauge1'
+import {GaugeComplete} from './GaugeComplete'
 import {dummyData} from './DummyData'
 const Container = styled.div`
 	background-color: #ccc;

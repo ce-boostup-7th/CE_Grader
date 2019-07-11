@@ -38,6 +38,14 @@ export const GaugeComplete = () => {
 		}
 	]
 
+	const CircleStyle = {
+		fill: fillColor
+	}
+
+	const TextStyle = {
+		fill: color('#444').toString(),
+		fontFamily: 'Arial'
+	}
 	return (
 		<div>
 			<LiquidFillGauge
@@ -47,28 +55,18 @@ export const GaugeComplete = () => {
 				value={datas.value}
 				percent="%"
 				textSize={1}
-				textOffsetX={0}
-				textOffsetY={0}
+				textOffsetX={10}
+				textOffsetY={20}
 				riseAnimation
 				waveAnimation
 				waveFrequency={2}
 				waveAmplitude={1}
 				gradient
 				gradientStops={gradientStops}
-				circleStyle={{
-					fill: fillColor
-				}}
-				waveStyle={{
-					fill: fillColor
-				}}
-				textStyle={{
-					fill: color('#444').toString(),
-					fontFamily: 'Arial'
-				}}
-				waveTextStyle={{
-					fill: color('#fff').toString(),
-					fontFamily: 'Arial'
-				}}
+				circleStyle={CircleStyle}
+				waveStyle={CircleStyle}
+				textStyle={TextStyle}
+				waveTextStyle={TextStyle}
 			/>
 		</div>
 	)
