@@ -1,14 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import SideNav from '../../components/SideNav'
 import Dashboard from '../../components/Dashboard'
-import {
-	StackData,
-	Attemp,
-	Heatmaps,
-	GaugeCompleteData,
-	ScoreData
-} from '../../DummyData'
 
 const Container = styled.div`
 	display: flex;
@@ -21,17 +15,11 @@ const Div = styled.div`
 	margin: 20px;
 `
 
-export default props => {
+export default (props) => {
 	return (
 		<Container>
 			<Div>
-				<Dashboard
-					dataBar={StackData}
-					dataHeatMap={Heatmaps}
-					dataAttemp={Attemp}
-					completeData={GaugeCompleteData}
-					scoreData={ScoreData}
-				/>
+				<Dashboard />
 			</Div>
 		</Container>
 	)

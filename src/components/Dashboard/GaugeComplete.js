@@ -3,8 +3,13 @@ import {interpolateRgb} from 'd3-interpolate'
 import React, {Component} from 'react'
 import LiquidFillGauge from 'react-liquid-gauge'
 
-export const GaugeComplete = props => {
-	const [datas, setDatas] = React.useState(props.data)
+export const GaugeComplete = () => {
+	const init = {
+		value: '50',
+		startColor: '#6495ed', // cornflowerblue
+		endColor: '#dc143c'
+	}
+	const [datas, setDatas] = React.useState(init)
 	const radius = 150
 	const interpolate = interpolateRgb(datas.value, datas.endColor)
 	const fillColor = interpolate(datas.value / 100)
