@@ -73,7 +73,7 @@ const CutoutBox = styled(Cutout)`
 	overflow: auto;
 `
 
-export default props => {
+export default () => {
 	return (
 		<Container>
 			<ThemeProvider theme={themes.default}>
@@ -85,11 +85,11 @@ export default props => {
 						</ExitButton>
 					</BoxHeader>
 					<BoxContent>
-						<StackBar data={props.dataBar} style={{flex: '1 auto'}} />
-						<HeatMap data={props.dataHeatMap} style={{flex: '1 auto'}} />
-						<Attemp data={props.dataAttemp} style={{flex: '1 auto'}} />
-						<GaugeComplete data={props.completeData} style={{flex: '1 auto'}} />
-						<GaugeScore data={props.scoreData} style={{flex: '1 auto'}} />
+						<StackBar data={dummyData.stackBar} style={{flex: '1 auto'}} />
+						<HeatMap data={dummyData.heatmaps} style={{flex: '1 auto'}} />
+						<Attemp data={dummyData.attemps} style={{flex: '1 auto'}} />
+						<GaugeComplete style={{flex: '1 auto'}} />
+						<GaugeScore style={{flex: '1 auto'}} />
 					</BoxContent>
 				</WinBox>
 			</ThemeProvider>

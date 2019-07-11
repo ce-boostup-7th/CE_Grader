@@ -10,7 +10,7 @@ const Stackbar = styled(Plot)`
 const StackBar = props => {
 	return (
 		<Stackbar
-			data={[props.data]}
+			data={props.data}
 			layout={{barmode: 'group'}}
 			config={{scrollZoom: true, responsive: true, autosizable: true}}
 		/>

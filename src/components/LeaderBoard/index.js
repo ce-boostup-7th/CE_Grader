@@ -22,9 +22,9 @@ import {usersNew} from './userDatas.js'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 // Start  Code Here
-export default props => {
+export default () => {
 	let {state, dispatch} = React.useContext(StateContext)
-	const [users, setUsers] = useState({})
+	const [users, setUsers] = useState(usersNew)
 	const [tabs, settabs] = useState(1)
 	return (
 		<div
@@ -87,7 +87,7 @@ export default props => {
 											overflow: 'auto'
 										}}>
 										{tabs === 1 &&
-											props.data.map((user, index) => {
+											users.map((user, index) => {
 												return (
 													<TableRow key={index}>
 														<TableDataCell
