@@ -42,15 +42,11 @@ const Exit = styled.span`
 	transform: translateY(-1px);
 `
 const BoxContent = styled(WindowContent)`
-	display: grid;
-
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	grid-template-areas:
-		'heatMap circle'
-		'stack attemp';
-	gap: 30px;
-	height: 90%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	overflow: auto;
 `
 
 const DashBox = styled.div`
@@ -89,21 +85,11 @@ export default () => {
 						</ExitButton>
 					</BoxHeader>
 					<BoxContent>
-						<FieldBox area="stack">
-							<StackBar data={dummyData.stackBar} />
-						</FieldBox>
-						<FieldBox area="heatMap">
-							<HeatMap data={dummyData.heatmaps} />
-						</FieldBox>
-						<FieldBox area="attemp">
-							<Attemp data={dummyData.attemps} />
-						</FieldBox>
-						<DashBox area="circle">
-							<div>
-								<GaugeComplete />
-								<GaugeScore />
-							</div>
-						</DashBox>
+						<StackBar data={dummyData.stackBar} style={{flex: '1 auto'}} />
+						<HeatMap data={dummyData.heatmaps} style={{flex: '1 auto'}} />
+						<Attemp data={dummyData.attemps} style={{flex: '1 auto'}} />
+						<GaugeComplete style={{flex: '1 auto'}} />
+						<GaugeScore style={{flex: '1 auto'}} />
 					</BoxContent>
 				</WinBox>
 			</ThemeProvider>
