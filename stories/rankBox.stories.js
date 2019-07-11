@@ -5,7 +5,16 @@ import {storiesOf} from '@storybook/react'
 import Ranking from '../src/components/Dashboard/Ranking'
 import {withKnobs, number} from '@storybook/addon-knobs'
 
-const stories = storiesOf('Raink Box', module)
+const stories = storiesOf('Raink Box', module).addDecorator(story => (
+	<div
+		style={{
+			padding: '5rem',
+
+			background: 'teal'
+		}}>
+        {story()}
+	</div>
+))
 stories.addDecorator(withKnobs)
 const datas = {
 	current: 1,
@@ -21,7 +30,8 @@ const handleStatus = data => {
 			return '🔻'
 		default:
 			return '😑'
-	}f
+	}
+	f
 }
 
 stories.add('normal', () => (
@@ -30,11 +40,17 @@ stories.add('normal', () => (
 			display: 'flex',
 			flexFlow: 'row nowrap',
 			justifyContent: 'flex-start'
-        }}>
-        <div style={{display:'flex',width:'100%',height:'130px',flexDirection:'column'}}>
-              <Ranking data={datas} status={handleStatus(datas)} />
-        </div>
-      
+		}}>
+		<div
+			style={{
+				display: 'flex',
+				width: '100%',
+				height: '130px',
+				flexDirection: 'column'
+			}}>
+			<Ranking data={datas} status={handleStatus(datas)} />
+		</div>
+
 		<div style={{flex: '5 auto'}}> </div>
 	</div>
 ))
