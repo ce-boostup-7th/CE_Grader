@@ -13,6 +13,7 @@ import HeatMap from './HeatMap'
 import StackBar from './StackBar'
 import Attemp from './Attemp'
 import {GaugeComplete} from './GaugeComplete'
+import GaugeScore from './GaugeScore'
 import {dummyData} from './DummyData'
 const Container = styled.div`
 	background-color: #ccc;
@@ -100,6 +101,7 @@ export default () => {
 						<DashBox area="circle">
 							<div>
 								<GaugeComplete />
+								<GaugeScore />
 							</div>
 						</DashBox>
 					</BoxContent>
