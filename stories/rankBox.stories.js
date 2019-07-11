@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react'
 import Ranking from '../src/components/Dashboard/Ranking'
 import {withKnobs, number} from '@storybook/addon-knobs'
 
-const stories = storiesOf('Raink Box', module).addDecorator(story => (
+const stories = storiesOf('Rank Box', module).addDecorator(story => (
 	<div
 		style={{
 			padding: '5rem',
