@@ -12,6 +12,7 @@ import {
 import HeatMap from './HeatMap'
 import StackBar from './StackBar'
 import Attemp from './Attemp'
+import {GaugeComplete} from './Gauge1'
 import {dummyData} from './DummyData'
 const Container = styled.div`
 	background-color: #ccc;
@@ -96,7 +97,11 @@ export default () => {
 						<FieldBox area="attemp">
 							<Attemp data={dummyData.attemps} />
 						</FieldBox>
-						<DashBox area="circle">{' circle'}</DashBox>
+						<DashBox area="circle">
+							<div>
+								<GaugeComplete />
+							</div>
+						</DashBox>
 					</BoxContent>
 				</WinBox>
 			</ThemeProvider>
