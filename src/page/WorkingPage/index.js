@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { withRouter } from 'react-router-dom'
 
 import Breadcrumb from '../../components/BreadcrumbsLink'
 import Editor from '../../components/Editor'
@@ -33,18 +34,47 @@ const Icon = styled.div`
     }
 `
 
-export default ({size1=4,size2=96}) => {
-    let [activeTerminal,setActiveTerminal] = React.useState(false)
+const Working = ({ size1 = 4, size2 = 96,match,location,history }) => {
+    let [activeTerminal, setActiveTerminal] = React.useState(false)
+    let [theme, setTheme] = React.useState('monokai')
+    let [code, setCode] = React.useState(
+        `#include<iostream>
+
+int main(){
+    std::cout<<"Hello CE"<<std::endl;
+    return 0;
+}`)
+    const handleImportFile = (textfile) => {
+        const reader = new FileReader()
+        reader.onloadend = (e) => {
+            const content = reader.result;
+            console.log(content)
+            setCode(content)
+        }
+        reader.readAsBinaryString(textfile);
+    }
+    const handleExportFile = () => {
+        let link = document.createElement('a')
+        const file = new Blob([code], { type: 'text/plain' });
+        link.href = URL.createObjectURL(file)
+        link.download = 'main.cpp'
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+    }
+    const onChangeTheme = (newTheme) => {
+        setTheme(newTheme)
+    }
     return (
         <Container>
             <NavigationBox row>
                 <div style={{
                     textAlign: "center",
                     alignSelf: "center",
-                    padding:"12px",
-                   width:`${size1}%`
+                    padding: "12px",
+                    width: `${size1}%`
                 }}><Icon icon={menu} /></div>
-                <Breadcrumb size={size2} destination="Asd" location="as" />
+                <Breadcrumb size={size2} location={`${match.params.type}`} destination={`${match.params.type} ${match.params.id}`}  />
             </NavigationBox>
             <FlexBox row style={{
                 flex: 1
@@ -52,20 +82,22 @@ export default ({size1=4,size2=96}) => {
                 <DetailBar />
                 <FlexBox col style={
                     {
-                        flexGrow:4
+                        flexGrow: 4
                     }
                 }>
-                    <div style={{height:'5%',flexShrink:0}}>
-                        <ManipulationTab/>
+                    <div style={{ height: '5%', flexShrink: 0 }}>
+                        <ManipulationTab onChangeTheme={onChangeTheme} handleExportFile={handleExportFile} handleImportFile={handleImportFile} />
                     </div>
-                    <Editor />
+                    <Editor theme={theme} onChange={value => setCode(value)} value={code} />
                     <div style={{
-                        height:`${activeTerminal? '50%':'auto'}`
-                        }}>
-                        <Terminal active={activeTerminal} toggleTerminal={()=>setActiveTerminal(!activeTerminal)}/>
+                        height: `${activeTerminal ? '50%' : 'auto'}`
+                    }}>
+                        <Terminal active={activeTerminal} toggleTerminal={() => setActiveTerminal(!activeTerminal)} />
                     </div>
                 </FlexBox>
             </FlexBox>
         </Container>
     )
 }
+
+export default withRouter(Working)

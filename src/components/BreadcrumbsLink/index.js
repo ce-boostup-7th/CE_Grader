@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import folder_open from '../../resource/icons/folder_open.png'
 import file_set from '../../resource/icons/file_set.png'
@@ -50,16 +51,16 @@ export default ({ size, location, destination }) => {
 				<LeftIcon icon={up_arrow} />
 				<StyledLi>
 					<Icon icon={folder_open} />
-					<a href="#">{location}</a>
+					<Link  to="/problem" >{location}</Link>
 				</StyledLi>
 				<StyledLi>
 					<Icon icon={file_set} />
-					<a href="#">{location}.exe</a>
+					<Link >{location}.exe</Link>
 				</StyledLi>
 				<StyledLi>
-					<a href="#">{destination}</a>
+					<Link >{destination}</Link>
 				</StyledLi>
-				<RightIcon icon={logout} />
+				<Link  to="/problem" ><RightIcon icon={logout} /></Link>
 			</StyledUl>
 		</Container>
 	)

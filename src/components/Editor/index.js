@@ -10,31 +10,34 @@ import 'brace/theme/github'
 import 'brace/theme/xcode'
 import 'brace/theme/dracula'
 
-export default ({theme = 'monokai', value = ''}) => {
+export default ({ onChange,theme = 'monokai', value = `#include<iostream>
+
+int main(){
+    std::cout<<"Hello CE"<<std::endl;
+    return 0;
+}
+` }) => {
 	return (
 		<AceEditor
 			placeholder="Start coding here!"
 			mode="c_cpp"
 			theme={theme}
 			name="CE BoostUp"
-			defaultValue={`#include<iostream>
-
-int main(){
-    std::cout<<"Hello CE"<<std::endl;
-    return 0;
-}
-`}
+			value={value}
 			fontSize={14}
 			showPrintMargin={true}
 			showGutter={true}
 			highlightActiveLine={true}
-			value={value}
+			onChange={text=>onChange(text)}
 			setOptions={{
 				enableBasicAutocompletion: true,
 				enableLiveAutocompletion: true,
 				enableSnippets: true,
 				showLineNumbers: true,
 				tabSize: 2
+			}}
+			editorProps={{
+				$blockScrolling: Infinity
 			}}
 			width={'100%'}
 			height={'100%'}

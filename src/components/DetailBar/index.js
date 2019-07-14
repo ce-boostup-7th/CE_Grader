@@ -48,11 +48,9 @@ export default (props) => {
                     height: '100%'
                 }}>
                     <WindowContent style={{
-                        marginTop: '10px',
-                        marginLeft:'10px',
-                        marginRight: '10px',
                         width: 'auto',
-                        height: '100%'
+                        height: '100%',
+                        background:'#ced0cf'
                     }}>
                         <Tabs value={activeTabs} onChange={(value) => setActive(value)}>
                             <Tab value={0}>Description</Tab>

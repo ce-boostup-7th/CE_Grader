@@ -14,17 +14,19 @@ import {
 	TableHead,
 	TableRow,
 	TableDataCell,
-	TableHeadCell,
-	Divider
+	TableHeadCell
 } from 'react95'
 import {ThemeProvider} from 'styled-components'
-import {usersNew} from './userDatas.js'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 // Start  Code Here
-export default () => {
+export default ({data=[{
+	name:'asd',
+	score:12314,
+	time:12312
+}]}) => {
 	let {state, dispatch} = React.useContext(StateContext)
-	const [users, setUsers] = useState(usersNew)
+	const [users] = useState(data)
 	const [tabs, settabs] = useState(1)
 	return (
 		<div
@@ -89,7 +91,7 @@ export default () => {
 										{tabs === 1 &&
 											users.map((user, index) => {
 												return (
-													<TableRow key={index}>
+													<TableRow style={{width:'100%'}} key={index}>
 														<TableDataCell
 															style={{width: '8vw', textAlign: 'center'}}>
 															{(() => {
@@ -105,7 +107,7 @@ export default () => {
 																}
 															})()}
 														</TableDataCell>
-														<TableDataCell style={{width: '33vw'}}>
+														<TableDataCell style={{width: '35vw'}}>
 															{(() => {
 																switch (index + 1) {
 																	case 1:
@@ -122,14 +124,14 @@ export default () => {
 														<TableDataCell
 															style={{
 																textAlign: 'center',
-																width: '11vw'
+																width: '12vw'
 															}}>
 															{user.score}
 														</TableDataCell>
 														<TableDataCell
 															style={{
 																textAlign: 'center',
-																width: '10vw'
+																width: '12vw'
 															}}>
 															{user.time} {' hrs '}
 														</TableDataCell>

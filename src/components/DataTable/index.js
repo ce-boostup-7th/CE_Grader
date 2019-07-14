@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { Tooltip } from 'react95'
+import Slide from 'react-reveal/slide'
 
-const renderArray = (number, serialize) => {
+
+const renderStar = (number, serialize) => {
 	let temp = []
 	for (let i = 0; i < number; i++) {
 		temp.push(serialize)
@@ -105,7 +106,7 @@ background:white;
 ;
 `
 
-export default ({ data, sort }) => {
+export default ({ data, sort,handleClick }) => {
 	return (
 		<Container>
 			<Box>
@@ -121,7 +122,7 @@ export default ({ data, sort }) => {
 			<Data>
 				{data.map((value, index) => {
 					return (
-						<DataBox key={index}>
+						<DataBox key={index} onClick={e=>handleClick(value.order)}>
 							<DataItem align="center" width={12.5}>
 								{renderStatus(value.status)}
 							</DataItem>
@@ -132,7 +133,7 @@ export default ({ data, sort }) => {
 								{value.name}
 							</DataItem>
 							<DataItem align="left" width={12.5}>
-								{renderArray(value.level, '⭐')}
+								{renderStar(value.level, '⭐')}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
 								{value.topic}

@@ -1,12 +1,14 @@
 import React, {useState, useContext} from 'react'
-
 import styled, {ThemeProvider, createGlobalStyle} from 'styled-components'
 import {themes, WindowContent, Window, reset, Divider, Button} from 'react95'
+import Icon from '@react95/core/Icon'
+import { withRouter } from 'react-router-dom'
+
 import testImg from '../../resource/img/IMG_6413.jpg'
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LOGOUT} from '../../StateProvider/actions_constant'
 import TreeFiles from '../TreeFiles'
-import Icon from '@react95/core/Icon'
+
 const ResetStyles = createGlobalStyle`
   ${reset}
 `
@@ -20,8 +22,7 @@ const Circle = styled.span`
 	-webkit-box-shadow: 1.5px 1.5px 0px 0px #000000;
 	box-shadow: 1.5px 1.5px 0px 0px #000000;
 `
-
-export default (props) => {
+const SideNave = (props) => {
 	let {state, dispatch} = useContext(StateContext)
 	let [name, setName] = useState('Unknown')
 	let [tabs, setTabs] = useState(0)
@@ -32,6 +33,7 @@ export default (props) => {
 
 	const handalLogOut = e => {
 		dispatch({type: LOGOUT})
+		props.history.push('/')
 	}
 
 	return (
@@ -148,3 +150,4 @@ export default (props) => {
 		</div>
 	)
 }
+export default withRouter(SideNave)
