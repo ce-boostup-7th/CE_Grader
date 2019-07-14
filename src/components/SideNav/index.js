@@ -41,7 +41,11 @@ const SideNave = (props) => {
 			<ResetStyles />
 
 			<ThemeProvider theme={themes.default}>
-				<Window style={{width: '350px', height: '100vh'}}>
+				<Window
+					style={{
+						width: '350y',
+						height: '100vh'
+					}}>
 					<WindowContent
 						style={{
 							display: 'flex',
