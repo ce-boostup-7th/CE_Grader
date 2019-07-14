@@ -14,6 +14,7 @@ import Keys from '../../resource/icons/keys.png'
 
 import {StateContext} from '../../StateProvider/StateProvider'
 import {LOGIN} from '../../StateProvider/actions_constant'
+import {withRouter} from 'react-router-dom'
 
 const WindowContentStyled = styled(WindowContent)`
 	display: flex;
@@ -27,12 +28,13 @@ const Form = styled.form`
 	flex-direction: column;
 `
 
-export default props => {
+const Login = props => {
 	const {state, dispatch} = React.useContext(StateContext)
 	const handleLoggin = () => {
 		dispatch({
 			type: LOGIN
 		})
+		props.history.push('/')
 		//some action
 	}
 	React.useEffect(() => {
@@ -83,3 +85,4 @@ export default props => {
 		</Div>
 	)
 }
+export default withRouter(Login)

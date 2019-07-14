@@ -1,18 +1,19 @@
 import React from 'react'
 import StateProvider from './StateProvider/StateProvider'
 import MainWindows from './page/MainWindows'
-import {Router} from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
+import { CookiesProvider, withCookies } from 'react-cookie'
 
-import history from './history'
-
-const App = () => {
+const App = ({cookies}) => {
 	return (
-		<Router history={history} >
-			<StateProvider>
-				<MainWindows />
-			</StateProvider>
-		</Router>
+		<CookiesProvider> 
+			<BrowserRouter>
+				<StateProvider>
+					<MainWindows cookies={cookies} />
+				</StateProvider>
+			</BrowserRouter>
+		</CookiesProvider>
 	)
 }
 
-export default App
+export default withCookies(App)

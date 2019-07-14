@@ -1,14 +1,13 @@
 import React from 'react'
-
+import { withRouter } from 'react-router-dom'
 import Tree from '@react95/core/Tree'
 
-import {StateContext} from '../../StateProvider/StateProvider'
-import {LEADER_BOARD, DASH_BOARD} from '../../StateProvider/actions_constant'
-import history from '../../history'
+import { StateContext } from '../../StateProvider/StateProvider'
+import { LEADER_BOARD, DASH_BOARD } from '../../StateProvider/actions_constant'
 
-export default (props) => {
-	let {state, dispatch} = React.useContext(StateContext)
-	const {icons} = Tree
+const Treefiles = ({ history, match, location }) => {
+	let { state, dispatch } = React.useContext(StateContext)
+	const { icons } = Tree
 	let [dataN, setDataN] = React.useState([
 		{
 			id: 0,
@@ -82,3 +81,5 @@ export default (props) => {
 
 	return <Tree data={dataN} />
 }
+
+export default withRouter(Treefiles)

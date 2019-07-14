@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, {ThemeProvider} from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 
 
 import {
@@ -7,100 +7,91 @@ import {
 	WindowHeader,
 	WindowContent,
 	themes,
-	Button,
-	Cutout
+	Button
 } from 'react95'
-import HeatMap from './HeatMap'
-import StackBar from './StackBar'
+import ActivnessChart from './ActivnessChart';
+import ChapterChart from './ChapterChart';
+import AttempTable from './AttempTable';
+import OverrallChart from './OverallChart';
+import PositionChart from './PositionChart';
 
 const Container = styled.div`
-	background-color: #ccc;
 	display: flex;
-	max-height: 90vh;
-	min-height: 90vh;
-	max-width: 90vw;
-	min-width: 80vw;
+	padding:20px;
+	width:100%;
 `
-
-const WinBox = styled(Window)`
-	width: 100%;
-	margin: 0 auto;
-
-`
-const BoxHeader = styled(WindowHeader)`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`
-
-const ExitButton = styled(Button)`
-	margin-right: -6px;
-`
-const Exit = styled.span`
-	font-weight: bold;
-	transform: translateY(-1px);
-`
-const BoxContent = styled(WindowContent)`
-	display: grid;
-
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr;
-	grid-template-areas:
-		'heatMap circle'
-		'stack attemp';
-	gap: 10px;
-	height: 90%;
-`
-
-const DashBox = styled.div`
-	grid-area: ${props => {
-		return props.area
-	}};
-`
-const FieldBox = styled.div`
-	display: flex;
-	grid-area: ${props => {
-		return props.area
-	}};
-	overflow: auto;
-	position: relative;
-	width: 100%;
-	height: 100%;
-`
-
-const CutoutBox = styled(Cutout)`
-	align-items: stretch;
-	height: 100%;
-	width: 100%;
-	overflow: auto;
+const FlexBox = styled.div`
+	display:flex;
+	${({ col }) => col && `
+		flex-direction:column;
+	`}
+	${({ row }) => row && `
+		flex-direction:row;
+	`}
+	${({ width }) => width && `
+		width:${width};
+	`}
+	${({ height }) => height && `
+		height:${height};
+	`}
 `
 
 export default () => {
 	return (
 		<Container>
 			<ThemeProvider theme={themes.default}>
-				<WinBox>
-					<BoxHeader>
-						<span>Dashboard.exe</span>
-						<ExitButton size={'sm'} square>
-							<Exit>x</Exit>
-						</ExitButton>
-					</BoxHeader>
-					<BoxContent>
+				<Window style={{
+					width: 'inherit'
+				}}>
+					<WindowHeader
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'space-between',
+						}}
+					>
+						<span>Virtual Mathchine:Running Mordern UI System</span>
+						<Button style={{ marginRight: '-6px', marginTop: '1px' }} size={'sm'} square>
+							<span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>x</span>
+						</Button>
+					</WindowHeader>
+					<WindowContent style={{
+						background: '#282c34',
+						width: '100%',
+						height: '95%'
+					}}>
+						<FlexBox row height="inherit">
+							<FlexBox col width='65%' height="100%">
+								<div style={{ fontSize: 16, marginBottom: '20px', color: 'white' }}>
+									Chapter Progress
+								</div>
+								<ChapterChart />
+								<AttempTable />
+							</FlexBox>
+							<FlexBox col width='40%' height="100%" style={{
+								marginLeft: 'auto'
+							}}>
+								<div style={{ paddingLeft:'20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
+									Overral Progress
+								</div>
+								<OverrallChart />
+								<div style={{ paddingLeft:'20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
+									Active Pulse
+								</div>
+								<FlexBox width="100%" height="25%" style={{ justifyContent: 'center' }}>
+									<ActivnessChart />
+								</FlexBox><br/>
+								<div style={{ paddingLeft:'20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
+									Position
+								</div>
+								<FlexBox width="100%" height="25%" style={{ justifyContent: 'center' }}>
+									<PositionChart />
+								</FlexBox>
+							</FlexBox>
+						</FlexBox>
+					</WindowContent>
 
-						<FieldBox area="stack">
-							<StackBar />
-						</FieldBox>
-						<FieldBox label="HeatMap" area="heatMap">
-							<HeatMap />
-						</FieldBox>
-						<FieldBox label="last doing" area="attemp">
-							{' attemp'}
-						</FieldBox>
-						<DashBox area="circle">{' circle'}</DashBox>
-
-					</BoxContent>
-				</WinBox>
+				</Window>
 			</ThemeProvider>
 		</Container>
 	)
