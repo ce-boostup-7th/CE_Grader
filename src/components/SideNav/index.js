@@ -1,12 +1,12 @@
-import React, {useState, useContext} from 'react'
-import styled, {ThemeProvider, createGlobalStyle} from 'styled-components'
-import {themes, WindowContent, Window, reset, Divider, Button} from 'react95'
+import React, { useState, useContext } from 'react'
+import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
+import { themes, WindowContent, Window, reset, Divider, Button } from 'react95'
 import Icon from '@react95/core/Icon'
 import { withRouter } from 'react-router-dom'
 
 import testImg from '../../resource/img/IMG_6413.jpg'
-import {StateContext} from '../../StateProvider/StateProvider'
-import {LOGOUT} from '../../StateProvider/actions_constant'
+import { StateContext } from '../../StateProvider/StateProvider'
+import { LOGOUT } from '../../StateProvider/actions_constant'
 import TreeFiles from '../TreeFiles'
 
 const ResetStyles = createGlobalStyle`
@@ -23,21 +23,39 @@ const Circle = styled.span`
 	box-shadow: 1.5px 1.5px 0px 0px #000000;
 `
 const SideNave = (props) => {
-	let {state, dispatch} = useContext(StateContext)
-	let [name, setName] = useState('Unknown')
-	let [tabs, setTabs] = useState(0)
-	const [rank, setRank] = useState(0)
-	const [pass, setPass] = useState(0)
-	const [quiz, setQuiz] = useState(0)
-	const [users, setUsers] = useState(1)
-
-	const handalLogOut = e => {
-		dispatch({type: LOGOUT})
-		props.history.push('/')
+	let { state, dispatch } = useContext(StateContext)
+	const handleLogout = e => {
+		fetch('http://161.246.34.96/api/logout', {
+			method: 'POST'
+		})
+			.then(res => res.status)
+			.then(status => {
+				if (status === 200) {
+					dispatch({ type: LOGOUT })
+					props.history.push('/')
+				}
+			}
+			)
 	}
-
+	const renderRank = (data) => {
+		let rank;
+		let temp = [...data.users]
+		temp.sort((a, b) => b.score - a.score)
+		rank = temp.findIndex((v) => v.username === data.statistics.name)
+		return rank + 1;
+	}
+	const renderPass = (data) => {
+		let divider = data.statistics.overall.reduce((sum,item)=>{
+			return sum+item.amount
+		},0)
+		let substuit = data.statistics.overall[0].amount
+		return (substuit*100/divider).toFixed(2)
+	}
+	const renderQuiz =(data)=>{
+		return data.statistics.overall[0].amount
+	}
 	return (
-		<div style={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
+		<div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
 			<ResetStyles />
 
 			<ThemeProvider theme={themes.default}>
@@ -53,8 +71,8 @@ const SideNave = (props) => {
 							alignContent: 'center',
 							alignItems: 'center'
 						}}>
-						<div style={{marginLeft: '45%'}}>{name} </div>
-						<Button style={{marginLeft: '25%'}} onClick={handalLogOut} square>
+						<div style={{ marginLeft: '45%', fontWeight: 'bold' }}>{state.statistics.name} </div>
+						<Button style={{ marginLeft: '25%' }} onClick={handleLogout} square>
 							<Icon name={'reader_eject'} />
 						</Button>
 					</WindowContent>
@@ -108,7 +126,7 @@ const SideNave = (props) => {
 										alignItems: 'center',
 										marginRight: '40px'
 									}}>
-									<span>{rank}</span>
+									<span>#{renderRank(state)}</span>
 									<span>rank</span>
 								</div>
 								<div
@@ -118,7 +136,7 @@ const SideNave = (props) => {
 										alignItems: 'center',
 										marginRight: '40px'
 									}}>
-									<span>{pass}</span>
+									<span>{renderPass(state)}%</span>
 									<span>Pass</span>
 								</div>
 								<div
@@ -128,15 +146,15 @@ const SideNave = (props) => {
 										alignItems: 'center',
 										marginRight: '10px'
 									}}>
-									<span>{quiz}</span>
+									<span>{renderQuiz(state)}</span>
 									<span>quiz</span>
 								</div>
 							</div>
 							<Button
-								style={{display: 'flex', justifyContent: 'space-between'}}>
+								style={{ display: 'flex', justifyContent: 'space-between' }}>
 								<Circle />
-								<span style={{paddingLeft: '5px'}}>
-									{users} user{users > 1 ? 's' : null} online
+								<span style={{ paddingLeft: '5px' }}>
+									online
 								</span>
 							</Button>
 						</div>

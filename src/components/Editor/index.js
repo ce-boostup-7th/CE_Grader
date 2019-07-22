@@ -34,7 +34,7 @@ int main(){
 				enableLiveAutocompletion: true,
 				enableSnippets: true,
 				showLineNumbers: true,
-				tabSize: 2
+				tabSize: 4
 			}}
 			editorProps={{
 				$blockScrolling: Infinity

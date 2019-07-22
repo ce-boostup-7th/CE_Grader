@@ -12,7 +12,7 @@ const Div = styled.div`
     box-shadow: inset 1px 1px 0px 1px #dfe0e3, inset -1px -1px 0 1px #888c8f;
 `
 
-const Description = (props) => {
+const Description = ({detail}) => {
     return (
         <TabBody style={{
             height: '85%'
@@ -21,19 +21,50 @@ const Description = (props) => {
                 <TextArea style={{
                     width: '100%',
                     height: '100%'
-                }} readOnly >
+                }} readOnly value={detail}>
                 </TextArea>
             </Div>
         </TabBody>
     )
 }
 
-const TestCase = (props) => {
+const TestCase = ({testcase}) => {
+    const renderTestcase=()=>{
+        if(testcase.length <= 3){
+            return `
+input : 
+${testcase[0].input}
+output :
+${testcase[0].output}
+`
+        }else return `
+input :
+${testcase[0].input}
+output :
+${testcase[0].output}
+
+
+input : 
+${testcase[1].input}
+output :
+${testcase[1].output}
+
+
+input : 
+${testcase[2].input}
+output :
+${testcase[2].output}
+`
+    }
     return (
         <TabBody style={{
             height: '85%'
         }}>
-            stuff
+            <TextArea style={{
+                    width: '100%',
+                    height: '100%'
+                }} readOnly value={renderTestcase()}>
+                </TextArea>
         </TabBody>
     )
 }
@@ -54,10 +85,10 @@ export default (props) => {
                     }}>
                         <Tabs value={activeTabs} onChange={(value) => setActive(value)}>
                             <Tab value={0}>Description</Tab>
-                            <Tab value={1}>Test Case</Tab>
+                            <Tab value={1}>Example</Tab>
                         </Tabs>
-                        {activeTabs === 0 && <Description />}
-                        {activeTabs === 1 && <TestCase />}
+                        {activeTabs === 0 && <Description detail={props.detail} />}
+                        {activeTabs === 1 && <TestCase testcase={props.testcase} />}
                     </WindowContent>
                 </div>
             </ThemeProvider>

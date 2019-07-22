@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Tooltip } from 'react95'
-import Slide from 'react-reveal/slide'
-
 
 const renderStar = (number, serialize) => {
 	let temp = []
@@ -12,16 +10,18 @@ const renderStar = (number, serialize) => {
 	return temp
 }
 
-const renderStatus = status => {
-	switch (status) {
-		case 'PASS':
-			return '✔'
-		case 'FAIL':
-			return '❌'
-		case 'UNKNOW':
-			return '❔'
+const renderCategory = category_id => {
+	switch (category_id) {
+		case 1:
+			return 'Basic'
+		case 2:
+			return 'Condition'
+		case 3:
+			return 'Loop'
+		case 4:
+			return 'Function'
 		default:
-			break
+			break;
 	}
 }
 
@@ -106,40 +106,61 @@ background:white;
 ;
 `
 
-export default ({ data, sort,handleClick }) => {
+export default ({ data, sortDifficulty, sortTopic, handleClick, submission }) => {
+	const renderPass = (id) => {
+		let temp = submission.filter((value) => {
+			return value.problem_id === id
+		})
+		if (temp.length > 0) {
+			const max = temp.reduce((prev, current) => (prev.score > current.score) ? prev : current)
+			return ((max.score * 100) / max.max_score).toFixed(2)
+		} else return -1
+	}
+	const renderStatus = id => {
+		if (renderPass(id) > 99) {
+			return '✔'
+		}
+		else if (renderPass(id) === -1) {
+			return '❔'
+		} else {
+			return '❌'
+		}
+	}
 	return (
 		<Container>
 			<Box>
 				<Item width={12.5}>Status</Item>
 				<Item width={12.5}>Order</Item>
 				<Item width={37.5}>Name</Item>
-				<Item width={12.5} sorting onClick={e => sort('Level')}>
+				<Item width={12.5} sorting onClick={e => sortDifficulty()}>
 					<StyledTooltip delay={300} text="Click to sort by level ⌛">Level</StyledTooltip>
 				</Item>
-				<Item width={12.5}>Topic</Item>
+				<Item width={12.5} sorting onClick={e => sortTopic()} >
+					<StyledTooltip delay={300} text="Click to sort by Topic ⌛">Topic</StyledTooltip>
+				</Item>
 				<Item width={12.5}>Pass</Item>
 			</Box>
 			<Data>
 				{data.map((value, index) => {
 					return (
-						<DataBox key={index} onClick={e=>handleClick(value.order)}>
-							<DataItem align="center" width={12.5}>
-								{renderStatus(value.status)}
+						<DataBox key={index} onClick={e => handleClick(value.id)}>
+							<DataItem style={{ color: 'green' }} align="center" width={12.5}>
+								{renderStatus(value.id)}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
-								{value.order}
+								{index + 1}
 							</DataItem>
 							<DataItem align="left" width={37.5}>
-								{value.name}
+								{value.title}
 							</DataItem>
 							<DataItem align="left" width={12.5}>
-								{renderStar(value.level, '⭐')}
+								{renderStar(value.difficulty, '⭐')}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
-								{value.topic}
+								{renderCategory(value.category_id)}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
-								{value.pass}
+								{`${renderPass(value.id) !== -1 ? `${renderPass(value.id)}%` : 'ยังไม่ทันแตะเลยจ้า'}`}
 							</DataItem>
 						</DataBox>
 					)

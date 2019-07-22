@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import moment from 'moment'
 import Fade from 'react-reveal/Fade'
@@ -43,24 +43,28 @@ justify-content:left;
 }
 `
 
-
-const AttempTable = ({ data = [
+const pop = [
     {
-        item: "test.cpp",
-        latestDate: moment().format('MMMM Do YYYY, h:mm a'),
-        status: '✔✔✔❌❌'
+        title: "test.cpp",
+        last_do: moment().format('MMMM Do YYYY, h:mm a'),
+        percen: 32,
+        problem_id: 2
     },
     {
-        item: "test.cpp",
-        latestDate: moment().format('MMMM Do YYYY, h:mm a'),
-        status: '✔✔✔❌❌'
+        title: "test.cpp",
+        last_do: moment().format('MMMM Do YYYY, h:mm a'),
+        percen: 21,
+        problem_id: 3
     },
     {
-        item: "test.cpp",
-        latestDate: moment().format('MMMM Do YYYY, h:mm a'),
-        status: '✔✔✔❌❌'
+        title: "test.cpp",
+        last_do: moment().format('MMMM Do YYYY, h:mm a'),
+        percen: 74,
+        problem_id: 4
     }
-] }) => {
+]
+
+const AttempTable = ({ data = pop, history }) => {
     return (
         <Container>
             <FlexBox color="white" fontSize="16" role="Purpose">
@@ -68,13 +72,13 @@ const AttempTable = ({ data = [
             </FlexBox>
             <FlexBox row role="Header" >
                 <FlexBox height="50px" style={{ lineHeight: '50px' }} width="60%" color="white" fontSize="14" >
-                    Item
+                    List
                 </FlexBox>
                 <FlexBox height="50px" style={{ justifyContent: 'center', lineHeight: '50px' }} width="30%" color="white" fontSize="14">
                     Last worked
                 </FlexBox>
                 <FlexBox height="50px" style={{ justifyContent: 'center', lineHeight: '50px' }} width="10%" color="white" fontSize="14">
-                    status
+                    Pass
                 </FlexBox>
             </FlexBox>
             <div role="divider" style={{
@@ -83,28 +87,28 @@ const AttempTable = ({ data = [
                 background: 'gray',
                 height: '2px'
             }}></div>
-            <FlexBox style={{ marginTop: '1%' }} col role="body">
-                <Fade cascade top>
+            <Fade cascade top>
+                <FlexBox style={{ marginTop: '1%' }} col role="body">
                     {
                         data.map((value, index) => {
                             return (
                                 <FlexBox height="55px" color="white" key={index} row>
                                     <FlexBox width="60%" fontSize="12" >
-                                        <ClickableText>{value.item}</ClickableText>
+                                        <ClickableText onClick={e => { history.push(`/workbench/problem/${value.problem_id}`) }}>{value.title}</ClickableText>
                                     </FlexBox>
                                     <FlexBox style={{ justifyContent: 'center' }} width="30%" color="white" fontSize="12">
-                                        {value.latestDate}
+                                        {value.last_do}
                                     </FlexBox>
                                     <FlexBox style={{ justifyContent: 'center' }} width="10%" color="green" fontSize="12">
-                                        {value.status}
+                                        {value.percen.toFixed(2)}%
                                     </FlexBox>
                                 </FlexBox>
                             )
                         })
                     }
-                </Fade>
-            </FlexBox>
-        </Container>
+                </FlexBox>
+            </Fade>
+        </Container >
     )
 }
-export default AttempTable
+export default withRouter(AttempTable)

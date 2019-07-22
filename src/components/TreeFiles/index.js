@@ -12,9 +12,6 @@ const Treefiles = ({ history, match, location }) => {
 		{
 			id: 0,
 			label: 'LeaderBoard',
-			onClick: () => {
-				console.log('nice')
-			},
 			children: [
 				{
 					id: 1,
@@ -29,9 +26,6 @@ const Treefiles = ({ history, match, location }) => {
 		{
 			id: 1,
 			label: 'DashBoard',
-			onClick: () => {
-				console.log('nice')
-			},
 			children: [
 				{
 					id: 1,
@@ -46,9 +40,6 @@ const Treefiles = ({ history, match, location }) => {
 		{
 			id: 2,
 			label: 'Problems',
-			onClick: () => {
-				console.log('nice')
-			},
 			children: [
 				{
 					id: 1,
@@ -56,23 +47,6 @@ const Treefiles = ({ history, match, location }) => {
 					iconName: icons.FILE_EXECUTABLE,
 					onClick: () => {
 						history.push('/problem')
-					}
-				}
-			]
-		},
-		{
-			id: 3,
-			label: 'Quizs',
-			onClick: () => {
-				console.log('nice')
-			},
-			children: [
-				{
-					id: 1,
-					label: 'Quizs.exe',
-					iconName: icons.FILE_EXECUTABLE,
-					onClick: () => {
-						history.push('/quiz')
 					}
 				}
 			]

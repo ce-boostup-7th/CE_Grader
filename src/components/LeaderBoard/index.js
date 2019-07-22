@@ -17,17 +17,18 @@ import {
 	TableHeadCell
 } from 'react95'
 import {ThemeProvider} from 'styled-components'
-import {StateContext} from '../../StateProvider/StateProvider'
 import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 // Start  Code Here
 export default ({data=[{
-	name:'asd',
-	score:12314,
-	time:12312
+	username:'asd',
+	score:12314
 }]}) => {
-	let {state, dispatch} = React.useContext(StateContext)
-	const [users] = useState(data)
 	const [tabs, settabs] = useState(1)
+	const sortByscore=()=>{
+		let temp = [...data]
+		temp.sort((a,b)=>b.score-a.score)
+		return temp
+	}
 	return (
 		<div
 			style={{
@@ -70,15 +71,12 @@ export default ({data=[{
 								<Table style={{display: 'block'}}>
 									<TableHead style={{display: 'block'}}>
 										<TableRow head style={{display: 'block'}}>
-											<TableHeadCell style={{width: '8vw'}}>Rank</TableHeadCell>
+											<TableHeadCell style={{width: '14vw'}}>Rank</TableHeadCell>
 											<TableHeadCell style={{width: '35vw'}}>
 												Name
 											</TableHeadCell>
-											<TableHeadCell style={{width: '12vw'}}>
+											<TableHeadCell style={{width: '18vw'}}>
 												Score
-											</TableHeadCell>
-											<TableHeadCell style={{width: '12vw'}}>
-												Time
 											</TableHeadCell>
 										</TableRow>
 									</TableHead>
@@ -89,11 +87,11 @@ export default ({data=[{
 											overflow: 'auto'
 										}}>
 										{tabs === 1 &&
-											users.map((user, index) => {
+											sortByscore().map((user, index) => {
 												return (
 													<TableRow style={{width:'100%'}} key={index}>
 														<TableDataCell
-															style={{width: '8vw', textAlign: 'center'}}>
+															style={{width: '14vw', textAlign: 'center'}}>
 															{(() => {
 																switch (index + 1) {
 																	case 1:
@@ -111,29 +109,22 @@ export default ({data=[{
 															{(() => {
 																switch (index + 1) {
 																	case 1:
-																		return user.name + `🥇`
+																		return user.username + `🥇`
 																	case 2:
-																		return user.name + '🥈'
+																		return user.username + '🥈'
 																	case 3:
-																		return user.name + '🥉'
+																		return user.username + '🥉'
 																	default:
-																		return user.name
+																		return user.username
 																}
 															})()}
 														</TableDataCell>
 														<TableDataCell
 															style={{
 																textAlign: 'center',
-																width: '12vw'
+																width: '18vw'
 															}}>
 															{user.score}
-														</TableDataCell>
-														<TableDataCell
-															style={{
-																textAlign: 'center',
-																width: '12vw'
-															}}>
-															{user.time} {' hrs '}
 														</TableDataCell>
 													</TableRow>
 												)

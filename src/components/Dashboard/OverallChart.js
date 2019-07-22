@@ -54,22 +54,44 @@ const renderActiveShape = (props) => {
         </g>
     );
 };
-
-const OverrallChart = ({ }) => {
+const mapData = (target) => {
+    let out = []
+    let divider = target.reduce((sum,item)=>{
+        return sum+item.amount
+    },0)
+    out.push({
+        name: target[0].name,
+        value: parseInt((target[0].amount*100/divider)),
+        fill: '#1bcc82'
+    })
+    out.push({
+        name: target[1].name,
+        value:parseInt((target[1].amount*100/divider)),
+        fill: '#db5c5c'
+    })
+    out.push({
+        name: target[2].name,
+        value: parseInt((target[2].amount*100/divider)),
+        fill: '#ababab'
+    })
+    return out
+}
+const OverrallChart = ({ data=pop }) => {
     let [activeIndex, setActiveIndex] = React.useState(0)
     const onPieEnter = (data, index) => {
         setActiveIndex(index)
     }
+
     return (
         <ResponsiveContainer height="45%" width="99%">
             <PieChart>
                 <Pie
                     activeIndex={activeIndex}
                     activeShape={renderActiveShape}
-                    data={pop}
+                    data={mapData(data)}
                     innerRadius={60}
                     outerRadius={80}
-                    fill="#8884d8"
+                    //  fill="#8884d8"
                     onMouseEnter={onPieEnter}
                     stroke={'none'}
                 />
