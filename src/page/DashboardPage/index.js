@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import SideNav from '../../components/SideNav'
 import Dashboard from '../../components/Dashboard'
+import { StateContext } from '../../StateProvider/StateProvider';
 
 const Container = styled.div`
 	display: flex;
@@ -16,11 +16,8 @@ const Div = styled.div`
 `
 
 export default (props) => {
+	let {state} = React.useContext(StateContext)
 	return (
-		<Container>
-			<Div>
-				<Dashboard />
-			</Div>
-		</Container>
+		<Dashboard data={state.statistics} />
 	)
 }

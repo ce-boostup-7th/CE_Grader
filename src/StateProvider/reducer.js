@@ -4,9 +4,13 @@ import {
 	LOGOUT,
 	DASH_BOARD,
 	LEADER_BOARD,
-	CLOSE_WIN
+	CLOSE_WIN,
+	FETCH_PROBLEM,
+	FETCH_STATISTIC,
+	FETCH_SUBMISSION,
+	FETCH_USERS
 } from './actions_constant'
-import {initialState} from './StateProvider'
+import { initialState } from './StateProvider'
 import LeaderBoard from '../components/LeaderBoard'
 
 const reducer = (state = initialState, action) => {
@@ -17,36 +21,35 @@ const reducer = (state = initialState, action) => {
 				text: action.payload
 			}
 		case LOGIN:
-			localStorage.setItem('Login', 'true')
 			return {
 				...state,
 				isLogin: true
 			}
 		case LOGOUT:
-			localStorage.setItem('Login', 'false')
 			return {
 				...state,
 				isLogin: false
 			}
-		//add action from usage
-		case DASH_BOARD: {
+		case FETCH_PROBLEM:
 			return {
 				...state,
-				pages: DASH_BOARD
+				problems: action.payload
 			}
-		}
-		case LEADER_BOARD: {
+		case FETCH_STATISTIC:
 			return {
 				...state,
-				pages: LEADER_BOARD
+				statistics: action.payload
 			}
-		}
-		case CLOSE_WIN: {
+		case FETCH_SUBMISSION:
 			return {
 				...state,
-				pages: ''
+				submissions: action.payload
 			}
-		}
+		case FETCH_USERS:
+			return {
+				...state,
+				users: action.payload
+			}
 		default:
 			return state
 	}

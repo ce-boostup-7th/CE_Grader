@@ -35,8 +35,8 @@ const FlexBox = styled.div`
 	`}
 `
 
-export default () => {
-	return (
+export default ({ data }) => {
+	return data ? ((
 		<Container>
 			<ThemeProvider theme={themes.default}>
 				<Window style={{
@@ -49,7 +49,7 @@ export default () => {
 							justifyContent: 'space-between',
 						}}
 					>
-						<span>Virtual Mathchine:Running Mordern UI System</span>
+						<span>Virtual Machine:Running Mordern UI System</span>
 						<Button style={{ marginRight: '-6px', marginTop: '1px' }} size={'sm'} square>
 							<span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>x</span>
 						</Button>
@@ -64,27 +64,27 @@ export default () => {
 								<div style={{ fontSize: 16, marginBottom: '20px', color: 'white' }}>
 									Chapter Progress
 								</div>
-								<ChapterChart />
-								<AttempTable />
+								<ChapterChart data={data.progress_array} />
+								<AttempTable data={data.history}/>
 							</FlexBox>
 							<FlexBox col width='40%' height="100%" style={{
 								marginLeft: 'auto'
 							}}>
-								<div style={{ paddingLeft:'20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
+								<div style={{ paddingLeft: '20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
 									Overral Progress
 								</div>
-								<OverrallChart />
-								<div style={{ paddingLeft:'20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
+								<OverrallChart data={data.overall} />
+								<div style={{ paddingLeft: '20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
 									Active Pulse
 								</div>
 								<FlexBox width="100%" height="25%" style={{ justifyContent: 'center' }}>
-									<ActivnessChart />
-								</FlexBox><br/>
-								<div style={{ paddingLeft:'20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
+									<ActivnessChart data={data.active_pulse} />
+								</FlexBox><br />
+								<div style={{ paddingLeft: '20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
 									Position
 								</div>
 								<FlexBox width="100%" height="25%" style={{ justifyContent: 'center' }}>
-									<PositionChart />
+									<PositionChart data={data.histogram} />
 								</FlexBox>
 							</FlexBox>
 						</FlexBox>
@@ -93,5 +93,5 @@ export default () => {
 				</Window>
 			</ThemeProvider>
 		</Container>
-	)
+	)) : 'Loding'
 }

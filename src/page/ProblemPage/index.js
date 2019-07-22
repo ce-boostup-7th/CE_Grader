@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 
 import DataTable from '../../components/DataTable'
-import {StateContext} from '../../StateProvider/StateProvider'
+import { StateContext } from '../../StateProvider/StateProvider'
 
 const Container = styled.div`
 	display: flex;
@@ -17,42 +17,65 @@ const Div = styled.div`
 	margin: 20px;
 `
 let processingData = (state, mode) => {
-	let temp = state.data
+	let temp = state
 	if (mode === 1) {
 		return temp.sort((a, b) =>
-			a.level > b.level ? 1 : b.level > a.level ? -1 : 0
+			a.difficulty > b.difficulty ? 1 : b.difficulty > a.difficulty ? -1 : 0
 		)
 	}
 	if (mode === -1) {
 		return temp.sort((a, b) =>
-			a.level > b.level ? -1 : b.level > a.level ? 1 : 0
+			a.difficulty > b.difficulty ? -1 : b.difficulty > a.difficulty ? 1 : 0
 		)
 	}
 	if (mode === 0) {
 		return temp
 	}
+	if (mode === 2) {
+		return temp.sort((a, b) =>
+			a.category_id > b.category_id ? 1 : b.category_id > a.category_id ? -1 : 0
+		)
+	}
+	if (mode === -2) {
+		return temp.sort((a, b) =>
+			a.category_id > b.category_id ? -1 : b.category_id > a.category_id ? 1 : 0
+		)
+	}
 }
 
 const ProblemPage = (props) => {
-	let {state, dispatch} = React.useContext(StateContext)
+	let { state, dispatch } = React.useContext(StateContext)
 	let [mode, setMode] = React.useState(0)
-	const handleClick = (index)=>{
+	const handleClick = (index) => {
 		props.history.push(`/workbench/problem/${index}`)
 	}
 	return (
 		<Container>
 			<Div>
 				<DataTable
-					data={processingData(state, mode)}
-					sort={() => {
+					submission={state.submissions}
+					data={processingData(state.problems, mode)}
+					sortDifficulty={() => {
 						if (mode === 0) {
 							setMode(1)
 						} else if (mode === 1) {
 							setMode(-1)
 						} else if (mode === -1) {
 							setMode(1)
+						}else {
+							setMode(0)
 						}
 					}}
+					sortTopic={() => {
+						if (mode === 2) {
+							setMode(-2)
+						} else if (mode === -2) {
+							setMode(2)
+						} else {
+							setMode(2)
+						}
+					}
+					}
 					handleClick={handleClick}
 				/>
 			</Div>
