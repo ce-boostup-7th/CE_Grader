@@ -84,7 +84,7 @@ export default ({ data }) => {
 									Position
 								</div>
 								<FlexBox width="100%" height="25%" style={{ justifyContent: 'center' }}>
-									<PositionChart data={data.histogram} />
+									<PositionChart reference={data.score} data={data.histogram} />
 								</FlexBox>
 							</FlexBox>
 						</FlexBox>

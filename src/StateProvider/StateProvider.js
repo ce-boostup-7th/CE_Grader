@@ -3,7 +3,6 @@ import React from 'react'
 import reducer from './reducer'
 
 export const initialState = {
-	isLogin: false,
 	problems: [
 		{
 			id: '',
@@ -56,7 +55,7 @@ export const initialState = {
 			{
 				problem_id: 0,
 				title: "",
-				percen: 0,
+				results: '',
 				last_do: "2019-07-23T01:30:55.133864+07:00"
 			},
 		],

@@ -31,7 +31,7 @@ const SideNave = (props) => {
 			.then(res => res.status)
 			.then(status => {
 				if (status === 200) {
-					dispatch({ type: LOGOUT })
+					props.onLogout()
 					props.history.push('/')
 				}
 			}

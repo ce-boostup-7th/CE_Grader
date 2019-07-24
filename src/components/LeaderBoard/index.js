@@ -18,6 +18,9 @@ import {
 } from 'react95'
 import {ThemeProvider} from 'styled-components'
 import {CLOSE_WIN} from '../../StateProvider/actions_constant'
+import First from '../../resource/icons/first.png'
+import Second from '../../resource/icons/second.png'
+import Third from '../../resource/icons/third.png'
 // Start  Code Here
 export default ({data=[{
 	username:'asd',
@@ -109,11 +112,11 @@ export default ({data=[{
 															{(() => {
 																switch (index + 1) {
 																	case 1:
-																		return user.username + `🥇`
+																		return <div>{user.username} <img width={18} height={18} src={First} /> </div>
 																	case 2:
-																		return user.username + '🥈'
+																		return <div>{user.username} <img width={18} height={18} src={Second} /> </div>
 																	case 3:
-																		return user.username + '🥉'
+																		return <div>{user.username} <img width={18} height={18} src={Third} /> </div>
 																	default:
 																		return user.username
 																}

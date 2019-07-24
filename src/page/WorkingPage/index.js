@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
+import { UTF8ArrToStr,base64DecToArr} from './base64'
 
 import Breadcrumb from '../../components/BreadcrumbsLink'
 import Editor from '../../components/Editor'
@@ -11,7 +12,6 @@ import menu from '../../resource/icons/menu.png'
 import ManipulationTab from '../../components/ManipulationTab';
 import { StateContext } from '../../StateProvider/StateProvider';
 import { FETCH_SUBMISSION, FETCH_PROBLEM, FETCH_STATISTIC } from '../../StateProvider/actions_constant';
-
 
 const Container = styled.div`
 display:flex;
@@ -42,6 +42,8 @@ const Working = ({ size1 = 4, size2 = 96, match, location, history }) => {
     let [activeTerminal, setActiveTerminal] = React.useState(false)
     let [theme, setTheme] = React.useState('monokai')
     let [testcase, setTestcase] = React.useState([])
+    let [input, setInput] = React.useState(``)
+    let [output, setOutput] = React.useState(``)
     let [code, setCode] = React.useState(
         `#include<stdio.h>
 
@@ -76,12 +78,27 @@ int main(){
                 },
                 body: qs.stringify({
                     problem_id: parseInt(match.params.id),
-                    language_id: 4,
+                    language_id: 10,
                     src: code
                 })
             })
-            .then((res) => res.status)
-            .then(status => { if (status === 201) alert('submit success!') })
+            .then((res) => res)
+            .then(res => {
+                if (res.status === 201) {
+                    res.json().then((data) => {
+                        setActiveTerminal(true)
+                        setOutput(
+                            `
+Compile success.
+.............................................
+
+Result: ${data.results.includes('X') ? 'Error Caught' : data.results}
+
+submit at: ${new Date(data.submitted_at).toLocaleString()}
+`                )
+                    })
+                }
+            })
             .then(() => {
                 fetch('http://161.246.34.96/api/users/submissions', {
                     credentials: 'include'
@@ -117,6 +134,38 @@ int main(){
                     })
             })
     }
+    const handleRun=()=>{
+        fetch('http://ce.19991999.xyz/judge/submissions?wait=true&base64_encoded=true',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded'
+            },
+            body: qs.stringify({
+                stdin:btoa(input),
+                language_id: 10,
+                source_code: btoa(code)
+            })
+        }).then(res=>res)
+        .then(res=>{
+            if (res.status === 201) {
+                res.json().then((data) => {
+                    let rawdata = data;
+                    setActiveTerminal(true)
+                    setOutput(
+                        `
+Process success.
+.............................................
+
+Compiler Output: ${rawdata.compile_output === null ? '-':UTF8ArrToStr(base64DecToArr(rawdata.compile_output.replace(/(\r\n|\n|\r)/gm," ")))}
+
+Output: ${rawdata.stdout === null?'-': UTF8ArrToStr(base64DecToArr(rawdata.stdout.replace(/(\r\n|\n|\r)/gm," ")))}
+
+exists status ${rawdata.status.id} (${rawdata.status.description})
+`                )
+                })
+            }
+    })
+}
     const onChangeTheme = (newTheme) => {
         setTheme(newTheme)
     }
@@ -139,20 +188,31 @@ int main(){
             <FlexBox row style={{
                 flex: 1
             }}>
-                <DetailBar testcase={testcase} detail={state.problems.find((v) => v.id === parseInt(match.params.id)).description} />
+                <DetailBar
+                    input={input}
+                    testcase={testcase}
+                    detail={state.problems.find((v) => v.id === parseInt(match.params.id)).description}
+                    onChange={value => setInput(value)}
+                />
                 <FlexBox col style={
                     {
                         flexGrow: 4
                     }
                 }>
                     <div style={{ height: '5%', flexShrink: 0 }}>
-                        <ManipulationTab handleSubmitFile={handleSubmitFile} onChangeTheme={onChangeTheme} handleExportFile={handleExportFile} handleImportFile={handleImportFile} />
+                        <ManipulationTab 
+                        handleSubmitFile={handleSubmitFile} 
+                        onChangeTheme={onChangeTheme} 
+                        handleExportFile={handleExportFile} 
+                        handleImportFile={handleImportFile} 
+                        handleRun={handleRun}
+                        />
                     </div>
                     <Editor theme={theme} onChange={value => setCode(value)} value={code} />
                     <div style={{
                         height: `${activeTerminal ? '50%' : 'auto'}`
                     }}>
-                        <Terminal active={activeTerminal} toggleTerminal={() => setActiveTerminal(!activeTerminal)} />
+                        <Terminal output={output} active={activeTerminal} toggleTerminal={() => setActiveTerminal(!activeTerminal)} />
                     </div>
                 </FlexBox>
             </FlexBox>

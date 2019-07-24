@@ -12,6 +12,9 @@ const Treefiles = ({ history, match, location }) => {
 		{
 			id: 0,
 			label: 'LeaderBoard',
+			onClick: () => {
+				history.push('/leaderboard')
+			},
 			children: [
 				{
 					id: 1,
@@ -26,6 +29,9 @@ const Treefiles = ({ history, match, location }) => {
 		{
 			id: 1,
 			label: 'DashBoard',
+			onClick: () => {
+				history.push('/dashboard')
+			},
 			children: [
 				{
 					id: 1,
@@ -40,6 +46,9 @@ const Treefiles = ({ history, match, location }) => {
 		{
 			id: 2,
 			label: 'Problems',
+			onClick: () => {
+				history.push('/problem')
+			},
 			children: [
 				{
 					id: 1,

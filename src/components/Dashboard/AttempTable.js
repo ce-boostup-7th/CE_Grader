@@ -65,6 +65,16 @@ const pop = [
 ]
 
 const AttempTable = ({ data = pop, history }) => {
+    const renderStatus = (value='') =>{
+       return value.split('').map(v=>{
+            switch(v){
+                case 'P':
+                    return <p style={{color:'green'}}>{v}</p>
+                default :
+                    return <p style={{color:'red'}}>{v}</p>
+            }
+        })
+    }
     return (
         <Container>
             <FlexBox color="white" fontSize="16" role="Purpose">
@@ -97,10 +107,10 @@ const AttempTable = ({ data = pop, history }) => {
                                         <ClickableText onClick={e => { history.push(`/workbench/problem/${value.problem_id}`) }}>{value.title}</ClickableText>
                                     </FlexBox>
                                     <FlexBox style={{ justifyContent: 'center' }} width="30%" color="white" fontSize="12">
-                                        {value.last_do}
+                                        {new Date(value.last_do).toLocaleString()}
                                     </FlexBox>
-                                    <FlexBox style={{ justifyContent: 'center' }} width="10%" color="green" fontSize="12">
-                                        {value.percen.toFixed(2)}%
+                                    <FlexBox style={{ justifyContent: 'center' }} width="10%" color="red" fontSize="12">
+                                        {renderStatus(value.results)}
                                     </FlexBox>
                                 </FlexBox>
                             )
