@@ -65,10 +65,24 @@ export default ({ output, toggleTerminal, active }) => {
                     padding: '20px'
                 }} height="100%" >
                     <div style={{
-                        color: 'white'
+                        width:'100%',
+                        height:'100%',
                     }}>
-                        {output}
-                        asd
+                       <textarea
+                       style={{
+                        width:'105%',
+                        height:'100%',
+                        background:'black',
+                        border:'none',
+                        resize:'none',
+                        color:'white',
+                        overflowX:'hidden'
+                       }}
+                       value={output}
+                       readOnly
+                       disabled
+                       >           
+                       </textarea>
                     </div>
                 </FlexItem>
             }

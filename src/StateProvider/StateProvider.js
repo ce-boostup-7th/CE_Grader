@@ -3,7 +3,6 @@ import React from 'react'
 import reducer from './reducer'
 
 export const initialState = {
-	isLogin: false,
 	problems: [
 		{
 			id: '',

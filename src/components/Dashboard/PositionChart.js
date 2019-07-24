@@ -11,12 +11,18 @@ const pop = [
     { name: 'Page G', amount: 4300 },
 ];
 
-const PositionChart = ({ data = pop }) => {
+
+const PositionChart = ({ data = pop, reference=0 }) => {
     const mapData = () => {
         return data.map((value) => ({
-            name: `${value.start}%-${value.stop}%`,
+            name: `${value.start}-${value.stop} score`,
             amount: value.amount
         }))
+    }
+    const renderReference = () => {
+       let temp =[]
+       temp = data.filter((v)=>reference>=v.start&&reference<=v.stop)
+       return [`${temp[0].start}-${temp[0].stop} score`,temp[0].amount]
     }
     return (
         <ResponsiveContainer height="100%" width="80%">
@@ -29,7 +35,7 @@ const PositionChart = ({ data = pop }) => {
                     </linearGradient>
                 </defs>
                 <Area type="linear" dataKey="amount" strokeWidth={0} fill="url('#positionchart')" />
-                <ReferenceDot x="Page C" y={9800} r={3} fill={'red'} />
+                <ReferenceDot x={renderReference(reference)[0]} y={renderReference(reference)[1]} r={3} fill={'red'} />
                 <XAxis dataKey="name" stroke='none' />
                 <CartesianGrid fillOpacity={0.1} stroke="#6c7687" vertical={false} />
             </AreaChart>

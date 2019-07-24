@@ -7,8 +7,7 @@ import DashboardPage from '../page/DashboardPage'
 import LeaderBoardPage from '../page/LeaderPage'
 import ProblemPage from './ProblemPage'
 import WorkingPage from './WorkingPage'
-import { StateContext } from '../StateProvider/StateProvider';
-import { FETCH_PROBLEM, FETCH_SUBMISSION, FETCH_STATISTIC, FETCH_USERS } from '../StateProvider/actions_constant';
+
 
 const NoRoute = () => {
 	let [time, setTime] = React.useState(0)
@@ -25,49 +24,7 @@ const NoRoute = () => {
 const HasNavSideroutes = ['/leaderboard', '/dashboard', '/problem', '/quiz']
 
 const MainWindows = props => {
-	let { state, dispatch } = React.useContext(StateContext)
-	React.useEffect(() => {
-		if (state.isLogin) {
-			fetch('http://161.246.34.96/api/problems')
-				.then(res => res.json())
-				.then(data => {
-					dispatch({
-						type: FETCH_PROBLEM,
-						payload: data
-					})
-				})
-			fetch('http://161.246.34.96/api/users/submissions', {
-				credentials: 'include'
-			})
-				.then(res => res.json())
-				.then(data => {
-					dispatch({
-						type: FETCH_SUBMISSION,
-						payload: data
-					})
-				})
-			fetch('http://161.246.34.96/api/users/stats', {
-				credentials: 'include'
-			})
-				.then(res => res.json())
-				.then(data => {
-					dispatch({
-						type: FETCH_STATISTIC,
-						payload: data
-					})
-				})
-				fetch('http://161.246.34.96/api/users', {
-					credentials: 'include'
-				})
-					.then(res => res.json())
-					.then(data => {
-						dispatch({
-							type: FETCH_USERS,
-							payload: data
-						})
-					})
-		}
-	}, [state.isLogin])
+	let [isLogin, setLogin] = React.useState(false)
 	return (
 		<div
 			style={{
@@ -78,15 +35,15 @@ const MainWindows = props => {
 		>
 
 			{
-				HasNavSideroutes.includes(props.location.pathname) && <SideNav />
+				HasNavSideroutes.includes(props.location.pathname) && <SideNav  onLogout={e=>{setLogin(false)}}/>
 			}
 			<Switch>
-				<Route exact path="/" component={() => state.isLogin ? <Redirect to="/dashboard" /> : <Redirect to="/login" />} />
-				<Route path="/login" component={Login} />
-				<Route path="/dashboard" component={() => state.isLogin ? <DashboardPage /> : <Redirect to="/login" />} />
-				<Route path="/leaderboard" component={() => state.isLogin ? <LeaderBoardPage /> : <Redirect to="/login" />} />
-				<Route path="/problem" component={() => state.isLogin ? <ProblemPage /> : <Redirect to="/login" />} />
-				<Route path="/workbench/:type/:id" component={() => state.isLogin ? <WorkingPage /> : <Redirect to="/login" />} />
+				<Route exact path="/" component={() => isLogin ? <Redirect to="/dashboard" /> : <Redirect to="/login" />} />
+				<Route path="/login" component={() => <Login onSuccess={(value) => { setLogin(value) }} />} />
+				<Route path="/dashboard" component={() => isLogin ? <DashboardPage /> : <Redirect to="/login" />} />
+				<Route path="/leaderboard" component={() => isLogin ? <LeaderBoardPage /> : <Redirect to="/login" />} />
+				<Route path="/problem" component={() => isLogin ? <ProblemPage /> : <Redirect to="/login" />} />
+				<Route path="/workbench/:type/:id" component={() => isLogin ? <WorkingPage /> : <Redirect to="/login" />} />
 				<Route component={NoRoute} />
 			</Switch>
 		</div>

@@ -32,6 +32,7 @@ const Container = styled.div`
 	min-height: 90vh;
 	border: solid 10px #e2e2e2;
 	background-color: #e2e2e2;
+	overflow-x:hidden;
 `
 const Box = styled.div`
 	display: flex;
@@ -90,7 +91,9 @@ const DataItem = styled.div`
 `
 const Data = styled.div`
 	height: 100vh;
+	width:102%;
 	overflow-y: auto;
+	overflow-x:hidden;
 	border-style: solid;
     border-width: 2px;
     border-left-color: #ffffff;
@@ -118,12 +121,12 @@ export default ({ data, sortDifficulty, sortTopic, handleClick, submission }) =>
 	}
 	const renderStatus = id => {
 		if (renderPass(id) > 99) {
-			return '✔'
+			return <div style={{color:'green'}}>&#x2714;</div>
 		}
 		else if (renderPass(id) === -1) {
-			return '❔'
+			return <div style={{color:'black'}}>&#x3f;</div>
 		} else {
-			return '❌'
+			return <div style={{color:'red'}}>&#x2715;</div>
 		}
 	}
 	return (
@@ -144,7 +147,7 @@ export default ({ data, sortDifficulty, sortTopic, handleClick, submission }) =>
 				{data.map((value, index) => {
 					return (
 						<DataBox key={index} onClick={e => handleClick(value.id)}>
-							<DataItem style={{ color: 'green' }} align="center" width={12.5}>
+							<DataItem align="center" width={12.5}>
 								{renderStatus(value.id)}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
@@ -153,8 +156,8 @@ export default ({ data, sortDifficulty, sortTopic, handleClick, submission }) =>
 							<DataItem align="left" width={37.5}>
 								{value.title}
 							</DataItem>
-							<DataItem align="left" width={12.5}>
-								{renderStar(value.difficulty, '⭐')}
+							<DataItem style={{color:'#ffb43b',fontSize:24}} align="left" width={12.5}>
+								{renderStar(value.difficulty, '★')}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
 								{renderCategory(value.category_id)}

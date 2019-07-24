@@ -65,6 +65,16 @@ const pop = [
 ]
 
 const AttempTable = ({ data = pop, history }) => {
+    const renderStatus = (value='') =>{
+       return value.split('').map(v=>{
+            switch(v){
+                case 'P':
+                    return <p style={{color:'green'}}>{v}</p>
+                default :
+                    return <p style={{color:'red'}}>{v}</p>
+            }
+        })
+    }
     return (
         <Container>
             <FlexBox color="white" fontSize="16" role="Purpose">
@@ -100,7 +110,7 @@ const AttempTable = ({ data = pop, history }) => {
                                         {new Date(value.last_do).toLocaleString()}
                                     </FlexBox>
                                     <FlexBox style={{ justifyContent: 'center' }} width="10%" color="red" fontSize="12">
-                                        {value.results}
+                                        {renderStatus(value.results)}
                                     </FlexBox>
                                 </FlexBox>
                             )
