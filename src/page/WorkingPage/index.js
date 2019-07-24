@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import qs from 'querystring'
-import { UTF8ArrToStr,base64DecToArr} from './base64'
+import { UTF8ArrToStr, base64DecToArr } from './base64'
 
 import Breadcrumb from '../../components/BreadcrumbsLink'
 import Editor from '../../components/Editor'
@@ -12,6 +12,7 @@ import menu from '../../resource/icons/menu.png'
 import ManipulationTab from '../../components/ManipulationTab';
 import { StateContext } from '../../StateProvider/StateProvider';
 import { FETCH_SUBMISSION, FETCH_PROBLEM, FETCH_STATISTIC } from '../../StateProvider/actions_constant';
+import SideList from '../../components/SideList';
 
 const Container = styled.div`
 display:flex;
@@ -37,13 +38,14 @@ const Icon = styled.div`
     }
 `
 
-const Working = ({ size1 = 4, size2 = 96, match, location, history }) => {
+const Working = ({ size1 = 4, size2 = 96, match, latest }) => {
     let { state, dispatch } = React.useContext(StateContext)
     let [activeTerminal, setActiveTerminal] = React.useState(false)
     let [theme, setTheme] = React.useState('monokai')
-    let [testcase, setTestcase] = React.useState([])
+    let [problem, setProblem] = React.useState({})
     let [input, setInput] = React.useState(``)
     let [output, setOutput] = React.useState(``)
+    let [peek, setPeek] = React.useState(false)
     let [code, setCode] = React.useState(
         `#include<stdio.h>
 
@@ -69,7 +71,7 @@ int main(){
         document.body.removeChild(link)
     }
     const handleSubmitFile = () => {
-        fetch('http://161.246.34.96/api/submissions',
+        fetch('http://ce.19991999.xyz/api/submissions',
             {
                 method: 'POST',
                 credentials: "include",
@@ -100,7 +102,7 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
                 }
             })
             .then(() => {
-                fetch('http://161.246.34.96/api/users/submissions', {
+                fetch('http://ce.19991999.xyz/api/users/submissions', {
                     credentials: 'include'
                 })
                     .then(res => res.json())
@@ -112,7 +114,9 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
                             })
                         })()
                     })
-                fetch('http://161.246.34.96/api/problems')
+                fetch('http://ce.19991999.xyz/api/users/problems',{
+                    credentials:'include'
+                })
                     .then(res => res.json())
                     .then(data => {
                         (() => {
@@ -122,7 +126,7 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
                             })
                         })()
                     })
-                fetch('http://161.246.34.96/api/users/stats', {
+                fetch('http://ce.19991999.xyz/api/users/stats', {
                     credentials: 'include'
                 })
                     .then(res => res.json())
@@ -134,89 +138,111 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
                     })
             })
     }
-    const handleRun=()=>{
-        fetch('http://ce.19991999.xyz/judge/submissions?wait=true&base64_encoded=true',{
+    const handleRun = () => {
+        fetch('http://ce.19991999.xyz/judge/submissions?wait=true&base64_encoded=true', {
             method: 'POST',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
             },
             body: qs.stringify({
-                stdin:btoa(input),
+                stdin: btoa(input),
                 language_id: 10,
                 source_code: btoa(code)
             })
-        }).then(res=>res)
-        .then(res=>{
-            if (res.status === 201) {
-                res.json().then((data) => {
-                    let rawdata = data;
-                    setActiveTerminal(true)
-                    setOutput(
-                        `
+        }).then(res => res)
+            .then(res => {
+                if (res.status === 201) {
+                    res.json().then((data) => {
+                        let rawdata = data;
+                        setActiveTerminal(true)
+                        setOutput(
+                            `
 Process success.
-.............................................
+-----------------------------------------
 
-Compiler Output: ${rawdata.compile_output === null ? '-':UTF8ArrToStr(base64DecToArr(rawdata.compile_output.replace(/(\r\n|\n|\r)/gm," ")))}
+Compiler Output: 
 
-Output: ${rawdata.stdout === null?'-': UTF8ArrToStr(base64DecToArr(rawdata.stdout.replace(/(\r\n|\n|\r)/gm," ")))}
+${rawdata.compile_output === null ? '-' : UTF8ArrToStr(base64DecToArr(rawdata.compile_output.replace(/(\r\n|\n|\r)/gm, " "))) + '\n compilation terminated.'}
+
+-----------------------------------------
+
+Output: 
+
+${rawdata.stdout === null ? '-' : UTF8ArrToStr(base64DecToArr(rawdata.stdout.replace(/(\r\n|\n|\r)/gm, " ")))}
+
+-----------------------------------------
 
 exists status ${rawdata.status.id} (${rawdata.status.description})
 `                )
-                })
-            }
-    })
-}
+                    })
+                }
+            })
+    }
     const onChangeTheme = (newTheme) => {
         setTheme(newTheme)
     }
     React.useEffect(() => {
-        fetch(`http://161.246.34.96/api/problems/${match.params.id}/testcases`)
+        fetch(`http://ce.19991999.xyz/api/problems/${match.params.id}`)
             .then(res => res.json())
-            .then(data => { setTestcase(data) })
+            .then(data => { setProblem(data) })
+        if (latest) {
+            fetch(`http://ce.19991999.xyz/api/problems/${match.params.id}/submissions/last`, {
+                method: 'get',
+                credentials: 'include'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    setCode(data.src)
+                })
+        }
     }, [])
-    return testcase ? (
-        <Container>
-            <NavigationBox row>
-                <div style={{
-                    textAlign: "center",
-                    alignSelf: "center",
-                    padding: "12px",
-                    width: `${size1}%`
-                }}><Icon icon={menu} /></div>
-                <Breadcrumb size={size2} location={`${match.params.type}`} destination={`${match.params.type} ${match.params.id}`} />
-            </NavigationBox>
-            <FlexBox row style={{
-                flex: 1
-            }}>
-                <DetailBar
-                    input={input}
-                    testcase={testcase}
-                    detail={state.problems.find((v) => v.id === parseInt(match.params.id)).description}
-                    onChange={value => setInput(value)}
-                />
-                <FlexBox col style={
-                    {
-                        flexGrow: 4
-                    }
-                }>
-                    <div style={{ height: '5%', flexShrink: 0 }}>
-                        <ManipulationTab 
-                        handleSubmitFile={handleSubmitFile} 
-                        onChangeTheme={onChangeTheme} 
-                        handleExportFile={handleExportFile} 
-                        handleImportFile={handleImportFile} 
-                        handleRun={handleRun}
-                        />
-                    </div>
-                    <Editor theme={theme} onChange={value => setCode(value)} value={code} />
+    return problem ? (
+        <div style={{ display: 'flex', width: '100%' }} onClick={peek ? () => { setPeek(false) } : undefined}>
+            {peek ? <SideList  peek={peek} />:''}
+            <Container>
+                <NavigationBox row>
                     <div style={{
-                        height: `${activeTerminal ? '50%' : 'auto'}`
-                    }}>
-                        <Terminal output={output} active={activeTerminal} toggleTerminal={() => setActiveTerminal(!activeTerminal)} />
-                    </div>
+                        textAlign: "center",
+                        alignSelf: "center",
+                        padding: "12px",
+                        width: `${size1}%`
+                    }}
+                    onClick={e=>{setPeek(true)}}><Icon icon={menu} /></div>
+                    <Breadcrumb size={size2} location={`${match.params.type}`} destination={`${match.params.type} ${match.params.id}`} />
+                </NavigationBox>
+                <FlexBox row style={{
+                    flex: 1
+                }}>
+                    <DetailBar
+                        input={input}
+                        testcase={problem.testcase}
+                        detail={problem.description}
+                        onChange={value => setInput(value)}
+                    />
+                    <FlexBox col style={
+                        {
+                            flexGrow: 4
+                        }
+                    }>
+                        <div style={{ height: '5%', flexShrink: 0 }}>
+                            <ManipulationTab
+                                handleSubmitFile={handleSubmitFile}
+                                onChangeTheme={onChangeTheme}
+                                handleExportFile={handleExportFile}
+                                handleImportFile={handleImportFile}
+                                handleRun={handleRun}
+                            />
+                        </div>
+                        <Editor theme={theme} onChange={value => setCode(value)} value={code} />
+                        <div style={{
+                            height: `${activeTerminal ? '50%' : 'auto'}`
+                        }}>
+                            <Terminal output={output} active={activeTerminal} toggleTerminal={() => setActiveTerminal(!activeTerminal)} />
+                        </div>
+                    </FlexBox>
                 </FlexBox>
-            </FlexBox>
-        </Container>
+            </Container>
+        </div>
     ) : 'Loding'
 }
 

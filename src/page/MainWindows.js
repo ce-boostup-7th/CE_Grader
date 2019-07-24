@@ -43,7 +43,8 @@ const MainWindows = props => {
 				<Route path="/dashboard" component={() => isLogin ? <DashboardPage /> : <Redirect to="/login" />} />
 				<Route path="/leaderboard" component={() => isLogin ? <LeaderBoardPage /> : <Redirect to="/login" />} />
 				<Route path="/problem" component={() => isLogin ? <ProblemPage /> : <Redirect to="/login" />} />
-				<Route path="/workbench/:type/:id" component={() => isLogin ? <WorkingPage /> : <Redirect to="/login" />} />
+				<Route exact path="/workbench/:type/:id" component={() => isLogin ? <WorkingPage /> : <Redirect to="/login" />} />
+				<Route path="/workbench/:type/:id/latest" component={() => isLogin ? <WorkingPage latest /> : <Redirect to="/login" />} />
 				<Route component={NoRoute} />
 			</Switch>
 		</div>

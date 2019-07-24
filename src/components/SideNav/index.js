@@ -25,7 +25,7 @@ const Circle = styled.span`
 const SideNave = (props) => {
 	let { state, dispatch } = useContext(StateContext)
 	const handleLogout = e => {
-		fetch('http://161.246.34.96/api/logout', {
+		fetch('http://ce.19991999.xyz/api/logout', {
 			method: 'POST'
 		})
 			.then(res => res.status)

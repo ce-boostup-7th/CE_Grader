@@ -105,50 +105,46 @@ const Data = styled.div`
 	background-color:white;
 `
 const StyledTooltip = styled(Tooltip)`
+position:absolute;
 background:white;
 ;
 `
 
-export default ({ data, sortDifficulty, sortTopic, handleClick, submission }) => {
-	const renderPass = (id) => {
-		let temp = submission.filter((value) => {
-			return value.problem_id === id
-		})
-		if (temp.length > 0) {
-			const max = temp.reduce((prev, current) => (prev.score > current.score) ? prev : current)
-			return ((max.score * 100) / max.max_score).toFixed(2)
-		} else return -1
-	}
-	const renderStatus = id => {
-		if (renderPass(id) > 99) {
-			return <div style={{color:'green'}}>&#x2714;</div>
+export default ({ data, sortDifficulty, sortTopic, sortPass, handleClick }) => {
+	const renderStatus = value => {
+		if (value > 99) {
+			return <div style={{ color: 'green' }}>&#x2714;</div>
 		}
-		else if (renderPass(id) === -1) {
-			return <div style={{color:'black'}}>&#x3f;</div>
+		else if (value === -1) {
+			return <div style={{ color: 'black' }}>&#x3f;</div>
 		} else {
-			return <div style={{color:'red'}}>&#x2715;</div>
+			return <div style={{ color: 'red' }}>&#x2715;</div>
 		}
 	}
 	return (
 		<Container>
 			<Box>
-				<Item width={12.5}>Status</Item>
+				<Item width={12.5} sorting onClick={e => sortPass()}>
+					<StyledTooltip delay={300} text="Sort by Status ⌛">Status</StyledTooltip>
+				</Item>
 				<Item width={12.5}>Order</Item>
 				<Item width={37.5}>Name</Item>
 				<Item width={12.5} sorting onClick={e => sortDifficulty()}>
-					<StyledTooltip delay={300} text="Click to sort by level ⌛">Level</StyledTooltip>
+					<StyledTooltip delay={300} text="Sort by level ⌛">Level</StyledTooltip>
 				</Item>
 				<Item width={12.5} sorting onClick={e => sortTopic()} >
-					<StyledTooltip delay={300} text="Click to sort by Topic ⌛">Topic</StyledTooltip>
+					<StyledTooltip delay={300} text="Sort by Topic ⌛">Topic</StyledTooltip>
 				</Item>
-				<Item width={12.5}>Pass</Item>
+				<Item width={12.5} sorting onClick={e => sortPass()}>
+					<StyledTooltip delay={300} text="Sort by  %Pass ⌛">Pass</StyledTooltip>
+				</Item>
 			</Box>
 			<Data>
 				{data.map((value, index) => {
 					return (
 						<DataBox key={index} onClick={e => handleClick(value.id)}>
 							<DataItem align="center" width={12.5}>
-								{renderStatus(value.id)}
+								{renderStatus(value.percent)}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
 								{index + 1}
@@ -156,14 +152,14 @@ export default ({ data, sortDifficulty, sortTopic, handleClick, submission }) =>
 							<DataItem align="left" width={37.5}>
 								{value.title}
 							</DataItem>
-							<DataItem style={{color:'#ffb43b',fontSize:24}} align="left" width={12.5}>
+							<DataItem style={{ color: '#ffb43b', fontSize: 24 }} align="left" width={12.5}>
 								{renderStar(value.difficulty, '★')}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
 								{renderCategory(value.category_id)}
 							</DataItem>
 							<DataItem align="center" width={12.5}>
-								{`${renderPass(value.id) !== -1 ? `${renderPass(value.id)}%` : 'ยังไม่ทันแตะเลยจ้า'}`}
+								{`${value.percent !== -1 ? `${value.percent}%` : 'ยังไม่ทันแตะเลยจ้า'}`}
 							</DataItem>
 						</DataBox>
 					)

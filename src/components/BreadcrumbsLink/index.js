@@ -51,16 +51,16 @@ export default ({ size, location, destination }) => {
 				<LeftIcon icon={up_arrow} />
 				<StyledLi>
 					<Icon icon={folder_open} />
-					<Link  to="/problem" >{location}</Link>
+					<Link  to={`/dashboard`} >{location}</Link>
 				</StyledLi>
 				<StyledLi>
 					<Icon icon={file_set} />
-					<Link >{location}.exe</Link>
+					<Link to={`/${location}`} >{location}.exe</Link>
 				</StyledLi>
 				<StyledLi>
-					<Link >{destination}</Link>
+					<Link onClick={e=>e.preventDefault()} to={'#'} >{destination}</Link>
 				</StyledLi>
-				<Link  to="/problem" ><RightIcon icon={logout} /></Link>
+				<Link  to={`/${location}`} ><RightIcon icon={logout} /></Link>
 			</StyledUl>
 		</Container>
 	)
