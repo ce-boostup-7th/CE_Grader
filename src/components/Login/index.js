@@ -34,7 +34,7 @@ const Login = props => {
 	const [form, setForm] = React.useState({ username: '', password: '' })
 	const handleLoggin = () => {
 		if (form.username.length >= 4 && form.password.length >= 4) {
-			fetch('http://161.246.34.96/api/login', {
+			fetch('http://ce.19991999.xyz/api/login', {
 							method: 'POST',
 							credentials: "include",
 							headers: {
@@ -49,7 +49,7 @@ const Login = props => {
 				.then(status => {
 					if (status === 404) {
 						if (confirm('user not found,create new user?')) {
-							fetch('http://161.246.34.96/api/users', {
+							fetch('http://ce.19991999.xyz/api/users', {
 								method: 'POST',
 								headers: {
 									'content-type': 'application/x-www-form-urlencoded'
@@ -67,7 +67,9 @@ const Login = props => {
 						}
 					} else if (status === 200) {
 						Promise.all([
-							fetch('http://161.246.34.96/api/problems')
+							fetch('http://ce.19991999.xyz/api/users/problems',{
+								credentials:'include'
+							})
 								.then(res => res.json())
 								.then(data => {
 									dispatch({
@@ -75,7 +77,7 @@ const Login = props => {
 										payload: data
 									})
 								}),
-							fetch('http://161.246.34.96/api/users/submissions', {
+							fetch('http://ce.19991999.xyz/api/users/submissions', {
 								credentials: 'include'
 							})
 								.then(res => res.json())
@@ -85,7 +87,7 @@ const Login = props => {
 										payload: data
 									})
 								}),
-							fetch('http://161.246.34.96/api/users/stats', {
+							fetch('http://ce.19991999.xyz/api/users/stats', {
 								credentials: 'include'
 							})
 								.then(res => res.json())
@@ -95,7 +97,7 @@ const Login = props => {
 										payload: data
 									})
 								}),
-							fetch('http://161.246.34.96/api/users', {
+							fetch('http://ce.19991999.xyz/api/users', {
 								credentials: 'include'
 							})
 								.then(res => res.json())

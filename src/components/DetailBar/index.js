@@ -20,7 +20,8 @@ const Description = ({detail}) => {
             <Div>
                 <TextArea style={{
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    fontSize:15
                 }} readOnly value={detail}>
                 </TextArea>
             </Div>
@@ -48,7 +49,8 @@ ${v.output}
         }}>
             <TextArea style={{
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    fontSize:15
                 }} readOnly value={renderTestcase()}>
                 </TextArea>
         </TabBody>
@@ -62,7 +64,8 @@ const InputList = ({input,onChange}) => {
             <Div>
                 <TextArea style={{
                     width: '100%',
-                    height: '100%'
+                    height: '100%',
+                    fontSize:15
                 }} value={input}
                  onChange={e=>onChange(e.target.value)}
                 >

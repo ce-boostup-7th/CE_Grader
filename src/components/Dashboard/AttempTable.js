@@ -66,12 +66,12 @@ const pop = [
 
 const AttempTable = ({ data = pop, history }) => {
     const renderStatus = (value='') =>{
-       return value.split('').map(v=>{
+       return value.split('').map((v,i)=>{
             switch(v){
                 case 'P':
-                    return <p style={{color:'green'}}>{v}</p>
+                    return <p key={i} style={{color:'green'}}>{v}</p>
                 default :
-                    return <p style={{color:'red'}}>{v}</p>
+                    return <p key={i} style={{color:'red'}}>{v}</p>
             }
         })
     }
@@ -98,13 +98,13 @@ const AttempTable = ({ data = pop, history }) => {
                 height: '2px'
             }}></div>
             <Fade cascade top>
-                <FlexBox style={{ marginTop: '1%' }} col role="body">
+                <FlexBox style={{ marginTop: '1%',paddingTop:'5px' }} col role="body">
                     {
                         data.map((value, index) => {
                             return (
                                 <FlexBox height="55px" color="white" key={index} row>
                                     <FlexBox width="60%" fontSize="12" >
-                                        <ClickableText onClick={e => { history.push(`/workbench/problem/${value.problem_id}`) }}>{value.title}</ClickableText>
+                                        <ClickableText onClick={e => { history.push(`/workbench/problem/${value.problem_id}/latest`) }}>{value.title}</ClickableText>
                                     </FlexBox>
                                     <FlexBox style={{ justifyContent: 'center' }} width="30%" color="white" fontSize="12">
                                         {new Date(value.last_do).toLocaleString()}

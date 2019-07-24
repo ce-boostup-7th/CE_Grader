@@ -41,6 +41,16 @@ let processingData = (state, mode) => {
 			a.category_id > b.category_id ? -1 : b.category_id > a.category_id ? 1 : 0
 		)
 	}
+	if (mode === 3) {
+		return temp.sort((a, b) =>
+			a.percent > b.percent ? 1 : b.percent > a.percent ? -1 : 0
+		)
+	}
+	if (mode === -3) {
+		return temp.sort((a, b) =>
+			a.percent > b.percent ? -1 : b.percent > a.percent ? 1 : 0
+		)
+	}
 }
 
 const ProblemPage = (props) => {
@@ -53,7 +63,6 @@ const ProblemPage = (props) => {
 		<Container>
 			<Div>
 				<DataTable
-					submission={state.submissions}
 					data={processingData(state.problems, mode)}
 					sortDifficulty={() => {
 						if (mode === 0) {
@@ -62,7 +71,7 @@ const ProblemPage = (props) => {
 							setMode(-1)
 						} else if (mode === -1) {
 							setMode(1)
-						}else {
+						} else {
 							setMode(0)
 						}
 					}}
@@ -75,6 +84,18 @@ const ProblemPage = (props) => {
 							setMode(2)
 						}
 					}
+					}
+					sortPass={
+						() => {
+							if (mode === 3) {
+								setMode(-3)
+							} else if (mode === -3) {
+								setMode(3)
+							} else {
+								setMode(3)
+							}
+
+						}
 					}
 					handleClick={handleClick}
 				/>

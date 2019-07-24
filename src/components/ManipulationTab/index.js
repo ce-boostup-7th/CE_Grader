@@ -95,7 +95,7 @@ export default ({handleRun=handleRunTest,onChangeTheme,handleExportFile=handleEx
             <Box width={30} />
             <ThemeProvider theme={themes.default}>
                 <Group>
-                    <Select  items={items} onChange={value=>ChangeTheme(value)}  width={150} />
+                    <Select style={{}} items={items} onChange={value=>ChangeTheme(value)}  width={150} />
                     <Box><Button onClick={() => handleClick()}><input onChange={e=>handleImportFile(e.target.files[0])} ref={ref} type="file" accept=".cpp" style={{ display: 'none' }} />Import</Button></Box>
                     <Box><Button onClick={() => handleSubmitFile()}>Submit</Button></Box>
                     <Box><Button onClick={() => handleExportFile()}>Export</Button></Box>
