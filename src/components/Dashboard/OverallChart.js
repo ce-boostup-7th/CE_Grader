@@ -76,7 +76,7 @@ const mapData = (target) => {
     })
     return out
 }
-const OverrallChart = ({ data=pop }) => {
+const OverallChart = ({ data=pop }) => {
     let [activeIndex, setActiveIndex] = React.useState(0)
     const onPieEnter = (data, index) => {
         setActiveIndex(index)
@@ -100,4 +100,4 @@ const OverrallChart = ({ data=pop }) => {
     )
 }
 
-export default OverrallChart
+export default OverallChart

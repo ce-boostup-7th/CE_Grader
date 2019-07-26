@@ -5,11 +5,11 @@ import reducer from './reducer'
 export const initialState = {
 	problems: [
 		{
-			id: '',
+			id: 0,
 			title: '',
 			difficulty: 1,
 			category_id: 1,
-			description: ''
+			percent:1
 		}
 	],
 	statistics: {

@@ -29,10 +29,12 @@ const Description = ({detail}) => {
     )
 }
 
+
 const TestCase = ({testcase}) => {
     const renderTestcase=()=>{
        let out = testcase.map((v)=>{
         return `
+##############################################
 input : 
 ${v.input}
 

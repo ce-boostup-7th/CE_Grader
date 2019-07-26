@@ -10,7 +10,7 @@ import 'brace/theme/github'
 import 'brace/theme/xcode'
 import 'brace/theme/dracula'
 
-export default ({ onChange,theme = 'monokai', value = `#include<iostream>
+export default ({ setActiveTerminal, fontSize, onChange, theme = 'monokai', value = `#include<iostream>
 
 int main(){
     std::cout<<"Hello CE"<<std::endl;
@@ -24,11 +24,11 @@ int main(){
 			theme={theme}
 			name="CE BoostUp"
 			value={value}
-			fontSize={14}
+			fontSize={fontSize}
 			showPrintMargin={true}
 			showGutter={true}
 			highlightActiveLine={true}
-			onChange={text=>onChange(text)}
+			onChange={text => onChange(text)}
 			setOptions={{
 				enableBasicAutocompletion: true,
 				enableLiveAutocompletion: true,
@@ -41,6 +41,8 @@ int main(){
 			}}
 			width={'100%'}
 			height={'100%'}
+			onFocus={() => setActiveTerminal()}
+			
 		/>
 	)
 }

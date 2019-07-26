@@ -1,9 +1,8 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { Button, themes,Select } from 'react95'
+import { Button, themes, Select } from 'react95'
 
 import cpp from '../../resource/icons/cpp.png'
-import play from '../../resource/icons/play.png'
 
 const Container = styled.div`
 display:flex;
@@ -18,8 +17,8 @@ height:inherit;
 line-height:30px;
 `
 const NameBox = styled(Box)`
-background:${({color})=>color};
-color:${({textcolor})=>textcolor};
+background:${({ color }) => color};
+color:${({ textcolor }) => textcolor};
 border-top-right-radius:5px;
 border-top-left-radius:5px;
 display:inherit;
@@ -35,31 +34,31 @@ const Group = styled.div`
 display:inherit;
 margin-left:auto;
 `
-const handleImport= (value)=>{
+const handleImport = (value) => {
     console.log('import')
 }
-const handleSubmit=(value) =>{
+const handleSubmit = (value) => {
     console.log('submit')
 }
 
-const handleExport=(value)=>{
+const handleExport = (value) => {
     console.log('export')
 }
-const handleRunTest=(value)=>{
+const handleRunTest = (value) => {
     console.log('run')
 }
 
-export default ({handleRun=handleRunTest,onChangeTheme,handleExportFile=handleExport,handleSubmitFile=handleSubmit,handleImportFile=handleImport}) => {
+export default ({ inProgress,handleRun = handleRunTest, ChangeFontSize, onChangeTheme, handleExportFile = handleExport, handleSubmitFile = handleSubmit, handleImportFile = handleImport }) => {
     const ref = React.createRef()
-    const [localtheme,setLocalTheme] = React.useState('monokai')
+    const [localtheme, setLocalTheme] = React.useState('monokai')
     const handleClick = () => {
         ref.current.click()
     }
-    const ChangeTheme =(value)=>{
+    const ChangeTheme = (value) => {
         setLocalTheme(value)
         onChangeTheme(value)
     }
-    const renderTheme=()=>{
+    const renderTheme = () => {
         switch (localtheme) {
             case 'monokai':
                 return '#272822'
@@ -69,37 +68,64 @@ export default ({handleRun=handleRunTest,onChangeTheme,handleExportFile=handleEx
                 return 'white'
         }
     }
-    const renderText=()=>{
-        if(localtheme==='monokai'||localtheme==='dracula'){
+    const renderText = () => {
+        if (localtheme === 'monokai' || localtheme === 'dracula') {
             return 'white'
-        }else{
+        } else {
             return 'black'
         }
     }
-    const items=[{
-        value:'monokai',label:'monokai',
+    const items = [{
+        value: 'monokai', label: 'monokai',
     },
     {
-        value:'github',label:'github'
+        value: 'github', label: 'github'
     },
     {
-        value:'xcode',label:'xcode'
+        value: 'xcode', label: 'xcode'
     },
     {
-        value:'dracula',label:'dracula'
+        value: 'dracula', label: 'dracula'
     }
-]
+    ]
+    const fontSize = [
+        {
+            value: 14,
+            label: '14'
+        },
+        {
+            value: 16,
+            label: '16'
+        },
+        {
+            value: 18,
+            label: '18'
+        },
+        {
+            value: 20,
+            label: '20'
+        },
+        {
+            value: 22,
+            label: '22'
+        },
+        {
+            value: 24,
+            label: '24'
+        },
+    ]
     return (
         <Container>
             <NameBox textcolor={renderText()} color={renderTheme()} width={20}><Icon icon={cpp} />{'  '}main.cpp</NameBox>
             <Box width={30} />
             <ThemeProvider theme={themes.default}>
                 <Group>
-                    <Select style={{}} items={items} onChange={value=>ChangeTheme(value)}  width={150} />
-                    <Box><Button onClick={() => handleClick()}><input onChange={e=>handleImportFile(e.target.files[0])} ref={ref} type="file" accept=".cpp" style={{ display: 'none' }} />Import</Button></Box>
-                    <Box><Button onClick={() => handleSubmitFile()}>Submit</Button></Box>
+                    <Select style={{}} items={items} onChange={value => ChangeTheme(value)} width={150} />
+                    <Select style={{}} items={fontSize} onChange={value => ChangeFontSize(value)} width={100} />
+                    <Box><Button onClick={() => handleClick()}><input onChange={e => handleImportFile(e.target.files[0])} ref={ref} type="file" accept=".cpp" style={{ display: 'none' }} />Import</Button></Box>
+                    <Box><Button disabled={inProgress} onClick={() => handleSubmitFile()}>Submit</Button></Box>
                     <Box><Button onClick={() => handleExportFile()}>Export</Button></Box>
-                    <Box><Button onClick={()=>handleRun()}><Icon icon={play} /></Button></Box>
+                    <Box><Button disabled={inProgress} onClick={() => handleRun()}><div style={{fontSize:60,lineHeight:'20px'}}>&#8227;</div></Button></Box>
                 </Group>
             </ThemeProvider>
         </Container >

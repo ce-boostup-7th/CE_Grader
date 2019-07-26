@@ -78,16 +78,16 @@ const AttempTable = ({ data = pop, history }) => {
     return (
         <Container>
             <FlexBox color="white" fontSize="16" role="Purpose">
-                Latest Attemp
+                Latest Attempt
             </FlexBox>
             <FlexBox row role="Header" >
-                <FlexBox height="50px" style={{ lineHeight: '50px' }} width="60%" color="white" fontSize="14" >
+                <FlexBox height="50px" style={{ lineHeight: '50px' }} width="40%" color="white" fontSize="14" >
                     List
                 </FlexBox>
                 <FlexBox height="50px" style={{ justifyContent: 'center', lineHeight: '50px' }} width="30%" color="white" fontSize="14">
                     Last worked
                 </FlexBox>
-                <FlexBox height="50px" style={{ justifyContent: 'center', lineHeight: '50px' }} width="10%" color="white" fontSize="14">
+                <FlexBox height="50px" style={{ justifyContent: 'center', lineHeight: '50px' }} width="30%" color="white" fontSize="14">
                     Pass
                 </FlexBox>
             </FlexBox>
@@ -103,13 +103,13 @@ const AttempTable = ({ data = pop, history }) => {
                         data.map((value, index) => {
                             return (
                                 <FlexBox height="55px" color="white" key={index} row>
-                                    <FlexBox width="60%" fontSize="12" >
+                                    <FlexBox width="40%" fontSize="12" >
                                         <ClickableText onClick={e => { history.push(`/workbench/problem/${value.problem_id}/latest`) }}>{value.title}</ClickableText>
                                     </FlexBox>
                                     <FlexBox style={{ justifyContent: 'center' }} width="30%" color="white" fontSize="12">
                                         {new Date(value.last_do).toLocaleString()}
                                     </FlexBox>
-                                    <FlexBox style={{ justifyContent: 'center' }} width="10%" color="red" fontSize="12">
+                                    <FlexBox style={{ justifyContent: 'center' }} width="30%" color="red" fontSize="12">
                                         {renderStatus(value.results)}
                                     </FlexBox>
                                 </FlexBox>

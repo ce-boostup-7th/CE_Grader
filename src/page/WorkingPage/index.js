@@ -11,7 +11,7 @@ import Terminal from '../../components/Terminal'
 import menu from '../../resource/icons/menu.png'
 import ManipulationTab from '../../components/ManipulationTab';
 import { StateContext } from '../../StateProvider/StateProvider';
-import { FETCH_SUBMISSION, FETCH_PROBLEM, FETCH_STATISTIC } from '../../StateProvider/actions_constant';
+import { FETCH_SUBMISSION, FETCH_PROBLEM, FETCH_STATISTIC, FETCH_USERS } from '../../StateProvider/actions_constant';
 import SideList from '../../components/SideList';
 
 const Container = styled.div`
@@ -37,7 +37,6 @@ const Icon = styled.div`
         cursor: pointer;
     }
 `
-
 const Working = ({ size1 = 4, size2 = 96, match, latest }) => {
     let { state, dispatch } = React.useContext(StateContext)
     let [activeTerminal, setActiveTerminal] = React.useState(false)
@@ -46,6 +45,8 @@ const Working = ({ size1 = 4, size2 = 96, match, latest }) => {
     let [input, setInput] = React.useState(``)
     let [output, setOutput] = React.useState(``)
     let [peek, setPeek] = React.useState(false)
+    let [fontsize, setFontSize] = React.useState(14)
+    let [inProgress,setProgress] = React.useState(false)
     let [code, setCode] = React.useState(
         `#include<stdio.h>
 
@@ -71,7 +72,8 @@ int main(){
         document.body.removeChild(link)
     }
     const handleSubmitFile = () => {
-        fetch('http://ce.19991999.xyz/api/submissions',
+        setProgress(true)
+        fetch('//ce.19991999.xyz/api/submissions',
             {
                 method: 'POST',
                 credentials: "include",
@@ -94,7 +96,9 @@ int main(){
 Compile success.
 .............................................
 
-Result: ${data.results.includes('X') ? 'Error Caught' : data.results}
+${data.compile_output}
+
+Result: ${data.results}
 
 submit at: ${new Date(data.submitted_at).toLocaleString()}
 `                )
@@ -102,44 +106,59 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
                 }
             })
             .then(() => {
-                fetch('http://ce.19991999.xyz/api/users/submissions', {
-                    credentials: 'include'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        (() => {
+                setProgress(false)
+                Promise.all([
+                    fetch('//ce.19991999.xyz/api/users/submissions', {
+                        credentials: 'include'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            (() => {
+                                dispatch({
+                                    type: FETCH_SUBMISSION,
+                                    payload: data
+                                })
+                            })()
+                        }),
+                    fetch('//ce.19991999.xyz/api/users/problems', {
+                        credentials: 'include'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            (() => {
+                                dispatch({
+                                    type: FETCH_PROBLEM,
+                                    payload: data
+                                })
+                            })()
+                        }),
+                    fetch('//ce.19991999.xyz/api/users/stats', {
+                        credentials: 'include'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            (() => dispatch({
+                                type: FETCH_STATISTIC,
+                                payload: data
+                            }))()
+                        }),
+                    fetch('//ce.19991999.xyz/api/users', {
+                        credentials: 'include'
+                    })
+                        .then(res => res.json())
+                        .then(data => {
                             dispatch({
-                                type: FETCH_SUBMISSION,
+                                type: FETCH_USERS,
                                 payload: data
                             })
-                        })()
-                    })
-                fetch('http://ce.19991999.xyz/api/users/problems',{
-                    credentials:'include'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        (() => {
-                            dispatch({
-                                type: FETCH_PROBLEM,
-                                payload: data
-                            })
-                        })()
-                    })
-                fetch('http://ce.19991999.xyz/api/users/stats', {
-                    credentials: 'include'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        (() => dispatch({
-                            type: FETCH_STATISTIC,
-                            payload: data
-                        }))()
-                    })
+                        }
+                        )
+                ])
             })
     }
     const handleRun = () => {
-        fetch('http://ce.19991999.xyz/judge/submissions?wait=true&base64_encoded=true', {
+        setProgress(true)
+        fetch('//ce.19991999.xyz/judge/submissions?wait=true&base64_encoded=true', {
             method: 'POST',
             headers: {
                 'content-type': 'application/x-www-form-urlencoded'
@@ -151,10 +170,11 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
             })
         }).then(res => res)
             .then(res => {
+                setProgress(false)
                 if (res.status === 201) {
                     res.json().then((data) => {
                         let rawdata = data;
-                        setActiveTerminal(true)
+                        setActiveTerminal(true)        
                         setOutput(
                             `
 Process success.
@@ -181,12 +201,22 @@ exists status ${rawdata.status.id} (${rawdata.status.description})
     const onChangeTheme = (newTheme) => {
         setTheme(newTheme)
     }
+    const onChangeFontSize = (newSize) => {
+        setFontSize(newSize)
+    }
+    function findId(value) {
+        for (let index = 0; index < value.length; index++) {
+            if (parseInt(match.params.id) === value[index].id) {
+                return value[index]
+            }
+        }
+    }
     React.useEffect(() => {
-        fetch(`http://ce.19991999.xyz/api/problems/${match.params.id}`)
+        fetch(`//ce.19991999.xyz/api/problems/${match.params.id}`)
             .then(res => res.json())
             .then(data => { setProblem(data) })
         if (latest) {
-            fetch(`http://ce.19991999.xyz/api/problems/${match.params.id}/submissions/last`, {
+            fetch(`//ce.19991999.xyz/api/problems/${match.params.id}/submissions/last`, {
                 method: 'get',
                 credentials: 'include'
             })
@@ -194,11 +224,22 @@ exists status ${rawdata.status.id} (${rawdata.status.description})
                 .then(data => {
                     setCode(data.src)
                 })
+        } else if (findId(state.problems).percent !== -1) {
+            if (confirm("Do you want to load latest edit?")) {
+                fetch(`//ce.19991999.xyz/api/problems/${match.params.id}/submissions/last`, {
+                    method: 'get',
+                    credentials: 'include'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        setCode(data.src)
+                    })
+            }
         }
     }, [])
     return problem ? (
         <div style={{ display: 'flex', width: '100%' }} onClick={peek ? () => { setPeek(false) } : undefined}>
-            {peek ? <SideList  peek={peek} />:''}
+            {peek ? <SideList peek={peek} /> : ''}
             <Container>
                 <NavigationBox row>
                     <div style={{
@@ -207,8 +248,8 @@ exists status ${rawdata.status.id} (${rawdata.status.description})
                         padding: "12px",
                         width: `${size1}%`
                     }}
-                    onClick={e=>{setPeek(true)}}><Icon icon={menu} /></div>
-                    <Breadcrumb size={size2} location={`${match.params.type}`} destination={`${match.params.type} ${match.params.id}`} />
+                        onClick={e => { setPeek(true) }}><Icon icon={menu} /></div>
+                    <Breadcrumb size={size2} location={`${match.params.type}`} destination={`${match.params.type}:${match.params.id} ${problem.title}`} />
                 </NavigationBox>
                 <FlexBox row style={{
                     flex: 1
@@ -226,14 +267,16 @@ exists status ${rawdata.status.id} (${rawdata.status.description})
                     }>
                         <div style={{ height: '5%', flexShrink: 0 }}>
                             <ManipulationTab
+                                inProgress={inProgress}
                                 handleSubmitFile={handleSubmitFile}
                                 onChangeTheme={onChangeTheme}
                                 handleExportFile={handleExportFile}
                                 handleImportFile={handleImportFile}
                                 handleRun={handleRun}
+                                ChangeFontSize={onChangeFontSize}
                             />
                         </div>
-                        <Editor theme={theme} onChange={value => setCode(value)} value={code} />
+                        <Editor setActiveTerminal={() => setActiveTerminal(false)} fontSize={fontsize} theme={theme} onChange={value => setCode(value)} value={code} />
                         <div style={{
                             height: `${activeTerminal ? '50%' : 'auto'}`
                         }}>

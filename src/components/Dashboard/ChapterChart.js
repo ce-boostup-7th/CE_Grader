@@ -8,6 +8,23 @@ const pop = [
     { name: 'Funtion', complete: 40}
 ];
 
+const CustomTooltip = ({ active, payload, label })=>{
+    if (active) {
+        return (
+          <div style={{
+              background:'rgba(255,255,255,1)',
+              color:'black',
+              padding:'5px'
+          }} >
+            <p style={{fontSize:16}}>{`${label}`}</p>
+            <p style={{fontSize:14}} >{`Complete: ${ payload[0].value } %`}</p>
+          </div>
+        );
+      }
+    
+      return null;
+}
+
 const ChapterChart = ({ data=pop }) => {
     const mapData = ()=>{
         return data.map((value)=>{
@@ -42,7 +59,7 @@ const ChapterChart = ({ data=pop }) => {
                     </linearGradient>
                 </defs>
                 <Bar barSize={40} fill="url(#colorUv)" dataKey="complete" />
-                <Tooltip cursor={false} />
+                <Tooltip cursor={false} content={<CustomTooltip/>} />
                 <XAxis height={50} dataKey="name">
                     <Label style={{ fill: 'rgba(255, 255, 255, 0.50)' }} value="Chapter" position="insideBottom" />
                 </XAxis>

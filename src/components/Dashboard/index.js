@@ -49,7 +49,7 @@ export default ({ data }) => {
 							justifyContent: 'space-between',
 						}}
 					>
-						<span>Virtual Machine:Running Mordern UI System</span>
+						<span>Virtual Machine : Running Modern UI System</span>
 						<Button style={{ marginRight: '-6px', marginTop: '1px' }} size={'sm'} square>
 							<span style={{ fontWeight: 'bold', transform: 'translateY(-1px)' }}>x</span>
 						</Button>
@@ -71,7 +71,7 @@ export default ({ data }) => {
 								marginLeft: 'auto'
 							}}>
 								<div style={{ paddingLeft: '20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>
-									Overral Progress
+									Overall Progress
 								</div>
 								<OverrallChart data={data.overall} />
 								<div style={{ paddingLeft: '20px', fontSize: 14, marginBottom: '20px', color: 'white' }}>

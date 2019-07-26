@@ -4,9 +4,8 @@ import { themes, WindowContent, Window, reset, Divider, Button } from 'react95'
 import Icon from '@react95/core/Icon'
 import { withRouter } from 'react-router-dom'
 
-import testImg from '../../resource/img/IMG_6413.jpg'
+import display from '../../resource/img/display.jpg'
 import { StateContext } from '../../StateProvider/StateProvider'
-import { LOGOUT } from '../../StateProvider/actions_constant'
 import TreeFiles from '../TreeFiles'
 
 const ResetStyles = createGlobalStyle`
@@ -25,7 +24,7 @@ const Circle = styled.span`
 const SideNave = (props) => {
 	let { state, dispatch } = useContext(StateContext)
 	const handleLogout = e => {
-		fetch('http://ce.19991999.xyz/api/logout', {
+		fetch('//ce.19991999.xyz/api/logout', {
 			method: 'POST'
 		})
 			.then(res => res.status)
@@ -69,10 +68,11 @@ const SideNave = (props) => {
 							display: 'flex',
 							justifyContent: 'center',
 							alignContent: 'center',
-							alignItems: 'center'
+							alignItems: 'center',
+
 						}}>
-						<div style={{ marginLeft: '45%', fontWeight: 'bold' }}>{state.statistics.name} </div>
-						<Button style={{ marginLeft: '25%' }} onClick={handleLogout} square>
+						<div style={{ fontWeight: 'bold' }}>{state.statistics.name} </div>
+						<Button style={{ position:'absolute',right:'10px' }} onClick={handleLogout} square>
 							<Icon name={'reader_eject'} />
 						</Button>
 					</WindowContent>
@@ -94,8 +94,8 @@ const SideNave = (props) => {
 								boxShadow: '1.5px 1.5px 0px 0px #000000'
 							}}>
 							<img
-								src={testImg}
-								alt="test img "
+								src={display}
+								alt="พี่หล่อจัด "
 								style={{
 									display: 'inline',
 									margin: '0 auto',
