@@ -21,6 +21,7 @@ import {CLOSE_WIN} from '../../StateProvider/actions_constant'
 import First from '../../resource/icons/first.png'
 import Second from '../../resource/icons/second.png'
 import Third from '../../resource/icons/third.png'
+import Trophy from '../../resource/icons/trophy.png'
 // Start  Code Here
 export default ({data=[{
 	username:'asd',
@@ -44,7 +45,7 @@ export default ({data=[{
 				<Window style={{display: 'inline', width: '72vw', height: '98vh'}}>
 					<WindowHeader
 						style={{display: 'flex', justifyContent: 'space-between'}}>
-						<span>Header .exe</span>
+						<span>Leaderboard.exe</span>
 						<Button
 							style={{
 								marginRight: '-6px',
@@ -67,7 +68,7 @@ export default ({data=[{
 							onChange={value => {
 								settabs(value)
 							}}>
-							<Tab value={1}>Today Ranking 🏆</Tab>
+							<Tab value={1}>Today Ranking <img width={18} height={18} src={Trophy}/></Tab>
 						</Tabs>
 						<div style={{height: '85vh'}}>
 							<TabBody>
@@ -127,7 +128,7 @@ export default ({data=[{
 																textAlign: 'center',
 																width: '18vw'
 															}}>
-															{user.score}
+															{user.score.toFixed(0)}
 														</TableDataCell>
 													</TableRow>
 												)

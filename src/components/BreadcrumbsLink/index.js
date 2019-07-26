@@ -51,7 +51,7 @@ export default ({ size, location, destination }) => {
 				<LeftIcon icon={up_arrow} />
 				<StyledLi>
 					<Icon icon={folder_open} />
-					<Link  to={`/dashboard`} >{location}</Link>
+					<Link  to={`/dashboard`} >CE BoostUp #7</Link>
 				</StyledLi>
 				<StyledLi>
 					<Icon icon={file_set} />

@@ -10,6 +10,22 @@ const pop = [
     { name: 'Day 6', submission_count: 0, },
     { name: 'Day 7', submission_count: 0 },
 ];
+const CustomTooltip = ({ active, payload, label })=>{
+    if (active) {
+        return (
+          <div style={{
+              background:'rgba(255,255,255,1)',
+              color:'black',
+              padding:'5px'
+          }} >
+            <p style={{fontSize:16}}>{`${label}`}</p>
+            <p style={{fontSize:14}} >{`Submit code : ${ payload[0].value } times `}</p>
+          </div>
+        );
+      }
+    
+      return null;
+}
 const ActivnessChart = ({ data }) => {
     const mapData = () => {
         return data.map((value, index) => {
@@ -24,7 +40,7 @@ const ActivnessChart = ({ data }) => {
         <div style={{ width: '80%', height: '100%' }}>
             <ResponsiveContainer>
                 <LineChart data={mapData(state)}>
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip/>} />
                     <defs>
                         <linearGradient id="activechart" x1="0%" y1="0%" x2="100%" y2="0%">
                             <stop offset="0%" stopColor="#1D976C" />

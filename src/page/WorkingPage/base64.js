@@ -4,7 +4,7 @@
 |*|
 |*|  Base64 / binary data / UTF-8 strings utilities (#2)
 |*|
-|*|  https://developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
+|*|  //developer.mozilla.org/en-US/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
 |*|
 |*|  Author: madmurphy
 |*|

@@ -6,7 +6,7 @@
 	"author": "DrZin-dev <pasawee.dev@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"startWSL": "echo 'Server on WSL running at :'&& echo 'http://'$(hostname -I)'':1234 | tr -d ' ' && yarn start",
+		"startWSL": "echo 'Server on WSL running at :'&& echo 'https://'$(hostname -I)'':1234 | tr -d ' ' && yarn start",
 		"start": "parcel ./src/index.html",
 		"build": "parcel build ./src/index.html --no-source-maps",
 		"test": "CI=true jest -u",
@@ -43,6 +43,7 @@
 		"jest": "^24.8.0",
 		"jest-canvas-mock": "^2.1.0",
 		"js-base64": "^2.5.1",
+		"js-cookie": "^2.2.0",
 		"parcel-bundler": "^1.12.3",
 		"react95": "^2.0.0",
 		"styled-components": "^4.3.2"

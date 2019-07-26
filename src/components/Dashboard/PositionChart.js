@@ -15,7 +15,7 @@ const pop = [
 const PositionChart = ({ data = pop, reference=0 }) => {
     const mapData = () => {
         return data.map((value) => ({
-            name: `${value.start}-${value.stop} score`,
+            name: `${value.start.toFixed(0)} - ${value.stop.toFixed(0)} score`,
             amount: value.amount
         }))
     }
