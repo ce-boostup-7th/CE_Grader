@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { Button, themes, Select } from 'react95'
+import { Button as rButton, themes, Select } from 'react95'
 
 import cpp from '../../resource/icons/cpp.png'
 
@@ -28,6 +28,11 @@ const Icon = styled.div`
 	height: 32px;
 	width: 32px;
 	content: url(${props => props.icon});
+`
+const Button = styled(rButton)`
+:focus{
+    outline:none;
+}
 `
 
 const Group = styled.div`
@@ -125,7 +130,7 @@ export default ({ inProgress,handleRun = handleRunTest, ChangeFontSize, onChange
                     <Box><Button onClick={() => handleClick()}><input onChange={e => handleImportFile(e.target.files[0])} ref={ref} type="file" accept=".cpp" style={{ display: 'none' }} />Import</Button></Box>
                     <Box><Button disabled={inProgress} onClick={() => handleSubmitFile()}>Submit</Button></Box>
                     <Box><Button onClick={() => handleExportFile()}>Export</Button></Box>
-                    <Box><Button disabled={inProgress} onClick={() => handleRun()}><div style={{fontSize:60,lineHeight:'20px'}}>&#8227;</div></Button></Box>
+                    <Box><Button style={{width:'40px',overflow:'hidden'}} disabled={inProgress} onClick={() => handleRun()}><div style={{fontSize:60,position:'absolute'}}>&#8227;</div></Button></Box>
                 </Group>
             </ThemeProvider>
         </Container >

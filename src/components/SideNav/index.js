@@ -7,6 +7,8 @@ import { withRouter } from 'react-router-dom'
 import display from '../../resource/img/display.jpg'
 import { StateContext } from '../../StateProvider/StateProvider'
 import TreeFiles from '../TreeFiles'
+import './switch.css'
+import { OPEN_TEST } from '../../StateProvider/actions_constant';
 
 const ResetStyles = createGlobalStyle`
   ${reset}
@@ -160,8 +162,25 @@ const SideNave = (props) => {
 						</div>
 					</WindowContent>
 					<Divider />
-					<WindowContent>
+					<WindowContent style={{display:'flex',flexDirection:'column',height:'70%'}}>
 						<TreeFiles />
+						{
+							props.location.pathname === '/problem' ? 
+							<div style={{marginTop:'auto',textAlign:'center'}}>
+								<Divider/>
+								<br/>
+								<label className="switch">
+									<input checked={state.openTest} onChange={()=>{dispatch({type:OPEN_TEST})}} type="checkbox"/>
+									<span className="slider round"></span>
+								</label>
+								<div>
+									<br/>
+									Mode<br/> <br/>
+									{ state.openTest ? 'Test' : 'Problem'}
+								</div>
+							</div>					
+							:null
+						}
 					</WindowContent>
 				</Window>
 			</ThemeProvider>

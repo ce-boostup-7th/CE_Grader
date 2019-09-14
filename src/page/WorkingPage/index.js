@@ -166,7 +166,7 @@ submit at: ${new Date(data.submitted_at).toLocaleString()}
             body: qs.stringify({
                 stdin: btoa(input),
                 language_id: 10,
-                source_code: btoa(code)
+                source_code: btoa(unescape(encodeURIComponent(code)))
             })
         }).then(res => res)
             .then(res => {
