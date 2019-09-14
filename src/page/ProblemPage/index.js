@@ -16,8 +16,17 @@ const Div = styled.div`
 	flex-grow: 3;
 	margin: 20px;
 `
-let processingData = (state, mode) => {
-	let temp = state
+let processingData = (state, mode,extra) => {
+	let temp = [...state]
+	if(extra){
+		return temp.filter((v)=>{
+			return v.category_id > 4
+		})
+	}else {
+		temp = temp.filter(v=>{
+			return v.category_id <=4
+		})
+	}
 	if (mode === 1) {
 		return temp.sort((a, b) =>
 			a.difficulty > b.difficulty ? 1 : b.difficulty > a.difficulty ? -1 : 0
@@ -63,7 +72,8 @@ const ProblemPage = (props) => {
 		<Container>
 			<Div>
 				<DataTable
-					data={processingData(state.problems, mode)}
+					data={processingData(
+						state.problems, mode,state.openTest)}
 					sortDifficulty={() => {
 						if (mode === 0) {
 							setMode(1)

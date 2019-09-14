@@ -8,10 +8,10 @@ import {
 	FETCH_PROBLEM,
 	FETCH_STATISTIC,
 	FETCH_SUBMISSION,
-	FETCH_USERS
+	FETCH_USERS,
+	OPEN_TEST
 } from './actions_constant'
 import { initialState } from './StateProvider'
-import LeaderBoard from '../components/LeaderBoard'
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -49,6 +49,11 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				users: action.payload
+			}
+		case OPEN_TEST:
+			return{
+				...state,
+				openTest:!state.openTest
 			}
 		default:
 			return state

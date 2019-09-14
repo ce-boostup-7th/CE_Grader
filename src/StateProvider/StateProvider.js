@@ -3,6 +3,7 @@ import React from 'react'
 import reducer from './reducer'
 
 export const initialState = {
+	openTest:false,
 	problems: [
 		{
 			id: 0,
